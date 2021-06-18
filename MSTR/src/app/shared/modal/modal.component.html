@@ -1,0 +1,44 @@
+
+<div class="modal-header" *ngIf="options.headText">
+  <span class="modal-title">{{options.headText}}</span>
+</div>
+<div class="modal-body" [ngSwitch]="options?.type">
+  <ng-container *ngSwitchCase="ModalType.Doc">
+    <iframe width="100%" height="100%" frameBorder="0" [src]="urlSafe" allowfullscreen></iframe>
+  </ng-container>
+  <ng-container *ngSwitchDefault>
+    <div class="modal__img" *ngIf="options.imgContent">
+      <img src="data:image/png;base64,{{options.imgContent}}" width="100%" height="100%" />
+    </div>
+    <div class="modal__warning" *ngIf="options.showWarning">
+      <img src="assets/ico/ico_high_priority@1.5x.svg" />
+    </div>
+    <div class="modal__content" *ngIf="options.txtContent">
+      {{options.txtContent}}
+    </div>
+  </ng-container>
+</div>
+<div class="modal-footer" [ngSwitch]="options?.type">
+  <ng-container *ngSwitchCase="ModalType.CancelDelete">
+    <div class="row">
+    <button class="btn btn-light col-sm" (click)="activeModal.close('BACK')" i18n="@@cancel">取消</button>
+    <button class="btn btn-light red col-sm" (click)="activeModal.close('NEXT')" i18n="@@delete">刪除</button>
+  </div>
+  </ng-container>
+<ng-container *ngSwitchCase="ModalType.Confirm">
+  <div class="row">
+  <button class="btn btn-light col-sm" (click)="closeModal('NEXT')" i18n="@@apply">確定</button>
+</div>
+</ng-container>
+<ng-container *ngSwitchCase="ModalType.ModifyPwd">
+  <div class="row">
+  <button class="btn btn-light col-sm" (click)="closeModal('BACK')" i18n="@@apply">立即變更</button>
+  <button class="btn btn-light col-sm" (click)="closeModal('NEXT')" i18n="@@apply">以後變更</button>
+</div>
+</ng-container>
+<ng-container *ngSwitchCase="ModalType.Doc">
+  <div class="row">
+  <button class="btn btn-light col-sm" (click)="closeModal('NEXT')" i18n="@@apply">關閉</button>
+</div>
+</ng-container>
+</div>

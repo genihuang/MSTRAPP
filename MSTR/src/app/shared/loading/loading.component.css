@@ -1,0 +1,17 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99998;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(48, 71, 120, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+.backdrop> #loading {
+    width: 100px;
+    height: 100px;
+    z-index: 99999;
+  }

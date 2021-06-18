@@ -1,0 +1,41 @@
+
+<div class="main">
+  <div class="home" (click)="home();">
+    <div>
+      <img src='assets/images/icon-home.png' >
+    </div>
+  </div>
+  <div class="logout" (click)="logout();">
+    <div>
+      <img src='assets/images/icon-Logout.png' >
+    </div>  
+    <div class="font" >登出</div>
+  </div>
+
+</div>
+<cdk-virtual-scroll-viewport itemSize="90" class="v-scroll">
+  <div class="menu">
+    <div *cdkVirtualFor="let item of menuData" >
+      <div class="menuItem" 
+        (click)="menuItemClick(item)"
+      >
+      <img src='assets/images/object-icon/{{item.web_menu_display_icon}}.png' *ngIf="item.web_menu_display_icon"><br>
+      {{item.web_func_display_text}}
+      </div>
+      <div *ngIf="item.children && item.expanded" style="background-color: #fff;">
+        <div *ngFor="let child of item.children;let idx=index;"  (click)="childItemClick(item,child)" class="childitem">
+          <div>
+          <input type="radio" id="{{child.web_function}}" name="menu" value="{{child.web_function}}" [checked]="idx === 0">
+          <label for="{{child.web_function}}">{{child.web_function_short_name}}</label>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</cdk-virtual-scroll-viewport>
+<div class="forgetPassword" (click)="modifyPwd();">
+  <div>
+    <img src="assets/images/forget-password.png">修改密碼
+  </div>
+  
+</div>

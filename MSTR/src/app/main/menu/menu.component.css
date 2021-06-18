@@ -1,0 +1,132 @@
+
+.menuItem{
+  background: #007AB3;
+  color: #FFFFFF;
+  text-align: center;
+  display: block;
+  font-size: 16px;
+  letter-spacing: 2px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.menuItem>img{
+  width: 24%;
+}
+.menuItem:hover{
+  background: #007AB3;
+  color: #FFFFFF;  
+}
+.childitem
+{
+  width: 100%; 
+  background-color: #FFFFFF;
+  font-size: 15px;
+}
+.childitem>div
+{
+  text-align: center;
+}
+.childitem>div input[type="radio"]{
+  opacity: 0;
+  display: none;
+  width: 0;
+}
+.childitem>div label{
+  display: block;
+  padding:10px 20px;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #007AB3;
+}
+.childitem>div input[type="radio"]:checked+label{
+  display: block;
+  padding:10px 20px;
+  background-color: #D4CDCD;
+  color: #007AB3;
+}
+
+.top {
+  background: #007AB3;
+}
+.menu{
+  margin-top: 0%;
+  padding-top: 0%;
+}
+.main{
+  display: flex;
+  flex-direction: row; 
+}
+.home{
+  margin-top: 7%;
+  margin-left: 5%;
+  /* top: 20%;
+  left: 10%;
+  width: 34px;
+  height: 30px; */
+  /* position: relative; */
+  /* UI Properties */
+}
+.home>div>img{
+  width: 85%;
+}
+.logout{
+  margin-top: 7%;
+  margin-left: 38%;
+  display: flex;
+  width:50%;
+  /* top: 20%;
+  left: 50%;
+  width: 37px;
+  height: 35px;
+  opacity: 1; */
+}
+.logout>div{
+  text-align: center;
+}
+.logout>div>img{
+  width: 70%;
+}
+.font{
+  /* margin-top: 10%;
+  margin-left: 2%; */
+  /* margin-top: 5%; */
+  top: 10%;
+  left: 85%;
+  /* UI Properties */
+  font: 16px DFHei Std;
+  letter-spacing: 0;
+  color: #FFFFFF;
+  opacity: 1;
+  margin-left: 1%;
+}
+label{
+  margin-bottom: 0;
+}
+.v-scroll{
+  height: 80%;
+  margin-top: 10%;
+  padding-top: 10%;
+}
+
+.forgetPassword{
+  position: relative;
+  display: flex;
+  margin-top: 15%;
+  width:100%;
+  text-align: left;
+}
+.forgetPassword>div>img{
+  padding-right: 3%;
+  width:24px;
+  margin-top: -3%;
+}
+.forgetPassword>div{
+  color: #fff;
+  font-size: 15px;
+  padding-top: 3%;
+  /* padding-left: 1%; */
+  width: 100%;
+  text-align: center;
+}
+.forgetPassword>div>span{
+  padding-top: 3%;
+}

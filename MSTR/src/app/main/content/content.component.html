@@ -1,0 +1,46 @@
+<div class="top">
+    <div>
+        <div class="logo"></div>
+    </div>
+    <div class="pathDefault">
+        <span *ngIf="upperPath" class="prePath">></span>
+        <span *ngIf="upperPath" class="path">{{upperPath}}</span>
+        <span *ngIf="path" class="prePath">></span>
+        <span *ngIf="path" class="path">{{path}}</span>
+    </div>
+    <div *ngIf="!subMenus" class="home">
+        <div>安聯ｅ智慧</div>
+    </div>       
+    <div *ngIf="tabMenus" class="tabDefault" >
+        <div *ngFor="let tab of tabMenus; let idx = index;" (click)="tabChanged(tab)" class="tab">
+            <div>
+            <input type="radio" id="{{tab.web_function}}" name="tab" value="{{tab.web_function}}"  [checked]="idx === 0">
+                <label for="{{tab.web_function}}">{{tab.web_func_display_text}}</label>             
+            </div>  
+        </div>
+    </div>
+    <div *ngIf="subMenus">  
+        <div class="line"> </div>  
+    </div>
+    <section class="carousel slide" id="myCarousel" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item {{i==0?'active':''}}" *ngFor="let chunkProducts of subMenusSplic;let i =index;">
+            <div class="divBlock">
+                <div  *ngFor="let slider of chunkProducts;" (click)="RestApi(slider,'_blank')">
+                        <img class="img-content" [src]="slider['web_obj_display_image']" alt="Carousel 1">
+                        <div class="txt-content">{{slider.web_obj_display_text}}</div>
+                </div>
+            </div>              
+        </div>
+
+    </div>
+    <div style="display: inline-block" *ngIf="showIndicators==true">
+        <ol class="carousel-indicators"> 
+            <li data-target="#myCarousel" *ngFor="let li of subMenusSplic; let i = index;" [attr.data-slide-to]="i" [ngClass]="{'active' : i == 0}" ></li>    
+        </ol>
+    </div>
+</section>
+    <div *ngIf="selMenuBK !=null && subMenus"  class="menuBk">
+        <img src='assets/images/content/{{selMenuBK}}.png' >
+    </div>        
+</div>

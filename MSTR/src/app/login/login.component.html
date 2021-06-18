@@ -1,0 +1,42 @@
+<div class="top">
+  <div class="root1"></div>
+  <div class="root2"></div>
+  <img src="assets/images/Allianz_logo.png" class="logo"/>
+	<div class="LoginForm">
+    <img src="assets/images/Allianz-EN.png" class="logoEn" />
+    <div class="appName">安聯ｅ智慧</div>
+    <form [formGroup]="loginForm" (ngSubmit)="onClickSubmit(loginForm.value)">
+      <div class="LoginInputGroup">
+        <div class="LoginInputGroup-prepend">
+          <span class="LoginInputGroup-text" id="basic-addon1"><i class="fas fa-user-alt"></i></span>
+        </div>
+        <div class="LoginInputGroup-cut"><div></div></div>
+        
+        <input type="text" class="form-control" placeholder="使用者名稱" id="account" formControlName="account">
+      </div>
+      <div class="LoginInputGroup">
+        <div class="LoginInputGroup-prepend">
+          <span class="LoginInputGroup-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
+        </div>
+        <div class="LoginInputGroup-cut"><div></div></div>
+        <input type="password" class="form-control" placeholder="密碼" id="pwd" formControlName="pwd">
+       
+      </div>
+      <input class="btnLogin" type="submit" value="登入"/>
+      <div class="forgetPassword" (click)="forgetPassword();">
+        <div>
+          <img src="assets/images/forget-password.png">忘記密碼
+        </div>
+        
+      </div>
+    </form>
+  </div>
+  <div class="version">{{appEnvironment}}版本：{{appVersion}}</div>
+  <div class="maintain" *ngIf="isShowMaintain">
+    <div class="title">系統維護公告</div>
+    <div>「安聯ｅ智慧」將於{{showBeginTime}} 起到<br>
+      {{showEndTime}} 期間進行停機維護，屆時<br>
+      將無法登入使用。</div>
+  </div>
+
+</div>
