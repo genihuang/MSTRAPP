@@ -676,7 +676,7 @@ const envData = {
     env: '14',
     systemId: '80',
     systemCode: 'MSTR',
-    version: '1.0.2',
+    version: '1.0.3',
     platform: '1' //1:IOS,2:Android
 };
 const apiPath = ([
@@ -1199,7 +1199,8 @@ let AppLoginService = class AppLoginService {
         const httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json',
-                'authenticationToken': this.commonUtility.getSessionValue('authenticationToken'),
+                //'authenticationToken':this.commonUtility.getSessionValue('authenticationToken'),
+                'authenticationToken': 'C501D4063C804323E0534D9C530A17EB',
                 'apiKey': this.ApiConfig.keyId
             })
         };

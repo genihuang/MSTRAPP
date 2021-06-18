@@ -70,7 +70,8 @@ export class AppLoginService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':'application/json',
-        'authenticationToken':this.commonUtility.getSessionValue('authenticationToken'),
+        //'authenticationToken':this.commonUtility.getSessionValue('authenticationToken'),
+        'authenticationToken':'C501D4063C804323E0534D9C530A17EB',
         'apiKey':this.ApiConfig.keyId
       })
     };
