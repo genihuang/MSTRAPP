@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh_TW">
+<head>    
+	<meta charset="UTF-8">    
+	<title>TEST</title>    
+	<script type="text/javascript" src="http://mstrpt.allianz.com.tw:8080/MicroStrategyLibrary/javascript/embeddinglib.js"></script>
+</head>
+<body >
+<P><div id="mydossier" style="height:100%;width:100%;margin:0"></div></P>
+</body>
+<script type="text/javascript">
+	//參數設定
+	var baseUrl = "http://mstrpt.allianz.com.tw:8080/MicroStrategyLibrary";
+	var project_id = "395FB60845D411F20E1129A1682BDCA8";
+	var document_id = "7544F5B84A3390CE394040B01D1C8B89";
+	var userName = "TAAJ5";
+	var passWord = "qazWSX77";
+
+	var postData = {};
+	postData.username = userName;
+	postData.password = passWord;
+	postData.loginMode = 1;
+
+	報表載入
+	function showDossier(){
+		var container = document.getElementById("mydossier");
+		var dossierurl = baseUrl + '/app/' + project_id + '/' + document_id;			
+
+ 		microstrategy.dossier.create({
+			placeholder: container,
+			url: dossierurl,
+			enableCustomAuthentication: true,
+			enableResponsive: true,
+			customAuthenticationType: microstrategy.dossier.CustomAuthenticationType.AUTH_TOKEN,
+			getLoginToken: function() {
+				return getXHRRequestPromise(baseUrl + '/api/auth/login', postData, 'POST', 'application/json', 'x-mstr-authToken').then(function(authToken){
+				    return authToken;
+				})
+			}
+		});
+	}; 
+	function login() {
+	    return getXHRRequestPromise(baseUrl + '/api/auth/login', postData, 'POST', 'application/json', 'x-mstr-authToken').then(function (authToken) {
+	        return authToken;
+	    })
+	};
+	//登入模式
+	function getXHRRequestPromise(url, body, method, contentType, desiredHeader){
+		return new Promise(function(resolve, reject){
+			var xhr = new XMLHttpRequest();
+			xhr.open(method, url);
+			xhr.withCredentials = true;
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.setRequestHeader("Accept", "application/json");
+			xhr.send(JSON.stringify(body));
+			
+			xhr.onreadystatechange = function(){
+				if (xhr.readyState === 2) {
+					resolve(xhr.getResponseHeader(desiredHeader));
+				} else {
+					reject({
+						status: this.status,
+						statusText: xhr.statusText
+					});
+				}
+			};
+		});
+	};	
+</script>
+</html>

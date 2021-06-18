@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+</head>
+
+<body >
+<div class="main">
+    <iframe id="myframe" name="myframe" width="100%" height="100%" frameBorder="0" src="https://www.allianz.com.tw" allowfullscreen ></iframe>
+</div>
+
+</body>
+</html>
+<script type="text/javascript">
+// var url = "https://mstr.allianz.com.tw/microstrategy/asp/Main.aspx";
+// var url=sessionStorage.getItem('objUrl');
+var url = localStorage.getItem('objUrl');
+var el = document.getElementById('myframe');
+el.src = url; // assign url to src property
+</script>

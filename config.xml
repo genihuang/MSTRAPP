@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="tw.com.allianz.MSTR.UAT" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>安聯ｅ智慧_UAT</name>
+    <description>
+        安聯ｅ智慧_A sample Apache Cordova application that responds to the deviceready event.
+    </description>
+    <author email="dev@cordova.apache.org" href="http://cordova.io">
+        Apache Cordova Team
+    </author>
+    <content src="dist/index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <preference name="Orientation" value="landscape" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+        <icon height="180" src="res/ios/Icon-App-60x60@3x.png" width="180" />
+        <icon height="60" src="res/ios/Icon-App-20x20@3x.png" width="60" />
+        <icon height="120" src="res/ios/Icon-App-60x60@2x.png" width="120" />
+        <icon height="76" src="res/ios/Icon-App-76x76@1x.png" width="76" />
+        <icon height="152" src="res/ios/Icon-App-76x76@2x.png" width="152" />
+        <icon height="40" src="res/ios/Icon-App-40x40@1x.png" width="40" />
+        <icon height="80" src="res/ios/Icon-App-40x40@2x.png" width="80" />
+        <icon height="57" src="res/ios/icon.png" width="57" />
+        <icon height="114" src="res/ios/icon@2x.png" width="114" />
+        <icon height="72" src="res/ios/Icon-App-72x72@1x.png" width="72" />
+        <icon height="144" src="res/ios/Icon-App-72x72@2x.png" width="144" />
+        <icon height="29" src="res/ios/icon-small.png" width="29" />
+        <icon height="58" src="res/ios/icon-small@2x.png" width="58" />
+        <icon height="50" src="res/ios/Icon-App-50x50@1x.png" width="50" />
+        <icon height="100" src="res/ios/Icon-App-50x50@2x.png" width="100" />
+    </platform>
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <plugin name="cordova-plugin-device" spec="^2.0.3" />
+    <plugin name="cordova-plugin-inappbrowser" spec="~3.1.0" />
+</widget>
