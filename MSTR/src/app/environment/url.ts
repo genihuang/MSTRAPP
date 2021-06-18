@@ -45,7 +45,7 @@ export const apiDomain_Uat: IApiDomain[] = ([
 export const apiConfig_Uat: IApiConfig[] = ([
     {
         apiID: "appLogin",
-        keyId: ""
+        keyId: "B718A8D8-6E99-4C55-B3F1-A826FBC0EF4F"
     },
     {
         apiID: "mstrLogin",
@@ -65,7 +65,7 @@ export const apiConfig_Uat: IApiConfig[] = ([
     },
     {
         apiID: "versionCheck",
-        keyId: ""
+        keyId: "2F61976E-4E8D-4DA4-871C-1507FB26D874"
     },
     {
         apiID:"checkPwdWs",
@@ -122,7 +122,7 @@ export const apiDomain_PreProd: IApiDomain[] = ([
 export const apiConfig_PreProd: IApiConfig[] = ([
     {
         apiID: "appLogin",
-        keyId: ""
+        keyId: "B68DFBB5-4509-4FC4-89D9-6CE4AA713756"
     },
     {
         apiID: "mstrLogin",
@@ -142,7 +142,7 @@ export const apiConfig_PreProd: IApiConfig[] = ([
     },
     {
         apiID: "versionCheck",
-        keyId: ""
+        keyId: "0D06003A-7FAA-4A78-9F0C-D58F2349AED3"
     },
     {
         apiID:"checkPwdWs",
@@ -202,7 +202,7 @@ export const apiDomain_Prod: IApiDomain[] = ([
 export const apiConfig_Prod: IApiConfig[] = ([
     {
         apiID: "appLogin",
-        keyId: ""
+        keyId: "C27A0301-9162-4DD2-9196-8BB9DB971DE0"
     },
     {
         apiID: "mstrLogin",
@@ -222,7 +222,7 @@ export const apiConfig_Prod: IApiConfig[] = ([
     },
     {
         apiID: "versionCheck",
-        keyId: ""
+        keyId: "F8D2555D-89F3-44AE-95FD-633A73FC56E2"
     },
     {
         apiID:"checkPwdWs",
