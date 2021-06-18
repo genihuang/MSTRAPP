@@ -400,11 +400,11 @@
   /***/
   function _(module, exports, __webpack_require__) {
     __webpack_require__(
-    /*! /Users/aztl/Documents/Test/MSTRAPP/MSTR/src/styles.css */
+    /*! /Users/aztl/Documents/Project/MSTRAPP/MSTR/src/styles.css */
     "./src/styles.css");
 
     module.exports = __webpack_require__(
-    /*! /Users/aztl/Documents/Test/MSTRAPP/MSTR/node_modules/bootstrap/dist/css/bootstrap.min.css */
+    /*! /Users/aztl/Documents/Project/MSTRAPP/MSTR/node_modules/bootstrap/dist/css/bootstrap.min.css */
     "./node_modules/bootstrap/dist/css/bootstrap.min.css");
     /***/
   }

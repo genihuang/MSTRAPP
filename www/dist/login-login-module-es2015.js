@@ -377,10 +377,11 @@ let LoginComponent = class LoginComponent {
         var Result = true;
         var updateUrl;
         this.appVersion = _environment_environment__WEBPACK_IMPORTED_MODULE_13__["envData"].version;
+        this.platform = _environment_environment__WEBPACK_IMPORTED_MODULE_13__["envData"].platform;
         if (this.commonUtility.getLocalValue("appLastUpdateTime") != null) {
             this.appLastUpdateTime = this.commonUtility.getLocalValue("appLastUpdateTime");
         }
-        this.loginService.versionCheck(this.appVersion, this.appLastUpdateTime)
+        this.loginService.versionCheck(this.appVersion, this.appLastUpdateTime, this.platform)
             .subscribe(res => {
             switch (res.ResponseDetails.responseCode) {
                 case "000":

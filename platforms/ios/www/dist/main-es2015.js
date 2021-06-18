@@ -676,7 +676,8 @@ const envData = {
     env: '14',
     systemId: '80',
     systemCode: 'MSTR',
-    version: '1.0.1'
+    version: '1.0.2',
+    platform: '1' //1:IOS,2:Android
 };
 const apiPath = ([
     {
@@ -706,7 +707,8 @@ const apiPath = ([
     },
     {
         apiID: "versionCheck",
-        domainKey: "discover",
+        //domainKey:"discover",
+        domainKey: "utility",
         path: "Common/checkVersion"
     },
     {
@@ -794,7 +796,7 @@ const apiDomain_Uat = ([
 const apiConfig_Uat = ([
     {
         apiID: "appLogin",
-        keyId: ""
+        keyId: "B718A8D8-6E99-4C55-B3F1-A826FBC0EF4F"
     },
     {
         apiID: "mstrLogin",
@@ -814,7 +816,7 @@ const apiConfig_Uat = ([
     },
     {
         apiID: "versionCheck",
-        keyId: ""
+        keyId: "2F61976E-4E8D-4DA4-871C-1507FB26D874"
     },
     {
         apiID: "checkPwdWs",
@@ -868,7 +870,7 @@ const apiDomain_PreProd = ([
 const apiConfig_PreProd = ([
     {
         apiID: "appLogin",
-        keyId: ""
+        keyId: "B68DFBB5-4509-4FC4-89D9-6CE4AA713756"
     },
     {
         apiID: "mstrLogin",
@@ -888,7 +890,7 @@ const apiConfig_PreProd = ([
     },
     {
         apiID: "versionCheck",
-        keyId: ""
+        keyId: "0D06003A-7FAA-4A78-9F0C-D58F2349AED3"
     },
     {
         apiID: "checkPwdWs",
@@ -947,7 +949,7 @@ const apiDomain_Prod = ([
 const apiConfig_Prod = ([
     {
         apiID: "appLogin",
-        keyId: ""
+        keyId: "C27A0301-9162-4DD2-9196-8BB9DB971DE0"
     },
     {
         apiID: "mstrLogin",
@@ -967,7 +969,7 @@ const apiConfig_Prod = ([
     },
     {
         apiID: "versionCheck",
-        keyId: ""
+        keyId: "F8D2555D-89F3-44AE-95FD-633A73FC56E2"
     },
     {
         apiID: "checkPwdWs",
@@ -1153,7 +1155,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AppLoginService = class AppLoginService {
-    //rsbody:login.resLogin;
     constructor(apiCommon, commonUtility, loadingService, http) {
         this.apiCommon = apiCommon;
         this.commonUtility = commonUtility;
@@ -1189,22 +1190,25 @@ let AppLoginService = class AppLoginService {
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["throwError"])(error);
         }));
     }
-    versionCheck(appVersion, lastUpdateTime) {
+    versionCheck(appVersion, lastUpdateTime, platform) {
         var apiId = "versionCheck";
         console.log(apiId);
+        this.ApiConfig = this.apiCommon.getApiConfigByApiID(apiId);
         const apiUrl = this.apiCommon.getApiUrl(apiId);
         console.log(apiUrl);
         const httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json',
-                'authenticationToken': this.commonUtility.getSessionValue('authenticationToken')
+                'authenticationToken': this.commonUtility.getSessionValue('authenticationToken'),
+                'apiKey': this.ApiConfig.keyId
             })
         };
         this.loadingService.show();
         const rqbody = {
             MetaData: this.apiCommon.reqCommon,
             AppVersion: appVersion,
-            LastUpdateTime: lastUpdateTime
+            LastUpdateTime: lastUpdateTime,
+            DeviceSystemType: platform
         };
         console.log(rqbody);
         return this.http.post(apiUrl, JSON.stringify(rqbody), httpOptions)
@@ -1751,7 +1755,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/aztl/Documents/Test/MSTRAPP/MSTR/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/aztl/Documents/Project/MSTRAPP/MSTR/src/main.ts */"./src/main.ts");
 
 
 /***/ })

@@ -1257,7 +1257,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       env: '14',
       systemId: '80',
       systemCode: 'MSTR',
-      version: '1.0.1'
+      version: '1.0.2',
+      platform: '1' //1:IOS,2:Android
+
     };
     var apiPath = [{
       apiID: "appLogin",
@@ -1281,7 +1283,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       path: "Main/ProcessReq_V2"
     }, {
       apiID: "versionCheck",
-      domainKey: "discover",
+      //domainKey:"discover",
+      domainKey: "utility",
       path: "Common/checkVersion"
     }, {
       apiID: "checkPwdWs",
@@ -1393,7 +1396,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }];
     var apiConfig_Uat = [{
       apiID: "appLogin",
-      keyId: ""
+      keyId: "B718A8D8-6E99-4C55-B3F1-A826FBC0EF4F"
     }, {
       apiID: "mstrLogin",
       keyId: ""
@@ -1408,7 +1411,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       keyId: "yAARveQNJZMgeutaObybFjaquxgafUbiyHtbhyzD"
     }, {
       apiID: "versionCheck",
-      keyId: ""
+      keyId: "2F61976E-4E8D-4DA4-871C-1507FB26D874"
     }, {
       apiID: "checkPwdWs",
       keyId: ""
@@ -1448,7 +1451,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }];
     var apiConfig_PreProd = [{
       apiID: "appLogin",
-      keyId: ""
+      keyId: "B68DFBB5-4509-4FC4-89D9-6CE4AA713756"
     }, {
       apiID: "mstrLogin",
       keyId: ""
@@ -1463,7 +1466,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       keyId: "RaWTMDZvIiZZxBIGQknYUqrpMJbmQccldLTkAcNH"
     }, {
       apiID: "versionCheck",
-      keyId: ""
+      keyId: "0D06003A-7FAA-4A78-9F0C-D58F2349AED3"
     }, {
       apiID: "checkPwdWs",
       keyId: ""
@@ -1508,7 +1511,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }];
     var apiConfig_Prod = [{
       apiID: "appLogin",
-      keyId: ""
+      keyId: "C27A0301-9162-4DD2-9196-8BB9DB971DE0"
     }, {
       apiID: "mstrLogin",
       keyId: ""
@@ -1523,7 +1526,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       keyId: "gVSAxjUcjoYOBTCejyGcfChltsJxdVOxGFZSZMSw"
     }, {
       apiID: "versionCheck",
-      keyId: ""
+      keyId: "F8D2555D-89F3-44AE-95FD-633A73FC56E2"
     }, {
       apiID: "checkPwdWs",
       keyId: ""
@@ -1833,7 +1836,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var AppLoginService =
     /*#__PURE__*/
     function () {
-      //rsbody:login.resLogin;
       function AppLoginService(apiCommon, commonUtility, loadingService, http) {
         _classCallCheck(this, AppLoginService);
 
@@ -1879,24 +1881,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }, {
         key: "versionCheck",
-        value: function versionCheck(appVersion, lastUpdateTime) {
+        value: function versionCheck(appVersion, lastUpdateTime, platform) {
           var _this8 = this;
 
           var apiId = "versionCheck";
           console.log(apiId);
+          this.ApiConfig = this.apiCommon.getApiConfigByApiID(apiId);
           var apiUrl = this.apiCommon.getApiUrl(apiId);
           console.log(apiUrl);
           var httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
               'Content-Type': 'application/json',
-              'authenticationToken': this.commonUtility.getSessionValue('authenticationToken')
+              'authenticationToken': this.commonUtility.getSessionValue('authenticationToken'),
+              'apiKey': this.ApiConfig.keyId
             })
           };
           this.loadingService.show();
           var rqbody = {
             MetaData: this.apiCommon.reqCommon,
             AppVersion: appVersion,
-            LastUpdateTime: lastUpdateTime
+            LastUpdateTime: lastUpdateTime,
+            DeviceSystemType: platform
           };
           console.log(rqbody);
           return this.http.post(apiUrl, JSON.stringify(rqbody), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["timeout"])(90 * 1000), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
@@ -2765,7 +2770,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /***/
   function _(module, exports, __webpack_require__) {
     module.exports = __webpack_require__(
-    /*! /Users/aztl/Documents/Test/MSTRAPP/MSTR/src/main.ts */
+    /*! /Users/aztl/Documents/Project/MSTRAPP/MSTR/src/main.ts */
     "./src/main.ts");
     /***/
   }
