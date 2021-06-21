@@ -4,7 +4,7 @@ export const envData:envConfig={
     env :'14',
     systemId:'80',
     systemCode:'MSTR',
-    version:'1.0.2',
+    version:'1.0.3',
     platform:'1'//1:IOS,2:Android
 };
 
