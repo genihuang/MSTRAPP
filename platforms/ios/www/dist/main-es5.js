@@ -1257,7 +1257,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       env: '14',
       systemId: '80',
       systemCode: 'MSTR',
-      version: '1.0.3',
+      version: '1.0.2',
       platform: '1' //1:IOS,2:Android
 
     };
@@ -1283,8 +1283,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       path: "Main/ProcessReq_V2"
     }, {
       apiID: "versionCheck",
-      //domainKey:"discover",
-      domainKey: "utility",
+      domainKey: "discover",
+      //domainKey:"utility",
       path: "Common/checkVersion"
     }, {
       apiID: "checkPwdWs",

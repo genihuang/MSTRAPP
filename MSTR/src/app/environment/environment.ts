@@ -37,8 +37,8 @@ export const apiPath : IApiConfig []=([
     },
     {
         apiID:"versionCheck",
-        //domainKey:"discover",
-        domainKey:"utility",
+        domainKey:"discover",
+        //domainKey:"utility",
         path:"Common/checkVersion"
     },
     {

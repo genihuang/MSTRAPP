@@ -1283,8 +1283,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       path: "Main/ProcessReq_V2"
     }, {
       apiID: "versionCheck",
-      //domainKey:"discover",
-      domainKey: "utility",
+      domainKey: "discover",
+      //domainKey:"utility",
       path: "Common/checkVersion"
     }, {
       apiID: "checkPwdWs",
