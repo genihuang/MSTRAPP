@@ -676,7 +676,7 @@ const envData = {
     env: '14',
     systemId: '80',
     systemCode: 'MSTR',
-    version: '1.0.3',
+    version: '1.0.2',
     platform: '1' //1:IOS,2:Android
 };
 const apiPath = ([
