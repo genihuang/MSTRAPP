@@ -295,10 +295,12 @@ export class LoginComponent implements OnInit {
                 endM = end.substring(4,6);
                 endD = end.substring(6,8);
                 endH = end.substring(8,10);
-                endMin = begin.substring(10,12);
+                endMin = end.substring(10,12);
 
                 beginDate = new Date(parseInt(beginY,10),parseInt(beginM,10)-1, parseInt(beginD,10),parseInt(beginH,10),parseInt(beginMin,10),0,0);
                 endDate = new Date(parseInt(endY,10),parseInt(endM,10)-1, parseInt(endD,10),parseInt(endH,10),parseInt(endMin,10),0,0);
+                
+                console.log(parseInt(endH,10));
                 if (imminentTime < beginDate.getTime()-new Date().getTime())
                 {
                   imminentTime = beginDate.getTime()-new Date().getTime();
