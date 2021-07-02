@@ -7219,10 +7219,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _service_mstr_login_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../service/mstr-login.service */ "./src/app/service/mstr-login.service.ts");
 /* harmony import */ var _shared_modal_modal_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../shared/modal/modal.service */ "./src/app/shared/modal/modal.service.ts");
 /* harmony import */ var _shared_loading_loading_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../shared/loading/loading.service */ "./src/app/shared/loading/loading.service.ts");
-/* harmony import */ var _class_modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../class/modal */ "./src/app/class/modal.ts");
-/* harmony import */ var _shared_common_utility_common_utility_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../shared/common-utility/common-utility.module */ "./src/app/shared/common-utility/common-utility.module.ts");
-/* harmony import */ var _service_api_common_api_common_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../service/api-common/api-common.module */ "./src/app/service/api-common/api-common.module.ts");
-
+/* harmony import */ var _shared_common_utility_common_utility_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../shared/common-utility/common-utility.module */ "./src/app/shared/common-utility/common-utility.module.ts");
+/* harmony import */ var _service_api_common_api_common_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../service/api-common/api-common.module */ "./src/app/service/api-common/api-common.module.ts");
 
 
 
@@ -7330,138 +7328,148 @@ let ContentComponent = class ContentComponent {
         // menus=>this.menus=menus
         console.log("submenu_" + this.subMenuCnt + "_" + this.showIndicators);
     }
-    checkMstrNeedLogin(dashboardUseMode) {
-        var mstrSession;
-        var dateNow;
-        var needLogin = true;
-        dateNow = this.commonUtility.Date + this.commonUtility.TimeStamp;
+    /*   checkMstrNeedLogin(dashboardUseMode: string): boolean {
+        var mstrSession: MstrSessionDetail;
+        var dateNow: string;
+        var needLogin: boolean = true;
+        dateNow = this.commonUtility.Date + this.commonUtility.TimeStamp
         mstrSession = this.getMstrSession(dashboardUseMode);
         if (mstrSession != null) {
-            if (mstrSession.sessionExpiredTime >= dateNow) {
-                needLogin = false;
-            }
+          if (mstrSession.sessionExpiredTime >= dateNow) {
+            needLogin = false;
+          }
         }
         return needLogin;
-    }
-    getMstrSession(dashboardUseMode) {
-        var mstrSession = null;
+      } */
+    /*   getMstrSession(dashboardUseMode: string): MstrSessionDetail {
+        var mstrSession: MstrSessionDetail = null;
         switch (dashboardUseMode.toUpperCase()) {
-            case "CURRENT USER_N":
-            case "CURRENT USER":
-                if (sessionStorage.getItem("CurrentSession") != null) {
-                    mstrSession = JSON.parse(this.commonUtility.getSessionValue("CurrentSession"));
-                }
-                break;
-            default:
-                if (sessionStorage.getItem("SingleSession") != null) {
-                    mstrSession = JSON.parse(this.commonUtility.getSessionValue("SingleSession"));
-                }
-                break;
+          case "CURRENT USER_N":
+          case "CURRENT USER":
+            if (sessionStorage.getItem("CurrentSession") != null) {
+              mstrSession = JSON.parse(this.commonUtility.getSessionValue("CurrentSession"));
+            }
+            break;
+          default:
+            if (sessionStorage.getItem("SingleSession") != null) {
+              mstrSession = JSON.parse(this.commonUtility.getSessionValue("SingleSession"));
+            }
+            break;
         }
         return mstrSession;
-    }
-    mstrLogin(menu, target) {
-        var mstrSession;
-        var bolIsNeedLogin;
-        var dashboardUseMode = menu.dashboard_use_mode;
-        var msg;
-        var result = true;
-        var now = new Date();
-        now.setMinutes(now.getMinutes() + 8); // timestamp
-        now = new Date(now); // Date object
-        var urlLink = menu.web_obj_link_url; //報表連結
-        var arrUrlParm = urlLink.split("&"); //參數array
-        var mstrProject;
-        var mstrPort;
-        var url = "";
-        console.log(target);
-        bolIsNeedLogin = this.checkMstrNeedLogin(dashboardUseMode);
-        arrUrlParm.forEach(parm => {
-            var parmVal = parm.split("=");
-            switch (parmVal[0].toUpperCase()) {
-                case "PROJECT":
-                    mstrProject = parmVal[1];
-                    break;
-                case "PORT":
-                    mstrPort = parmVal[1];
-                    break;
+      } */
+    /* mstrLogin(menu: ObjectNode, target:string) {
+      var mstrSession: MstrSessionDetail;
+      var bolIsNeedLogin: boolean;
+      var dashboardUseMode: string = menu.dashboard_use_mode;
+      var msg: ModalOptions;
+      var result: boolean = true;
+      var now = new Date();
+      now.setMinutes(now.getMinutes() + 8); // timestamp
+      now = new Date(now); // Date object
+  
+      var urlLink: string = menu.web_obj_link_url;      //報表連結
+      var arrUrlParm: string[] = urlLink.split("&");    //參數array
+  
+      var mstrProject: string;
+      var mstrPort: string;
+  
+      var url:string= "";
+      console.log(target);
+      bolIsNeedLogin = this.checkMstrNeedLogin(dashboardUseMode);
+      arrUrlParm.forEach(parm => {
+        var parmVal: string[] = parm.split("=")
+        switch (parmVal[0].toUpperCase()) {
+          case "PROJECT":
+            mstrProject = parmVal[1];
+            break;
+          case "PORT":
+            mstrPort = parmVal[1];
+            break;
+          default:
+            break;
+        };
+      });
+      if (bolIsNeedLogin) {
+        this.mstrLoginService.mstrLogin(mstrProject, this.commonUtility.getSessionValue("loginUser"), dashboardUseMode)
+          .subscribe(
+            res => {
+              this.loadingService.hide();
+              switch (res.ResponseDetails.responseCode) {
+                case "000":
+                  let mstrSession:MstrSessionDetail={
+                    dashboardUseMode : dashboardUseMode,
+                    sessionInfo:res.sessionInfo,
+                    sessionState:res.sessionState,
+                    sessionExpiredTime:this.commonUtility.formatDate(now)+this.commonUtility.formatTime(now),
+                    iServer:res.iServer,
+                    iisServer:res.iisServer
+                  };
+                  switch(dashboardUseMode.toUpperCase())
+                  {
+                    case "CURRENT USER_N":
+                      case "CURRENT USER":
+                        this.commonUtility.setSessionValue("CurrentSession",JSON.stringify(mstrSession));
+                        break;
+                      default:
+                        this.commonUtility.setSessionValue("SingleSession",JSON.stringify(mstrSession));
+                        break;
+                  }
+                  console.log("login");
+                  console.log(mstrSession);
+                  this.exexDoc(arrUrlParm,mstrSession,menu.web_obj_attribute,target);
+                  result=true;
+                  break;
+                case "008":
+                  msg = {
+                    headText: 'MSTR登入失敗',
+                    txtContent: res.ReasonCode.map(
+                      item =>
+                        `${item.reasonMsg}(錯誤碼：${item.reasonCode})`
+                    )
+                      .join(' '),
+                    type: ModalType.Confirm
+                  };
+                  this.modalService.open(msg,'sm');
+                  result = false;
+                  break;
                 default:
-                    break;
+                  msg = {
+                    headText: 'MSTR登入失敗',
+                    txtContent: '資料異常，請聯絡系統管理員。',
+                    type: ModalType.Confirm
+                  };
+                  this.modalService.open(msg,'sm');
+                  result = false;
+                  break;
+              };
+            },
+            ()=>{
+              console.log('mstrlogin_oncomplete');
+              if (result)
+              {
+                console.log(mstrSession);
+              }
             }
-            ;
-        });
-        if (bolIsNeedLogin) {
-            this.mstrLoginService.mstrLogin(mstrProject, this.commonUtility.getSessionValue("loginUser"), dashboardUseMode)
-                .subscribe(res => {
-                this.loadingService.hide();
-                switch (res.ResponseDetails.responseCode) {
-                    case "000":
-                        let mstrSession = {
-                            dashboardUseMode: dashboardUseMode,
-                            sessionInfo: res.sessionInfo,
-                            sessionState: res.sessionState,
-                            sessionExpiredTime: this.commonUtility.formatDate(now) + this.commonUtility.formatTime(now),
-                            iServer: res.iServer,
-                            iisServer: res.iisServer
-                        };
-                        switch (dashboardUseMode.toUpperCase()) {
-                            case "CURRENT USER_N":
-                            case "CURRENT USER":
-                                this.commonUtility.setSessionValue("CurrentSession", JSON.stringify(mstrSession));
-                                break;
-                            default:
-                                this.commonUtility.setSessionValue("SingleSession", JSON.stringify(mstrSession));
-                                break;
-                        }
-                        console.log("login");
-                        console.log(mstrSession);
-                        this.exexDoc(arrUrlParm, mstrSession, menu.web_obj_attribute, target);
-                        result = true;
-                        break;
-                    case "008":
-                        msg = {
-                            headText: 'MSTR登入失敗',
-                            txtContent: res.ReasonCode.map(item => `${item.reasonMsg}(錯誤碼：${item.reasonCode})`)
-                                .join(' '),
-                            type: _class_modal__WEBPACK_IMPORTED_MODULE_8__["ModalType"].Confirm
-                        };
-                        this.modalService.open(msg, 'sm');
-                        result = false;
-                        break;
-                    default:
-                        msg = {
-                            headText: 'MSTR登入失敗',
-                            txtContent: '資料異常，請聯絡系統管理員。',
-                            type: _class_modal__WEBPACK_IMPORTED_MODULE_8__["ModalType"].Confirm
-                        };
-                        this.modalService.open(msg, 'sm');
-                        result = false;
-                        break;
-                }
-                ;
-            }, () => {
-                console.log('mstrlogin_oncomplete');
-                if (result) {
-                    console.log(mstrSession);
-                }
-            });
-        }
-        else {
-            console.log("no login");
-            mstrSession = this.getMstrSession(dashboardUseMode);
-            this.exexDoc(arrUrlParm, mstrSession, menu.web_obj_attribute, target);
-        }
+          )
+      }
+      else {
+        console.log("no login");
+        mstrSession = this.getMstrSession(dashboardUseMode);
+        this.exexDoc(arrUrlParm,mstrSession,menu.web_obj_attribute,target);
+      }
     }
-    exexDoc(arrUrlParm, mstrSession, objAttribute, target) {
-        var urlPrefix = this.commonUtility.getUrlPrefix();
-        var rptUrl = "/microstrategy/asp/Main.aspx?";
-        var dashboardUseMode = mstrSession.dashboardUseMode;
-        var UrlParm = "";
-        var domain = mstrSession.iisServer;
-        var iServer = mstrSession.iServer;
-        var mstrLoginSession = "";
-        var msg;
-        var url = "";
+   */
+    /*   exexDoc(arrUrlParm:string[], mstrSession:MstrSessionDetail, objAttribute:string, target:string ){
+        var urlPrefix: string = this.commonUtility.getUrlPrefix();
+        var rptUrl: string = "/microstrategy/asp/Main.aspx?";
+        var dashboardUseMode= mstrSession.dashboardUseMode;
+        var UrlParm: string = "";
+        var domain:string = mstrSession.iisServer;
+        var iServer:string=mstrSession.iServer;
+        var mstrLoginSession ="";
+        var msg: ModalOptions;
+        var url:string= "";
         console.log("execDoc");
         // switch (envData.env) {
         //   case "10":
@@ -7469,77 +7477,78 @@ let ContentComponent = class ContentComponent {
         //     break;
         // }
         switch (dashboardUseMode.toUpperCase()) {
-            case "CURRENT USER_N":
-                mstrLoginSession = mstrSession.sessionInfo;
-                break;
-            default:
-                mstrLoginSession = mstrSession.sessionState;
-                UrlParm = "Server=" + iServer + "&";
-                break;
+          case "CURRENT USER_N":
+            mstrLoginSession = mstrSession.sessionInfo;
+            break;
+          default:
+            mstrLoginSession = mstrSession.sessionState;
+            UrlParm = "Server=" + iServer + "&";
+            break;
         }
         arrUrlParm.forEach(parm => {
-            var parmVal = parm.split("=");
-            switch (dashboardUseMode.toUpperCase()) {
-                case "CURRENT USER_N":
-                    switch (parmVal[0].toUpperCase()) {
-                        case "CURRENTVIEWMEDIA":
-                        case "VISMODE":
-                            switch (objAttribute.toUpperCase()) {
-                                case "DASHBOARD":
-                                    //UrlParm += "&share=1";
-                                    break;
-                                default:
-                                    UrlParm += parm + "&";
-                                    break;
-                            }
-                            break;
-                        case "PROJECT":
-                        case "SERVER":
-                        case "PORT":
-                            break;
-                        default:
-                            UrlParm += parm + "&";
-                            break;
-                    }
-                    break;
-                case "CURRENT USER":
-                case "SINGLE USER":
-                    switch (parmVal[0].toUpperCase()) {
-                        case "CURRENTVIEWMEDIA":
-                        case "VISMODE":
-                            switch (objAttribute.toUpperCase()) {
-                                case "DASHBOARD":
-                                    //UrlParm += "&share=1";
-                                    break;
-                                default:
-                                    UrlParm += parm + "&";
-                                    break;
-                            }
-                            break;
-                        default:
-                            UrlParm += parm + "&";
-                            break;
-                    }
-                    break;
-            }
+          var parmVal: string[] = parm.split("=")
+          switch (dashboardUseMode.toUpperCase()) {
+            case "CURRENT USER_N":
+              switch (parmVal[0].toUpperCase()) {
+                case "CURRENTVIEWMEDIA":
+                case "VISMODE":
+                  switch (objAttribute.toUpperCase()) {
+                    case "DASHBOARD":
+                      //UrlParm += "&share=1";
+                      break;
+                    default:
+                      UrlParm += parm + "&";
+                      break;
+                  }
+                  break;
+                case "PROJECT":
+                case "SERVER":
+                case "PORT":
+                  break;
+                default:
+                  UrlParm += parm + "&";
+                  break;
+              }
+              break;
+            case "CURRENT USER":
+            case "SINGLE USER":
+              switch (parmVal[0].toUpperCase()) {
+                case "CURRENTVIEWMEDIA":
+                case "VISMODE":
+                  switch (objAttribute.toUpperCase()) {
+                    case "DASHBOARD":
+                      //UrlParm += "&share=1";
+                      break;
+                    default:
+                      UrlParm += parm + "&";
+                      break;
+                  }
+                  break;
+                default:
+                  UrlParm += parm + "&";
+                  break;
+              }
+              break;
+          }
+    
         });
         switch (objAttribute.toUpperCase()) {
-            case "DASHBOARD":
-                UrlParm += "share=1&";
-                break;
+          case "DASHBOARD":
+            UrlParm += "share=1&";
+            break;
         }
         UrlParm += "hiddensections=header,path,dockTop,dockLeft,footer&";
         UrlParm += "mstrSmgr=" + mstrLoginSession;
         // this.modalService.open(msg,'lg');
         // console.log(urlPrefix + domain + rptUrl + UrlParm);
         //this.commonUtility.openUrl('', '_blank');
-        url = urlPrefix + domain + rptUrl + UrlParm;
-        sessionStorage.setItem("objUrl", urlPrefix + domain + rptUrl + UrlParm);
+        url = urlPrefix + domain + rptUrl + UrlParm
+        sessionStorage.setItem("objUrl",urlPrefix + domain + rptUrl + UrlParm );
         console.log(urlPrefix + domain + rptUrl + UrlParm);
         // this.commonUtility.openRouteUrl(url,'_blank');
         //this.openDoc();
         this.commonUtility.openUrl(urlPrefix + domain + rptUrl + UrlParm, target);
-    }
+      } */
     RestApi(menu, target) {
         var apiId = "mstrRestApiPage";
         var ApiConfig = this.apiCommon.getApiConfigByApiID(apiId);
@@ -7548,6 +7557,7 @@ let ContentComponent = class ContentComponent {
         parm = "?SystemCode=" + this.commonUtility.systemId;
         parm += "&Token=" + this.commonUtility.getSessionValue('authenticationToken');
         parm += "&ObjectId=" + menu.web_object;
+        parm += "&accType=" + this.commonUtility.accType;
         console.log(apiUrl);
         this.commonUtility.openUrl(apiUrl + parm, target);
     }
@@ -7570,8 +7580,8 @@ ContentComponent.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
     { type: _service_menu_service__WEBPACK_IMPORTED_MODULE_4__["MenuService"] },
     { type: _service_mstr_login_service__WEBPACK_IMPORTED_MODULE_5__["MstrLoginService"] },
-    { type: _service_api_common_api_common_module__WEBPACK_IMPORTED_MODULE_10__["ApiCommonModule"] },
-    { type: _shared_common_utility_common_utility_module__WEBPACK_IMPORTED_MODULE_9__["CommonUtilityModule"] },
+    { type: _service_api_common_api_common_module__WEBPACK_IMPORTED_MODULE_9__["ApiCommonModule"] },
+    { type: _shared_common_utility_common_utility_module__WEBPACK_IMPORTED_MODULE_8__["CommonUtilityModule"] },
     { type: _shared_modal_modal_service__WEBPACK_IMPORTED_MODULE_6__["ModalService"] },
     { type: _shared_loading_loading_service__WEBPACK_IMPORTED_MODULE_7__["LoadingService"] },
     { type: _angular_common__WEBPACK_IMPORTED_MODULE_2__["Location"] }
@@ -7974,6 +7984,8 @@ let MenuService = class MenuService {
         console.log(this.apiId);
         this.ApiConfig = this.apiCommon.getApiConfigByApiID(this.apiId);
         const apiUrl = `${this.ApiConfig.domain}${this.ApiConfig.path}`;
+        var userId = "";
+        var accSource = "";
         console.log(apiUrl);
         const httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
@@ -7983,10 +7995,20 @@ let MenuService = class MenuService {
             })
         };
         this.loadingService.show();
+        accSource = this.commonUtility.getSessionValue("accSource");
+        switch (accSource) {
+            case "STAFF":
+                userId = this.commonUtility.getSessionValue("loginUser");
+                break;
+            default:
+                userId = this.commonUtility.getSessionValue("agentId");
+                break;
+        }
         const rqbody = {
             UKEY: this.commonUtility.getSessionValue('authenticationToken'),
             WEB_SYSTEM_CODE: this.commonUtility.systemCode,
-            USER_ID: this.commonUtility.getSessionValue('loginUser')
+            USER_TYPE: accSource,
+            USER_ID: userId
         };
         console.log(rqbody);
         return this.http.post(apiUrl, JSON.stringify(rqbody), httpOptions)

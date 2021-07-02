@@ -265,7 +265,13 @@ let LoginComponent = class LoginComponent {
                     });
                 }
                 if (result) {
-                    this.ngZone.run(() => this.router.navigateByUrl('/main'));
+                    if (this.commonUtility.accType == '0') {
+                        this.commonUtility.accSource = "STAFF";
+                        this.ngZone.run(() => this.router.navigateByUrl('/main'));
+                    }
+                    else {
+                        result = this.getTokenDetail();
+                    }
                 }
             });
         }
@@ -323,10 +329,9 @@ let LoginComponent = class LoginComponent {
                                 endM = end.substring(4, 6);
                                 endD = end.substring(6, 8);
                                 endH = end.substring(8, 10);
-                                endMin = end.substring(10, 12);
+                                endMin = begin.substring(10, 12);
                                 beginDate = new Date(parseInt(beginY, 10), parseInt(beginM, 10) - 1, parseInt(beginD, 10), parseInt(beginH, 10), parseInt(beginMin, 10), 0, 0);
                                 endDate = new Date(parseInt(endY, 10), parseInt(endM, 10) - 1, parseInt(endD, 10), parseInt(endH, 10), parseInt(endMin, 10), 0, 0);
-                                console.log(parseInt(endH, 10));
                                 if (imminentTime < beginDate.getTime() - new Date().getTime()) {
                                     imminentTime = beginDate.getTime() - new Date().getTime();
                                     this.showBeginTime = `${beginY}/${beginM}/${beginD} ${beginH}:${beginMin}`;
@@ -372,6 +377,64 @@ let LoginComponent = class LoginComponent {
             }
         });
     }
+    getTokenDetail() {
+        var msg;
+        var result = true;
+        this.loginService.getTokenDetail()
+            .subscribe(res => {
+            console.log(res);
+            this.loadingService.hide();
+            switch (res.ResponseDetails.responseCode) {
+                case "000":
+                    if (res.TokenDetail.length > 0) {
+                        this.commonUtility.accSource = res.TokenDetail[0].ACC_SOURCE;
+                        this.commonUtility.agentId = res.TokenDetail[0].AGENT_ID.toString();
+                        result = true;
+                    }
+                    else {
+                        msg = {
+                            headText: '登入失敗',
+                            txtContent: '查無資料。',
+                            type: _class_modal__WEBPACK_IMPORTED_MODULE_5__["ModalType"].Confirm
+                        };
+                        this.modalService.open(msg, 'sm');
+                        result = false;
+                    }
+                    break;
+                case "008":
+                    msg = {
+                        headText: '取資料失敗',
+                        txtContent: res.ReasonCode.map(item => `${item.reasonMsg}(錯誤碼：${item.reasonCode})`)
+                            .join(' '),
+                        type: _class_modal__WEBPACK_IMPORTED_MODULE_5__["ModalType"].Confirm
+                    };
+                    this.modalService.open(msg, 'sm');
+                    result = false;
+                    break;
+                default:
+                    msg = {
+                        headText: '取資料失敗',
+                        txtContent: '資料異常，請聯絡系統管理員。',
+                        type: _class_modal__WEBPACK_IMPORTED_MODULE_5__["ModalType"].Confirm
+                    };
+                    this.modalService.open(msg, 'sm');
+                    result = false;
+                    break;
+            }
+            ;
+        }, err => {
+            console.log("error");
+        }, () => {
+            console.log('get TokenDetail onComplete');
+            if (result) {
+                this.ngZone.run(() => this.router.navigateByUrl('/main'));
+            }
+            else {
+            }
+        });
+        return result;
+    }
+    ;
     versionCheck() {
         var msg;
         var needUpdate = false;

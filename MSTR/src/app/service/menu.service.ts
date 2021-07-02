@@ -28,6 +28,8 @@ export class MenuService {
     console.log(this.apiId);
     this.ApiConfig = this.apiCommon.getApiConfigByApiID(this.apiId);
     const apiUrl = `${this.ApiConfig.domain}${this.ApiConfig.path}`;
+    var userId:string="";
+    var accSource:string="";
     console.log(apiUrl);
 
     const httpOptions = {
@@ -38,10 +40,20 @@ export class MenuService {
       })
     };
     this.loadingService.show();
+    accSource=this.commonUtility.getSessionValue("accSource");
+    switch (accSource) {
+      case "STAFF":
+        userId= this.commonUtility.getSessionValue("loginUser");
+        break;
+      default:
+        userId= this.commonUtility.getSessionValue("agentId");
+        break;
+    }
     const rqbody:Menu.reqMenu={
       UKEY:this.commonUtility.getSessionValue('authenticationToken'),
       WEB_SYSTEM_CODE:this.commonUtility.systemCode,
-      USER_ID:this.commonUtility.getSessionValue('loginUser')
+      USER_TYPE:accSource,
+      USER_ID:userId
     };
 
     console.log(rqbody);

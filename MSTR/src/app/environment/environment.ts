@@ -4,15 +4,23 @@ export const envData:envConfig={
     env :'14',
     systemId:'80',
     systemCode:'MSTR',
-    version:'1.0.3',
-    platform:'1'//1:IOS,2:Android
+    version:'1.0.4',
+    platform:'1',//1:IOS,2:Android
+    useAcc:'1' //0：舊帳號，1：新帳號
 };
 
 export const apiPath : IApiConfig []=([
     {
         apiID: "appLogin",
         domainKey: "utility",
-        path: "MSTR/appLogin",
+        path: "MSTR/appLogin"
+        //path:"Common/login"
+    },
+    {
+        apiID: "commonLogin",
+        domainKey: "utility",
+        //path: "MSTR/appLogin",
+        path:"Common/login"
     },
     {
         apiID: "mstrLogin",
@@ -42,6 +50,12 @@ export const apiPath : IApiConfig []=([
         path:"Common/checkVersion"
     },
     {
+        apiID:"commonVersionCheck",
+        //domainKey:"discover",
+        domainKey:"utility",
+        path:"Common/checkVersion"
+    },
+    {
         apiID:"checkPwdWs",
         domainKey:"w2Util_pp",
         path:"pp.asmx"        
@@ -60,6 +74,11 @@ export const apiPath : IApiConfig []=([
         apiID:"maintainData",
         domainKey:"w2UtilAPI",
         path:"General/GetMaintainData"
+    },
+    {
+        apiID:"tokenData",
+        domainKey:"utility",
+        path:"Common/getTokenData"
     }
 ]);
 export const contentSize:number=8;

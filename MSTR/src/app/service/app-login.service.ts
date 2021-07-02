@@ -10,6 +10,7 @@ import {LoadingService} from '../shared/loading/loading.service';
 import {ApiCommonModule} from './api-common/api-common.module';
 import { IApiConfig } from '../class/environment';
 import * as login from '../class/login';
+import { BADQUERY } from 'dns';
 
 @Injectable({
   providedIn: 'root',
@@ -26,13 +27,24 @@ export class AppLoginService {
 
   appLogin (account:string, pwd:string): Observable<login.resLogin> {
     var apiId:string = "appLogin";
+    switch(this.commonUtility.accType)
+    {
+      case "0":
+        break;
+      case "1":
+        apiId="commonLogin";
+        break;
+    }
     console.log(apiId);
+    this.ApiConfig = this.apiCommon.getApiConfigByApiID(apiId);
     const apiUrl = this.apiCommon.getApiUrl(apiId);
     console.log(apiUrl);
+    console.warn()
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+        'apiKey':this.ApiConfig.keyId
       })
     };
     this.loadingService.show();
@@ -63,6 +75,14 @@ export class AppLoginService {
 
   versionCheck (appVersion:string, lastUpdateTime:string, platform:string): Observable<login.resVersionStatus> {
     var apiId:string = "versionCheck";
+    switch(this.commonUtility.accType)
+    {
+      case "0":
+        break;
+      case "1":
+        apiId="commonVersionCheck";
+        break;
+    }
     console.log(apiId);
     this.ApiConfig = this.apiCommon.getApiConfigByApiID(apiId);
     const apiUrl = this.apiCommon.getApiUrl(apiId);
@@ -71,7 +91,6 @@ export class AppLoginService {
       headers: new HttpHeaders({
         'Content-Type':'application/json',
         'authenticationToken':this.commonUtility.getSessionValue('authenticationToken'),
-        //'authenticationToken':'C501D4063C804323E0534D9C530A17EB',
         'apiKey':this.ApiConfig.keyId
       })
     };
@@ -98,5 +117,39 @@ export class AppLoginService {
           return throwError( error );
         }),
       );
-  }    
+  }
+  getTokenDetail(): Observable<login.resTokenDetail> {
+    var apiId:string = "tokenData";
+    console.log(apiId);
+    this.ApiConfig = this.apiCommon.getApiConfigByApiID(apiId);
+    const apiUrl = this.apiCommon.getApiUrl(apiId);
+    console.log(apiUrl);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':'application/json',
+        'authenticationToken':this.commonUtility.getSessionValue('authenticationToken'),
+        'apiKey':this.ApiConfig.keyId
+      })
+    };
+    this.loadingService.show();
+    const rqbody:login.reqVersionData={
+      MetaData:this.apiCommon.reqCommon
+    }
+
+    console.log(rqbody);
+
+    return this.http.post<login.resTokenDetail>(apiUrl, JSON.stringify(rqbody), httpOptions)
+      .pipe(
+        timeout(90 * 1000),
+        catchError( error => {
+          console.log('error:', error);
+
+          this.loadingService.hide();
+
+          if (error instanceof TimeoutError) {
+          }
+          return throwError( error );
+        }),
+      );
+  }
 }

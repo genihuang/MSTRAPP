@@ -51,7 +51,7 @@ export class CommonUtilityModule {
       cordova.InAppBrowser.open(encodeURI(url), target, 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
     }) ;   
   }
-public openRouteUrl(DocUrl:string,target:string)
+/* public openRouteUrl(DocUrl:string,target:string)
 {
   var url = "doc.html";
   console.log('openRouteUrl');
@@ -69,7 +69,7 @@ public openRestApiTest(DocUrl:string,target:string)
   document.addEventListener('deviceready', () => {
     cordova.InAppBrowser.open(url, '_system', 'location=yes,closebuttoncaption=關閉,hidenavigationbuttons=yes');
   });
-}
+} */
 
   public modifyPwd(account:string, page:string){
     // modifyPwdPage = this.apiCommon.getApiUrl("modifyPwdPage");
@@ -103,12 +103,15 @@ public openRestApiTest(DocUrl:string,target:string)
     switch(env.envData.env)
     {
       case "0":
+      case "2":
         rtn ="";
         break;
       case "10":
+      case "14":
         rtn ="UAT";
         break;
       case "11":
+      case "15":
         rtn="PreProd";
         break;
       default:
@@ -180,7 +183,9 @@ public formatTime(date:Date):string
   get systemCode():string{
     return env.envData.systemCode;
   }
-
+  get accType():string{
+    return env.envData.useAcc;
+  }
   //設定登入資訊
   private setToken(value:string){
     this.setSessionValue("authenticationToken",value);
@@ -214,7 +219,14 @@ public formatTime(date:Date):string
     this.setSessionValue("loginUser", value);
     // sessionStorage.setItem("loginUser", value);
   }
-
+  set accSource(value:string)
+  {
+    this.setSessionValue("accSource",value);
+  }
+  set agentId(value:string)
+  {
+    this.setSessionValue("agentId",value);
+  }
   set TokenData(value:login.tokenData)
   {
     this.setToken(value.Token);

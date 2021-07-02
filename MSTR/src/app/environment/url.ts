@@ -48,6 +48,10 @@ export const apiConfig_Uat: IApiConfig[] = ([
         keyId: "B718A8D8-6E99-4C55-B3F1-A826FBC0EF4F"
     },
     {
+        apiID: "commonLogin",
+        keyId: "B718A8D8-6E99-4C55-B3F1-A826FBC0EF4F"
+    },
+    {
         apiID: "mstrLogin",
         keyId: ""
     },
@@ -68,6 +72,10 @@ export const apiConfig_Uat: IApiConfig[] = ([
         keyId: "2F61976E-4E8D-4DA4-871C-1507FB26D874"
     },
     {
+        apiID: "commonVersionCheck",
+        keyId: "2F61976E-4E8D-4DA4-871C-1507FB26D874"
+    },
+    {
         apiID:"checkPwdWs",
         keyId:""
     },
@@ -82,6 +90,10 @@ export const apiConfig_Uat: IApiConfig[] = ([
     {
         apiID:"maintainData",
         keyId:"1EECE5B6-3A06-4F0D-BF72-FD08762D2B1C"
+    },
+    {
+        apiID:"tokenData",
+        keyId:"263E0FE2-8FA7-45AC-AAD7-610D57DAF364"
     }
 ]);
 
@@ -125,6 +137,10 @@ export const apiConfig_PreProd: IApiConfig[] = ([
         keyId: "B68DFBB5-4509-4FC4-89D9-6CE4AA713756"
     },
     {
+        apiID: "commonLogin",
+        keyId: "B68DFBB5-4509-4FC4-89D9-6CE4AA713756"
+    },
+    {
         apiID: "mstrLogin",
         keyId: ""
     },
@@ -145,6 +161,10 @@ export const apiConfig_PreProd: IApiConfig[] = ([
         keyId: "0D06003A-7FAA-4A78-9F0C-D58F2349AED3"
     },
     {
+        apiID: "commonVersionCheck",
+        keyId: "0D06003A-7FAA-4A78-9F0C-D58F2349AED3"
+    },
+    {
         apiID:"checkPwdWs",
         keyId:""
     },
@@ -159,6 +179,10 @@ export const apiConfig_PreProd: IApiConfig[] = ([
     {
         apiID:"maintainData",
         keyId:"5B98F6AD-5E60-4965-B9F1-5423C7275AAD"
+    },
+    {
+        apiID:"tokenData",
+        keyId:"DAB87AF7-E85D-475D-B637-F1CF4873DFE2"
     }
 ]);
 
@@ -205,6 +229,10 @@ export const apiConfig_Prod: IApiConfig[] = ([
         keyId: "C27A0301-9162-4DD2-9196-8BB9DB971DE0"
     },
     {
+        apiID: "commonLogin",
+        keyId: "C27A0301-9162-4DD2-9196-8BB9DB971DE0"
+    },
+    {
         apiID: "mstrLogin",
         keyId: ""
     },
@@ -225,6 +253,10 @@ export const apiConfig_Prod: IApiConfig[] = ([
         keyId: "F8D2555D-89F3-44AE-95FD-633A73FC56E2"
     },
     {
+        apiID: "commonVersionCheck",
+        keyId: "F8D2555D-89F3-44AE-95FD-633A73FC56E2"
+    },
+    {
         apiID:"checkPwdWs",
         keyId:""
     },
@@ -239,6 +271,10 @@ export const apiConfig_Prod: IApiConfig[] = ([
     {
         apiID:"maintainData",
         keyId:"6EF77201-21A7-46DF-926A-825737DF6608"
+    },
+    {
+        apiID:"tokenData",
+        keyId:"14B7C122-2212-4F23-A62E-5DBBD7673A43"
     }
 ]);
 
