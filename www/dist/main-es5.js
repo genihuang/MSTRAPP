@@ -2886,7 +2886,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /***/
   function _(module, exports, __webpack_require__) {
     module.exports = __webpack_require__(
-    /*! /Users/aztl/Documents/Test/MSTRAPP/MSTR/src/main.ts */
+    /*! /Users/aztl/Documents/Project/MSTRAPP/MSTR/src/main.ts */
     "./src/main.ts");
     /***/
   }
