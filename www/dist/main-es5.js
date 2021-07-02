@@ -1257,14 +1257,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       env: '14',
       systemId: '80',
       systemCode: 'MSTR',
-      version: '1.0.3',
-      platform: '1' //1:IOS,2:Android
+      version: '1.0.4',
+      platform: '1',
+      useAcc: '1' //0：舊帳號，1：新帳號
 
     };
     var apiPath = [{
       apiID: "appLogin",
       domainKey: "utility",
-      path: "MSTR/appLogin"
+      path: "MSTR/appLogin" //path:"Common/login"
+
+    }, {
+      apiID: "commonLogin",
+      domainKey: "utility",
+      //path: "MSTR/appLogin",
+      path: "Common/login"
     }, {
       apiID: "mstrLogin",
       domainKey: "utility",
@@ -1287,6 +1294,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       //domainKey:"utility",
       path: "Common/checkVersion"
     }, {
+      apiID: "commonVersionCheck",
+      //domainKey:"discover",
+      domainKey: "utility",
+      path: "Common/checkVersion"
+    }, {
       apiID: "checkPwdWs",
       domainKey: "w2Util_pp",
       path: "pp.asmx"
@@ -1302,6 +1314,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       apiID: "maintainData",
       domainKey: "w2UtilAPI",
       path: "General/GetMaintainData"
+    }, {
+      apiID: "tokenData",
+      domainKey: "utility",
+      path: "Common/getTokenData"
     }];
     var contentSize = 8;
     var idleTimeout = 30;
@@ -1398,6 +1414,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       apiID: "appLogin",
       keyId: "B718A8D8-6E99-4C55-B3F1-A826FBC0EF4F"
     }, {
+      apiID: "commonLogin",
+      keyId: "B718A8D8-6E99-4C55-B3F1-A826FBC0EF4F"
+    }, {
       apiID: "mstrLogin",
       keyId: ""
     }, {
@@ -1413,6 +1432,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       apiID: "versionCheck",
       keyId: "2F61976E-4E8D-4DA4-871C-1507FB26D874"
     }, {
+      apiID: "commonVersionCheck",
+      keyId: "2F61976E-4E8D-4DA4-871C-1507FB26D874"
+    }, {
       apiID: "checkPwdWs",
       keyId: ""
     }, {
@@ -1424,6 +1446,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       apiID: "maintainData",
       keyId: "1EECE5B6-3A06-4F0D-BF72-FD08762D2B1C"
+    }, {
+      apiID: "tokenData",
+      keyId: "263E0FE2-8FA7-45AC-AAD7-610D57DAF364"
     }];
     var apiDomain_PreProd = [{
       apiDomainKey: "utility",
@@ -1453,6 +1478,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       apiID: "appLogin",
       keyId: "B68DFBB5-4509-4FC4-89D9-6CE4AA713756"
     }, {
+      apiID: "commonLogin",
+      keyId: "B68DFBB5-4509-4FC4-89D9-6CE4AA713756"
+    }, {
       apiID: "mstrLogin",
       keyId: ""
     }, {
@@ -1468,6 +1496,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       apiID: "versionCheck",
       keyId: "0D06003A-7FAA-4A78-9F0C-D58F2349AED3"
     }, {
+      apiID: "commonVersionCheck",
+      keyId: "0D06003A-7FAA-4A78-9F0C-D58F2349AED3"
+    }, {
       apiID: "checkPwdWs",
       keyId: ""
     }, {
@@ -1479,6 +1510,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       apiID: "maintainData",
       keyId: "5B98F6AD-5E60-4965-B9F1-5423C7275AAD"
+    }, {
+      apiID: "tokenData",
+      keyId: "DAB87AF7-E85D-475D-B637-F1CF4873DFE2"
     }];
     var apiDomain_Prod = [{
       apiDomainKey: "utility",
@@ -1513,6 +1547,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       apiID: "appLogin",
       keyId: "C27A0301-9162-4DD2-9196-8BB9DB971DE0"
     }, {
+      apiID: "commonLogin",
+      keyId: "C27A0301-9162-4DD2-9196-8BB9DB971DE0"
+    }, {
       apiID: "mstrLogin",
       keyId: ""
     }, {
@@ -1528,6 +1565,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       apiID: "versionCheck",
       keyId: "F8D2555D-89F3-44AE-95FD-633A73FC56E2"
     }, {
+      apiID: "commonVersionCheck",
+      keyId: "F8D2555D-89F3-44AE-95FD-633A73FC56E2"
+    }, {
       apiID: "checkPwdWs",
       keyId: ""
     }, {
@@ -1539,6 +1579,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       apiID: "maintainData",
       keyId: "6EF77201-21A7-46DF-926A-825737DF6608"
+    }, {
+      apiID: "tokenData",
+      keyId: "14B7C122-2212-4F23-A62E-5DBBD7673A43"
     }];
     /***/
   },
@@ -1851,12 +1894,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var _this7 = this;
 
           var apiId = "appLogin";
+
+          switch (this.commonUtility.accType) {
+            case "0":
+              break;
+
+            case "1":
+              apiId = "commonLogin";
+              break;
+          }
+
           console.log(apiId);
+          this.ApiConfig = this.apiCommon.getApiConfigByApiID(apiId);
           var apiUrl = this.apiCommon.getApiUrl(apiId);
           console.log(apiUrl);
+          console.warn();
           var httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'apiKey': this.ApiConfig.keyId
             })
           };
           this.loadingService.show();
@@ -1885,6 +1941,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var _this8 = this;
 
           var apiId = "versionCheck";
+
+          switch (this.commonUtility.accType) {
+            case "0":
+              break;
+
+            case "1":
+              apiId = "commonVersionCheck";
+              break;
+          }
+
           console.log(apiId);
           this.ApiConfig = this.apiCommon.getApiConfigByApiID(apiId);
           var apiUrl = this.apiCommon.getApiUrl(apiId);
@@ -1893,7 +1959,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
               'Content-Type': 'application/json',
               'authenticationToken': this.commonUtility.getSessionValue('authenticationToken'),
-              //'authenticationToken':'C501D4063C804323E0534D9C530A17EB',
               'apiKey': this.ApiConfig.keyId
             })
           };
@@ -1909,6 +1974,38 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             console.log('error:', error);
 
             _this8.loadingService.hide();
+
+            if (error instanceof rxjs__WEBPACK_IMPORTED_MODULE_3__["TimeoutError"]) {}
+
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["throwError"])(error);
+          }));
+        }
+      }, {
+        key: "getTokenDetail",
+        value: function getTokenDetail() {
+          var _this9 = this;
+
+          var apiId = "tokenData";
+          console.log(apiId);
+          this.ApiConfig = this.apiCommon.getApiConfigByApiID(apiId);
+          var apiUrl = this.apiCommon.getApiUrl(apiId);
+          console.log(apiUrl);
+          var httpOptions = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
+              'Content-Type': 'application/json',
+              'authenticationToken': this.commonUtility.getSessionValue('authenticationToken'),
+              'apiKey': this.ApiConfig.keyId
+            })
+          };
+          this.loadingService.show();
+          var rqbody = {
+            MetaData: this.apiCommon.reqCommon
+          };
+          console.log(rqbody);
+          return this.http.post(apiUrl, JSON.stringify(rqbody), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["timeout"])(90 * 1000), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
+            console.log('error:', error);
+
+            _this9.loadingService.hide();
 
             if (error instanceof rxjs__WEBPACK_IMPORTED_MODULE_3__["TimeoutError"]) {}
 
@@ -2037,26 +2134,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             cordova.InAppBrowser.open(encodeURI(url), target, 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
           });
         }
-      }, {
-        key: "openRouteUrl",
-        value: function openRouteUrl(DocUrl, target) {
+        /* public openRouteUrl(DocUrl:string,target:string)
+        {
           var url = "doc.html";
           console.log('openRouteUrl');
-          localStorage.setItem("objUrl", DocUrl);
-          document.addEventListener('deviceready', function () {
+          localStorage.setItem("objUrl",DocUrl);
+          document.addEventListener('deviceready', () => {
             cordova.InAppBrowser.open(url, '_blank', 'location=yes,closebuttoncaption=關閉,hidenavigationbuttons=yes');
           });
         }
-      }, {
-        key: "openRestApiTest",
-        value: function openRestApiTest(DocUrl, target) {
+        
+        public openRestApiTest(DocUrl:string,target:string)
+        {
           var url = "RestApiTest.html";
           console.log('RestApiTest');
-          localStorage.setItem("objUrl", DocUrl);
-          document.addEventListener('deviceready', function () {
+          localStorage.setItem("objUrl",DocUrl);
+          document.addEventListener('deviceready', () => {
             cordova.InAppBrowser.open(url, '_system', 'location=yes,closebuttoncaption=關閉,hidenavigationbuttons=yes');
           });
-        }
+        } */
+
       }, {
         key: "modifyPwd",
         value: function modifyPwd(account, page) {
@@ -2094,14 +2191,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           switch (_environment_environment__WEBPACK_IMPORTED_MODULE_4__["envData"].env) {
             case "0":
+            case "2":
               rtn = "";
               break;
 
             case "10":
+            case "14":
               rtn = "UAT";
               break;
 
             case "11":
+            case "15":
               rtn = "PreProd";
               break;
 
@@ -2201,6 +2301,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return _environment_environment__WEBPACK_IMPORTED_MODULE_4__["envData"].systemCode;
         }
       }, {
+        key: "accType",
+        get: function get() {
+          return _environment_environment__WEBPACK_IMPORTED_MODULE_4__["envData"].useAcc;
+        }
+      }, {
         key: "Token",
         set: function set(value) {
           this.setTokenEnd(value);
@@ -2219,6 +2324,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "loginUser",
         set: function set(value) {
           this.setSessionValue("loginUser", value); // sessionStorage.setItem("loginUser", value);
+        }
+      }, {
+        key: "accSource",
+        set: function set(value) {
+          this.setSessionValue("accSource", value);
+        }
+      }, {
+        key: "agentId",
+        set: function set(value) {
+          this.setSessionValue("agentId", value);
         }
       }, {
         key: "TokenData",

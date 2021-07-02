@@ -407,9 +407,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               }
 
               if (result) {
-                _this.ngZone.run(function () {
-                  return _this.router.navigateByUrl('/main');
-                });
+                if (_this.commonUtility.accType == '0') {
+                  _this.commonUtility.accSource = "STAFF";
+
+                  _this.ngZone.run(function () {
+                    return _this.router.navigateByUrl('/main');
+                  });
+                } else {
+                  result = _this.getTokenDetail();
+                }
               }
             });
           }
@@ -471,10 +477,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       endM = end.substring(4, 6);
                       endD = end.substring(6, 8);
                       endH = end.substring(8, 10);
-                      endMin = end.substring(10, 12);
+                      endMin = begin.substring(10, 12);
                       beginDate = new Date(parseInt(beginY, 10), parseInt(beginM, 10) - 1, parseInt(beginD, 10), parseInt(beginH, 10), parseInt(beginMin, 10), 0, 0);
                       endDate = new Date(parseInt(endY, 10), parseInt(endM, 10) - 1, parseInt(endD, 10), parseInt(endH, 10), parseInt(endMin, 10), 0, 0);
-                      console.log(parseInt(endH, 10));
 
                       if (imminentTime < beginDate.getTime() - new Date().getTime()) {
                         imminentTime = beginDate.getTime() - new Date().getTime();
@@ -526,9 +531,82 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           });
         }
       }, {
+        key: "getTokenDetail",
+        value: function getTokenDetail() {
+          var _this3 = this;
+
+          var msg;
+          var result = true;
+          this.loginService.getTokenDetail().subscribe(function (res) {
+            console.log(res);
+
+            _this3.loadingService.hide();
+
+            switch (res.ResponseDetails.responseCode) {
+              case "000":
+                if (res.TokenDetail.length > 0) {
+                  _this3.commonUtility.accSource = res.TokenDetail[0].ACC_SOURCE;
+                  _this3.commonUtility.agentId = res.TokenDetail[0].AGENT_ID.toString();
+                  result = true;
+                } else {
+                  msg = {
+                    headText: '登入失敗',
+                    txtContent: '查無資料。',
+                    type: _class_modal__WEBPACK_IMPORTED_MODULE_5__["ModalType"].Confirm
+                  };
+
+                  _this3.modalService.open(msg, 'sm');
+
+                  result = false;
+                }
+
+                break;
+
+              case "008":
+                msg = {
+                  headText: '取資料失敗',
+                  txtContent: res.ReasonCode.map(function (item) {
+                    return "".concat(item.reasonMsg, "(\u932F\u8AA4\u78BC\uFF1A").concat(item.reasonCode, ")");
+                  }).join(' '),
+                  type: _class_modal__WEBPACK_IMPORTED_MODULE_5__["ModalType"].Confirm
+                };
+
+                _this3.modalService.open(msg, 'sm');
+
+                result = false;
+                break;
+
+              default:
+                msg = {
+                  headText: '取資料失敗',
+                  txtContent: '資料異常，請聯絡系統管理員。',
+                  type: _class_modal__WEBPACK_IMPORTED_MODULE_5__["ModalType"].Confirm
+                };
+
+                _this3.modalService.open(msg, 'sm');
+
+                result = false;
+                break;
+            }
+
+            ;
+          }, function (err) {
+            console.log("error");
+          }, function () {
+            console.log('get TokenDetail onComplete');
+
+            if (result) {
+              _this3.ngZone.run(function () {
+                return _this3.router.navigateByUrl('/main');
+              });
+            } else {}
+          });
+          return result;
+        }
+      }, {
         key: "versionCheck",
         value: function versionCheck() {
-          var _this3 = this;
+          var _this4 = this;
 
           var msg;
           var needUpdate = false;
@@ -549,7 +627,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 if (res.AppVersionStatus.NeedUpdate == "Y") {
                   needUpdate = true;
                 } else {
-                  if (_this3.appVersion == "" || _this3.appVersion != "" && res.AppVersionStatus.AppVersion.replace('.', '') > _this3.appVersion.replace('.', '')) {
+                  if (_this4.appVersion == "" || _this4.appVersion != "" && res.AppVersionStatus.AppVersion.replace('.', '') > _this4.appVersion.replace('.', '')) {
                     needUpdate = true;
                   }
                 }
@@ -561,15 +639,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     type: _class_modal__WEBPACK_IMPORTED_MODULE_5__["ModalType"].Confirm
                   }; // modalRtn=this.modalService.open(msg)
 
-                  modalRtn = _this3.open(msg);
+                  modalRtn = _this4.open(msg);
                   modalRtn.result.then(function (result) {
                     if (result == 'NEXT') {
                       console.log(res.AppVersionStatus.AppLink);
                       localStorage.removeItem("appLastUpdateTime");
-                      _this3.appVersion = res.AppVersionStatus.AppVersion;
-                      _this3.appLastUpdateTime = "".concat(_this3.commonUtility.Date).concat(_this3.commonUtility.TimeStamp);
+                      _this4.appVersion = res.AppVersionStatus.AppVersion;
+                      _this4.appLastUpdateTime = "".concat(_this4.commonUtility.Date).concat(_this4.commonUtility.TimeStamp);
 
-                      _this3.commonUtility.openUrl(res.AppVersionStatus.AppLink, '_system');
+                      _this4.commonUtility.openUrl(res.AppVersionStatus.AppLink, '_system');
 
                       console.log(updateUrl);
                     } else {
@@ -579,8 +657,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     console.log(reason);
                   });
                 } else {
-                  if (_this3.commonUtility.getLocalValue('appLastUpdateTime') == null) {
-                    _this3.commonUtility.setLocalValue("appLastUpdateTime", _this3.appLastUpdateTime);
+                  if (_this4.commonUtility.getLocalValue('appLastUpdateTime') == null) {
+                    _this4.commonUtility.setLocalValue("appLastUpdateTime", _this4.appLastUpdateTime);
                   }
                 }
 
@@ -596,7 +674,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   type: _class_modal__WEBPACK_IMPORTED_MODULE_5__["ModalType"].Confirm
                 };
 
-                _this3.modalService.open(msg, 'sm');
+                _this4.modalService.open(msg, 'sm');
 
                 Result = false;
                 break;
@@ -608,7 +686,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   type: _class_modal__WEBPACK_IMPORTED_MODULE_5__["ModalType"].Confirm
                 };
 
-                _this3.modalService.open(msg, 'sm');
+                _this4.modalService.open(msg, 'sm');
 
                 Result = false;
                 break;
@@ -873,7 +951,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(MaintainService, [{
         key: "getMaintainData",
         value: function getMaintainData() {
-          var _this4 = this;
+          var _this5 = this;
 
           console.log("getMaintainData");
           var apiId = "maintainData";
@@ -901,7 +979,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return this.http.post(apiUrl, JSON.stringify(rqbody), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["timeout"])(90 * 1000), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
             console.log('error:', error);
 
-            _this4.loadingService.hide();
+            _this5.loadingService.hide();
 
             if (error instanceof rxjs__WEBPACK_IMPORTED_MODULE_3__["TimeoutError"]) {// this.nativeService.alert({
               //   TITLE: '系統連線逾時',

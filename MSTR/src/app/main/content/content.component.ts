@@ -149,7 +149,7 @@ export class ContentComponent implements OnInit {
     // menus=>this.menus=menus
     console.log("submenu_" + this.subMenuCnt + "_" + this.showIndicators);
   }
-  checkMstrNeedLogin(dashboardUseMode: string): boolean {
+/*   checkMstrNeedLogin(dashboardUseMode: string): boolean {
     var mstrSession: MstrSessionDetail;
     var dateNow: string;
     var needLogin: boolean = true;
@@ -161,8 +161,8 @@ export class ContentComponent implements OnInit {
       }
     }
     return needLogin;
-  }
-  getMstrSession(dashboardUseMode: string): MstrSessionDetail {
+  } */
+/*   getMstrSession(dashboardUseMode: string): MstrSessionDetail {
     var mstrSession: MstrSessionDetail = null;
     switch (dashboardUseMode.toUpperCase()) {
       case "CURRENT USER_N":
@@ -178,9 +178,9 @@ export class ContentComponent implements OnInit {
         break;
     }
     return mstrSession;
-  }
+  } */
   
-  mstrLogin(menu: ObjectNode, target:string) {
+  /* mstrLogin(menu: ObjectNode, target:string) {
     var mstrSession: MstrSessionDetail;
     var bolIsNeedLogin: boolean;
     var dashboardUseMode: string = menu.dashboard_use_mode;
@@ -281,7 +281,8 @@ export class ContentComponent implements OnInit {
       this.exexDoc(arrUrlParm,mstrSession,menu.web_obj_attribute,target);
     }
   }
-  exexDoc(arrUrlParm:string[], mstrSession:MstrSessionDetail, objAttribute:string, target:string ){
+ */
+/*   exexDoc(arrUrlParm:string[], mstrSession:MstrSessionDetail, objAttribute:string, target:string ){
     var urlPrefix: string = this.commonUtility.getUrlPrefix();
     var rptUrl: string = "/microstrategy/asp/Main.aspx?";
     var dashboardUseMode= mstrSession.dashboardUseMode;
@@ -369,7 +370,7 @@ export class ContentComponent implements OnInit {
     // this.commonUtility.openRouteUrl(url,'_blank');
     //this.openDoc();
     this.commonUtility.openUrl(urlPrefix + domain + rptUrl + UrlParm, target);
-  }
+  } */
   RestApi(menu: ObjectNode, target:string)
   {
     var apiId:string = "mstrRestApiPage";
@@ -381,6 +382,7 @@ export class ContentComponent implements OnInit {
     parm = "?SystemCode=" +this.commonUtility.systemId;
     parm += "&Token="+this.commonUtility.getSessionValue('authenticationToken');
     parm += "&ObjectId="+menu.web_object;
+    parm += "&accType="+this.commonUtility.accType;
     console.log(apiUrl);
     this.commonUtility.openUrl(apiUrl+parm, target);
   }

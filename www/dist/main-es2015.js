@@ -676,14 +676,22 @@ const envData = {
     env: '14',
     systemId: '80',
     systemCode: 'MSTR',
-    version: '1.0.3',
-    platform: '1' //1:IOS,2:Android
+    version: '1.0.4',
+    platform: '1',
+    useAcc: '1' //0：舊帳號，1：新帳號
 };
 const apiPath = ([
     {
         apiID: "appLogin",
         domainKey: "utility",
-        path: "MSTR/appLogin",
+        path: "MSTR/appLogin"
+        //path:"Common/login"
+    },
+    {
+        apiID: "commonLogin",
+        domainKey: "utility",
+        //path: "MSTR/appLogin",
+        path: "Common/login"
     },
     {
         apiID: "mstrLogin",
@@ -712,6 +720,12 @@ const apiPath = ([
         path: "Common/checkVersion"
     },
     {
+        apiID: "commonVersionCheck",
+        //domainKey:"discover",
+        domainKey: "utility",
+        path: "Common/checkVersion"
+    },
+    {
         apiID: "checkPwdWs",
         domainKey: "w2Util_pp",
         path: "pp.asmx"
@@ -730,6 +744,11 @@ const apiPath = ([
         apiID: "maintainData",
         domainKey: "w2UtilAPI",
         path: "General/GetMaintainData"
+    },
+    {
+        apiID: "tokenData",
+        domainKey: "utility",
+        path: "Common/getTokenData"
     }
 ]);
 const contentSize = 8;
@@ -799,6 +818,10 @@ const apiConfig_Uat = ([
         keyId: "B718A8D8-6E99-4C55-B3F1-A826FBC0EF4F"
     },
     {
+        apiID: "commonLogin",
+        keyId: "B718A8D8-6E99-4C55-B3F1-A826FBC0EF4F"
+    },
+    {
         apiID: "mstrLogin",
         keyId: ""
     },
@@ -819,6 +842,10 @@ const apiConfig_Uat = ([
         keyId: "2F61976E-4E8D-4DA4-871C-1507FB26D874"
     },
     {
+        apiID: "commonVersionCheck",
+        keyId: "2F61976E-4E8D-4DA4-871C-1507FB26D874"
+    },
+    {
         apiID: "checkPwdWs",
         keyId: ""
     },
@@ -833,6 +860,10 @@ const apiConfig_Uat = ([
     {
         apiID: "maintainData",
         keyId: "1EECE5B6-3A06-4F0D-BF72-FD08762D2B1C"
+    },
+    {
+        apiID: "tokenData",
+        keyId: "263E0FE2-8FA7-45AC-AAD7-610D57DAF364"
     }
 ]);
 const apiDomain_PreProd = ([
@@ -873,6 +904,10 @@ const apiConfig_PreProd = ([
         keyId: "B68DFBB5-4509-4FC4-89D9-6CE4AA713756"
     },
     {
+        apiID: "commonLogin",
+        keyId: "B68DFBB5-4509-4FC4-89D9-6CE4AA713756"
+    },
+    {
         apiID: "mstrLogin",
         keyId: ""
     },
@@ -893,6 +928,10 @@ const apiConfig_PreProd = ([
         keyId: "0D06003A-7FAA-4A78-9F0C-D58F2349AED3"
     },
     {
+        apiID: "commonVersionCheck",
+        keyId: "0D06003A-7FAA-4A78-9F0C-D58F2349AED3"
+    },
+    {
         apiID: "checkPwdWs",
         keyId: ""
     },
@@ -907,6 +946,10 @@ const apiConfig_PreProd = ([
     {
         apiID: "maintainData",
         keyId: "5B98F6AD-5E60-4965-B9F1-5423C7275AAD"
+    },
+    {
+        apiID: "tokenData",
+        keyId: "DAB87AF7-E85D-475D-B637-F1CF4873DFE2"
     }
 ]);
 const apiDomain_Prod = ([
@@ -952,6 +995,10 @@ const apiConfig_Prod = ([
         keyId: "C27A0301-9162-4DD2-9196-8BB9DB971DE0"
     },
     {
+        apiID: "commonLogin",
+        keyId: "C27A0301-9162-4DD2-9196-8BB9DB971DE0"
+    },
+    {
         apiID: "mstrLogin",
         keyId: ""
     },
@@ -972,6 +1019,10 @@ const apiConfig_Prod = ([
         keyId: "F8D2555D-89F3-44AE-95FD-633A73FC56E2"
     },
     {
+        apiID: "commonVersionCheck",
+        keyId: "F8D2555D-89F3-44AE-95FD-633A73FC56E2"
+    },
+    {
         apiID: "checkPwdWs",
         keyId: ""
     },
@@ -986,6 +1037,10 @@ const apiConfig_Prod = ([
     {
         apiID: "maintainData",
         keyId: "6EF77201-21A7-46DF-926A-825737DF6608"
+    },
+    {
+        apiID: "tokenData",
+        keyId: "14B7C122-2212-4F23-A62E-5DBBD7673A43"
     }
 ]);
 
@@ -1163,12 +1218,22 @@ let AppLoginService = class AppLoginService {
     }
     appLogin(account, pwd) {
         var apiId = "appLogin";
+        switch (this.commonUtility.accType) {
+            case "0":
+                break;
+            case "1":
+                apiId = "commonLogin";
+                break;
+        }
         console.log(apiId);
+        this.ApiConfig = this.apiCommon.getApiConfigByApiID(apiId);
         const apiUrl = this.apiCommon.getApiUrl(apiId);
         console.log(apiUrl);
+        console.warn();
         const httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'apiKey': this.ApiConfig.keyId
             })
         };
         this.loadingService.show();
@@ -1192,6 +1257,13 @@ let AppLoginService = class AppLoginService {
     }
     versionCheck(appVersion, lastUpdateTime, platform) {
         var apiId = "versionCheck";
+        switch (this.commonUtility.accType) {
+            case "0":
+                break;
+            case "1":
+                apiId = "commonVersionCheck";
+                break;
+        }
         console.log(apiId);
         this.ApiConfig = this.apiCommon.getApiConfigByApiID(apiId);
         const apiUrl = this.apiCommon.getApiUrl(apiId);
@@ -1200,7 +1272,6 @@ let AppLoginService = class AppLoginService {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json',
                 'authenticationToken': this.commonUtility.getSessionValue('authenticationToken'),
-                //'authenticationToken':'C501D4063C804323E0534D9C530A17EB',
                 'apiKey': this.ApiConfig.keyId
             })
         };
@@ -1210,6 +1281,33 @@ let AppLoginService = class AppLoginService {
             AppVersion: appVersion,
             LastUpdateTime: lastUpdateTime,
             DeviceSystemType: platform
+        };
+        console.log(rqbody);
+        return this.http.post(apiUrl, JSON.stringify(rqbody), httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["timeout"])(90 * 1000), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(error => {
+            console.log('error:', error);
+            this.loadingService.hide();
+            if (error instanceof rxjs__WEBPACK_IMPORTED_MODULE_3__["TimeoutError"]) {
+            }
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["throwError"])(error);
+        }));
+    }
+    getTokenDetail() {
+        var apiId = "tokenData";
+        console.log(apiId);
+        this.ApiConfig = this.apiCommon.getApiConfigByApiID(apiId);
+        const apiUrl = this.apiCommon.getApiUrl(apiId);
+        console.log(apiUrl);
+        const httpOptions = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
+                'Content-Type': 'application/json',
+                'authenticationToken': this.commonUtility.getSessionValue('authenticationToken'),
+                'apiKey': this.ApiConfig.keyId
+            })
+        };
+        this.loadingService.show();
+        const rqbody = {
+            MetaData: this.apiCommon.reqCommon
         };
         console.log(rqbody);
         return this.http.post(apiUrl, JSON.stringify(rqbody), httpOptions)
@@ -1288,22 +1386,25 @@ let CommonUtilityModule = class CommonUtilityModule {
             cordova.InAppBrowser.open(encodeURI(url), target, 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
         });
     }
-    openRouteUrl(DocUrl, target) {
-        var url = "doc.html";
-        console.log('openRouteUrl');
-        localStorage.setItem("objUrl", DocUrl);
-        document.addEventListener('deviceready', () => {
-            cordova.InAppBrowser.open(url, '_blank', 'location=yes,closebuttoncaption=關閉,hidenavigationbuttons=yes');
-        });
+    /* public openRouteUrl(DocUrl:string,target:string)
+    {
+      var url = "doc.html";
+      console.log('openRouteUrl');
+      localStorage.setItem("objUrl",DocUrl);
+      document.addEventListener('deviceready', () => {
+        cordova.InAppBrowser.open(url, '_blank', 'location=yes,closebuttoncaption=關閉,hidenavigationbuttons=yes');
+      });
     }
-    openRestApiTest(DocUrl, target) {
-        var url = "RestApiTest.html";
-        console.log('RestApiTest');
-        localStorage.setItem("objUrl", DocUrl);
-        document.addEventListener('deviceready', () => {
-            cordova.InAppBrowser.open(url, '_system', 'location=yes,closebuttoncaption=關閉,hidenavigationbuttons=yes');
-        });
-    }
+    
+    public openRestApiTest(DocUrl:string,target:string)
+    {
+      var url = "RestApiTest.html";
+      console.log('RestApiTest');
+      localStorage.setItem("objUrl",DocUrl);
+      document.addEventListener('deviceready', () => {
+        cordova.InAppBrowser.open(url, '_system', 'location=yes,closebuttoncaption=關閉,hidenavigationbuttons=yes');
+      });
+    } */
     modifyPwd(account, page) {
         // modifyPwdPage = this.apiCommon.getApiUrl("modifyPwdPage");
         page += '&SystemID=' + this.systemId + '&Account=' + account;
@@ -1330,12 +1431,15 @@ let CommonUtilityModule = class CommonUtilityModule {
         var rtn;
         switch (_environment_environment__WEBPACK_IMPORTED_MODULE_4__["envData"].env) {
             case "0":
+            case "2":
                 rtn = "";
                 break;
             case "10":
+            case "14":
                 rtn = "UAT";
                 break;
             case "11":
+            case "15":
                 rtn = "PreProd";
                 break;
             default:
@@ -1400,6 +1504,9 @@ let CommonUtilityModule = class CommonUtilityModule {
     get systemCode() {
         return _environment_environment__WEBPACK_IMPORTED_MODULE_4__["envData"].systemCode;
     }
+    get accType() {
+        return _environment_environment__WEBPACK_IMPORTED_MODULE_4__["envData"].useAcc;
+    }
     //設定登入資訊
     setToken(value) {
         this.setSessionValue("authenticationToken", value);
@@ -1425,6 +1532,12 @@ let CommonUtilityModule = class CommonUtilityModule {
     set loginUser(value) {
         this.setSessionValue("loginUser", value);
         // sessionStorage.setItem("loginUser", value);
+    }
+    set accSource(value) {
+        this.setSessionValue("accSource", value);
+    }
+    set agentId(value) {
+        this.setSessionValue("agentId", value);
     }
     set TokenData(value) {
         this.setToken(value.Token);

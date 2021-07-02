@@ -10874,19 +10874,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony import */
 
 
-    var _class_modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
-    /*! ../../class/modal */
-    "./src/app/class/modal.ts");
-    /* harmony import */
-
-
-    var _shared_common_utility_common_utility_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    var _shared_common_utility_common_utility_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! ../../shared/common-utility/common-utility.module */
     "./src/app/shared/common-utility/common-utility.module.ts");
     /* harmony import */
 
 
-    var _service_api_common_api_common_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    var _service_api_common_api_common_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! ../../service/api-common/api-common.module */
     "./src/app/service/api-common/api-common.module.ts");
 
@@ -11011,272 +11005,228 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           console.log("submenu_" + this.subMenuCnt + "_" + this.showIndicators);
         }
-      }, {
-        key: "checkMstrNeedLogin",
-        value: function checkMstrNeedLogin(dashboardUseMode) {
-          var mstrSession;
-          var dateNow;
-          var needLogin = true;
-          dateNow = this.commonUtility.Date + this.commonUtility.TimeStamp;
-          mstrSession = this.getMstrSession(dashboardUseMode);
-
-          if (mstrSession != null) {
-            if (mstrSession.sessionExpiredTime >= dateNow) {
-              needLogin = false;
+        /*   checkMstrNeedLogin(dashboardUseMode: string): boolean {
+            var mstrSession: MstrSessionDetail;
+            var dateNow: string;
+            var needLogin: boolean = true;
+            dateNow = this.commonUtility.Date + this.commonUtility.TimeStamp
+            mstrSession = this.getMstrSession(dashboardUseMode);
+            if (mstrSession != null) {
+              if (mstrSession.sessionExpiredTime >= dateNow) {
+                needLogin = false;
+              }
             }
-          }
+            return needLogin;
+          } */
 
-          return needLogin;
-        }
-      }, {
-        key: "getMstrSession",
-        value: function getMstrSession(dashboardUseMode) {
-          var mstrSession = null;
+        /*   getMstrSession(dashboardUseMode: string): MstrSessionDetail {
+            var mstrSession: MstrSessionDetail = null;
+            switch (dashboardUseMode.toUpperCase()) {
+              case "CURRENT USER_N":
+              case "CURRENT USER":
+                if (sessionStorage.getItem("CurrentSession") != null) {
+                  mstrSession = JSON.parse(this.commonUtility.getSessionValue("CurrentSession"));
+                }
+                break;
+              default:
+                if (sessionStorage.getItem("SingleSession") != null) {
+                  mstrSession = JSON.parse(this.commonUtility.getSessionValue("SingleSession"));
+                }
+                break;
+            }
+            return mstrSession;
+          } */
 
-          switch (dashboardUseMode.toUpperCase()) {
-            case "CURRENT USER_N":
-            case "CURRENT USER":
-              if (sessionStorage.getItem("CurrentSession") != null) {
-                mstrSession = JSON.parse(this.commonUtility.getSessionValue("CurrentSession"));
-              }
-
-              break;
-
-            default:
-              if (sessionStorage.getItem("SingleSession") != null) {
-                mstrSession = JSON.parse(this.commonUtility.getSessionValue("SingleSession"));
-              }
-
-              break;
-          }
-
-          return mstrSession;
-        }
-      }, {
-        key: "mstrLogin",
-        value: function mstrLogin(menu, target) {
-          var _this40 = this;
-
-          var mstrSession;
-          var bolIsNeedLogin;
-          var dashboardUseMode = menu.dashboard_use_mode;
-          var msg;
-          var result = true;
+        /* mstrLogin(menu: ObjectNode, target:string) {
+          var mstrSession: MstrSessionDetail;
+          var bolIsNeedLogin: boolean;
+          var dashboardUseMode: string = menu.dashboard_use_mode;
+          var msg: ModalOptions;
+          var result: boolean = true;
           var now = new Date();
           now.setMinutes(now.getMinutes() + 8); // timestamp
-
           now = new Date(now); // Date object
-
-          var urlLink = menu.web_obj_link_url; //報表連結
-
-          var arrUrlParm = urlLink.split("&"); //參數array
-
-          var mstrProject;
-          var mstrPort;
-          var url = "";
+             var urlLink: string = menu.web_obj_link_url;      //報表連結
+          var arrUrlParm: string[] = urlLink.split("&");    //參數array
+             var mstrProject: string;
+          var mstrPort: string;
+             var url:string= "";
           console.log(target);
           bolIsNeedLogin = this.checkMstrNeedLogin(dashboardUseMode);
-          arrUrlParm.forEach(function (parm) {
-            var parmVal = parm.split("=");
-
+          arrUrlParm.forEach(parm => {
+            var parmVal: string[] = parm.split("=")
             switch (parmVal[0].toUpperCase()) {
               case "PROJECT":
                 mstrProject = parmVal[1];
                 break;
-
               case "PORT":
                 mstrPort = parmVal[1];
                 break;
-
               default:
                 break;
-            }
-
-            ;
+            };
           });
-
           if (bolIsNeedLogin) {
-            this.mstrLoginService.mstrLogin(mstrProject, this.commonUtility.getSessionValue("loginUser"), dashboardUseMode).subscribe(function (res) {
-              _this40.loadingService.hide();
-
-              switch (res.ResponseDetails.responseCode) {
-                case "000":
-                  var _mstrSession = {
-                    dashboardUseMode: dashboardUseMode,
-                    sessionInfo: res.sessionInfo,
-                    sessionState: res.sessionState,
-                    sessionExpiredTime: _this40.commonUtility.formatDate(now) + _this40.commonUtility.formatTime(now),
-                    iServer: res.iServer,
-                    iisServer: res.iisServer
-                  };
-
-                  switch (dashboardUseMode.toUpperCase()) {
-                    case "CURRENT USER_N":
-                    case "CURRENT USER":
-                      _this40.commonUtility.setSessionValue("CurrentSession", JSON.stringify(_mstrSession));
-
+            this.mstrLoginService.mstrLogin(mstrProject, this.commonUtility.getSessionValue("loginUser"), dashboardUseMode)
+              .subscribe(
+                res => {
+                  this.loadingService.hide();
+                  switch (res.ResponseDetails.responseCode) {
+                    case "000":
+                      let mstrSession:MstrSessionDetail={
+                        dashboardUseMode : dashboardUseMode,
+                        sessionInfo:res.sessionInfo,
+                        sessionState:res.sessionState,
+                        sessionExpiredTime:this.commonUtility.formatDate(now)+this.commonUtility.formatTime(now),
+                        iServer:res.iServer,
+                        iisServer:res.iisServer
+                      };
+                      switch(dashboardUseMode.toUpperCase())
+                      {
+                        case "CURRENT USER_N":
+                          case "CURRENT USER":
+                            this.commonUtility.setSessionValue("CurrentSession",JSON.stringify(mstrSession));
+                            break;
+                          default:
+                            this.commonUtility.setSessionValue("SingleSession",JSON.stringify(mstrSession));
+                            break;
+                      }
+                      console.log("login");
+                      console.log(mstrSession);
+                      this.exexDoc(arrUrlParm,mstrSession,menu.web_obj_attribute,target);
+                      result=true;
                       break;
-
+                    case "008":
+                      msg = {
+                        headText: 'MSTR登入失敗',
+                        txtContent: res.ReasonCode.map(
+                          item =>
+                            `${item.reasonMsg}(錯誤碼：${item.reasonCode})`
+                        )
+                          .join(' '),
+                        type: ModalType.Confirm
+                      };
+                      this.modalService.open(msg,'sm');
+                      result = false;
+                      break;
                     default:
-                      _this40.commonUtility.setSessionValue("SingleSession", JSON.stringify(_mstrSession));
-
+                      msg = {
+                        headText: 'MSTR登入失敗',
+                        txtContent: '資料異常，請聯絡系統管理員。',
+                        type: ModalType.Confirm
+                      };
+                      this.modalService.open(msg,'sm');
+                      result = false;
                       break;
+                  };
+                },
+                ()=>{
+                  console.log('mstrlogin_oncomplete');
+                  if (result)
+                  {
+                    console.log(mstrSession);
                   }
-
-                  console.log("login");
-                  console.log(_mstrSession);
-
-                  _this40.exexDoc(arrUrlParm, _mstrSession, menu.web_obj_attribute, target);
-
-                  result = true;
-                  break;
-
-                case "008":
-                  msg = {
-                    headText: 'MSTR登入失敗',
-                    txtContent: res.ReasonCode.map(function (item) {
-                      return "".concat(item.reasonMsg, "(\u932F\u8AA4\u78BC\uFF1A").concat(item.reasonCode, ")");
-                    }).join(' '),
-                    type: _class_modal__WEBPACK_IMPORTED_MODULE_8__["ModalType"].Confirm
-                  };
-
-                  _this40.modalService.open(msg, 'sm');
-
-                  result = false;
-                  break;
-
-                default:
-                  msg = {
-                    headText: 'MSTR登入失敗',
-                    txtContent: '資料異常，請聯絡系統管理員。',
-                    type: _class_modal__WEBPACK_IMPORTED_MODULE_8__["ModalType"].Confirm
-                  };
-
-                  _this40.modalService.open(msg, 'sm');
-
-                  result = false;
-                  break;
-              }
-
-              ;
-            }, function () {
-              console.log('mstrlogin_oncomplete');
-
-              if (result) {
-                console.log(mstrSession);
-              }
-            });
-          } else {
+                }
+              )
+          }
+          else {
             console.log("no login");
             mstrSession = this.getMstrSession(dashboardUseMode);
-            this.exexDoc(arrUrlParm, mstrSession, menu.web_obj_attribute, target);
+            this.exexDoc(arrUrlParm,mstrSession,menu.web_obj_attribute,target);
           }
         }
-      }, {
-        key: "exexDoc",
-        value: function exexDoc(arrUrlParm, mstrSession, objAttribute, target) {
-          var urlPrefix = this.commonUtility.getUrlPrefix();
-          var rptUrl = "/microstrategy/asp/Main.aspx?";
-          var dashboardUseMode = mstrSession.dashboardUseMode;
-          var UrlParm = "";
-          var domain = mstrSession.iisServer;
-          var iServer = mstrSession.iServer;
-          var mstrLoginSession = "";
-          var msg;
-          var url = "";
-          console.log("execDoc"); // switch (envData.env) {
-          //   case "10":
-          //     domain = "113.196.86.112";
-          //     break;
-          // }
+        */
 
-          switch (dashboardUseMode.toUpperCase()) {
-            case "CURRENT USER_N":
-              mstrLoginSession = mstrSession.sessionInfo;
-              break;
-
-            default:
-              mstrLoginSession = mstrSession.sessionState;
-              UrlParm = "Server=" + iServer + "&";
-              break;
-          }
-
-          arrUrlParm.forEach(function (parm) {
-            var parmVal = parm.split("=");
-
+        /*   exexDoc(arrUrlParm:string[], mstrSession:MstrSessionDetail, objAttribute:string, target:string ){
+            var urlPrefix: string = this.commonUtility.getUrlPrefix();
+            var rptUrl: string = "/microstrategy/asp/Main.aspx?";
+            var dashboardUseMode= mstrSession.dashboardUseMode;
+            var UrlParm: string = "";
+            var domain:string = mstrSession.iisServer;
+            var iServer:string=mstrSession.iServer;
+            var mstrLoginSession ="";
+            var msg: ModalOptions;
+            var url:string= "";
+            console.log("execDoc");
+            // switch (envData.env) {
+            //   case "10":
+            //     domain = "113.196.86.112";
+            //     break;
+            // }
             switch (dashboardUseMode.toUpperCase()) {
               case "CURRENT USER_N":
-                switch (parmVal[0].toUpperCase()) {
-                  case "CURRENTVIEWMEDIA":
-                  case "VISMODE":
-                    switch (objAttribute.toUpperCase()) {
-                      case "DASHBOARD":
-                        //UrlParm += "&share=1";
-                        break;
-
-                      default:
-                        UrlParm += parm + "&";
-                        break;
-                    }
-
-                    break;
-
-                  case "PROJECT":
-                  case "SERVER":
-                  case "PORT":
-                    break;
-
-                  default:
-                    UrlParm += parm + "&";
-                    break;
-                }
-
+                mstrLoginSession = mstrSession.sessionInfo;
                 break;
-
-              case "CURRENT USER":
-              case "SINGLE USER":
-                switch (parmVal[0].toUpperCase()) {
-                  case "CURRENTVIEWMEDIA":
-                  case "VISMODE":
-                    switch (objAttribute.toUpperCase()) {
-                      case "DASHBOARD":
-                        //UrlParm += "&share=1";
-                        break;
-
-                      default:
-                        UrlParm += parm + "&";
-                        break;
-                    }
-
-                    break;
-
-                  default:
-                    UrlParm += parm + "&";
-                    break;
-                }
-
+              default:
+                mstrLoginSession = mstrSession.sessionState;
+                UrlParm = "Server=" + iServer + "&";
                 break;
             }
-          });
+            arrUrlParm.forEach(parm => {
+              var parmVal: string[] = parm.split("=")
+              switch (dashboardUseMode.toUpperCase()) {
+                case "CURRENT USER_N":
+                  switch (parmVal[0].toUpperCase()) {
+                    case "CURRENTVIEWMEDIA":
+                    case "VISMODE":
+                      switch (objAttribute.toUpperCase()) {
+                        case "DASHBOARD":
+                          //UrlParm += "&share=1";
+                          break;
+                        default:
+                          UrlParm += parm + "&";
+                          break;
+                      }
+                      break;
+                    case "PROJECT":
+                    case "SERVER":
+                    case "PORT":
+                      break;
+                    default:
+                      UrlParm += parm + "&";
+                      break;
+                  }
+                  break;
+                case "CURRENT USER":
+                case "SINGLE USER":
+                  switch (parmVal[0].toUpperCase()) {
+                    case "CURRENTVIEWMEDIA":
+                    case "VISMODE":
+                      switch (objAttribute.toUpperCase()) {
+                        case "DASHBOARD":
+                          //UrlParm += "&share=1";
+                          break;
+                        default:
+                          UrlParm += parm + "&";
+                          break;
+                      }
+                      break;
+                    default:
+                      UrlParm += parm + "&";
+                      break;
+                  }
+                  break;
+              }
+        
+            });
+            switch (objAttribute.toUpperCase()) {
+              case "DASHBOARD":
+                UrlParm += "share=1&";
+                break;
+            }
+            UrlParm += "hiddensections=header,path,dockTop,dockLeft,footer&";
+            UrlParm += "mstrSmgr=" + mstrLoginSession;
+            // this.modalService.open(msg,'lg');
+            // console.log(urlPrefix + domain + rptUrl + UrlParm);
+            //this.commonUtility.openUrl('', '_blank');
+            url = urlPrefix + domain + rptUrl + UrlParm
+            sessionStorage.setItem("objUrl",urlPrefix + domain + rptUrl + UrlParm );
+            console.log(urlPrefix + domain + rptUrl + UrlParm);
+            // this.commonUtility.openRouteUrl(url,'_blank');
+            //this.openDoc();
+            this.commonUtility.openUrl(urlPrefix + domain + rptUrl + UrlParm, target);
+          } */
 
-          switch (objAttribute.toUpperCase()) {
-            case "DASHBOARD":
-              UrlParm += "share=1&";
-              break;
-          }
-
-          UrlParm += "hiddensections=header,path,dockTop,dockLeft,footer&";
-          UrlParm += "mstrSmgr=" + mstrLoginSession; // this.modalService.open(msg,'lg');
-          // console.log(urlPrefix + domain + rptUrl + UrlParm);
-          //this.commonUtility.openUrl('', '_blank');
-
-          url = urlPrefix + domain + rptUrl + UrlParm;
-          sessionStorage.setItem("objUrl", urlPrefix + domain + rptUrl + UrlParm);
-          console.log(urlPrefix + domain + rptUrl + UrlParm); // this.commonUtility.openRouteUrl(url,'_blank');
-          //this.openDoc();
-
-          this.commonUtility.openUrl(urlPrefix + domain + rptUrl + UrlParm, target);
-        }
       }, {
         key: "RestApi",
         value: function RestApi(menu, target) {
@@ -11287,6 +11237,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           parm = "?SystemCode=" + this.commonUtility.systemId;
           parm += "&Token=" + this.commonUtility.getSessionValue('authenticationToken');
           parm += "&ObjectId=" + menu.web_object;
+          parm += "&accType=" + this.commonUtility.accType;
           console.log(apiUrl);
           this.commonUtility.openUrl(apiUrl + parm, target);
         }
@@ -11324,9 +11275,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         type: _service_mstr_login_service__WEBPACK_IMPORTED_MODULE_5__["MstrLoginService"]
       }, {
-        type: _service_api_common_api_common_module__WEBPACK_IMPORTED_MODULE_10__["ApiCommonModule"]
+        type: _service_api_common_api_common_module__WEBPACK_IMPORTED_MODULE_9__["ApiCommonModule"]
       }, {
-        type: _shared_common_utility_common_utility_module__WEBPACK_IMPORTED_MODULE_9__["CommonUtilityModule"]
+        type: _shared_common_utility_common_utility_module__WEBPACK_IMPORTED_MODULE_8__["CommonUtilityModule"]
       }, {
         type: _shared_modal_modal_service__WEBPACK_IMPORTED_MODULE_6__["ModalService"]
       }, {
@@ -11803,7 +11754,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getMenus",
         value: function getMenus() {
-          var _this41 = this;
+          var _this40 = this;
 
           if (sessionStorage.getItem("menu") == null || sessionStorage.getItem("object") == null) {
             var msg;
@@ -11811,15 +11762,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               console.log('get Menu OK');
               console.log(res);
 
-              _this41.loadingService.hide();
+              _this40.loadingService.hide();
 
               switch (res.ReturnCode) {
                 case 0:
                   sessionStorage.setItem("menu", JSON.stringify(res.ReturnResult.menu));
                   sessionStorage.setItem("object", JSON.stringify(res.ReturnResult.object));
-                  _this41._treeControl = new _allianz_ngx_ndbx_tree__WEBPACK_IMPORTED_MODULE_3__["NxFlatTreeControl"]();
-                  _this41._dataSource = new _allianz_ngx_ndbx_tree__WEBPACK_IMPORTED_MODULE_3__["NxTreeFlatDataSource"](_this41._treeControl, JSON.parse(_this41.commonUtility.getSessionValue("menu")));
-                  _this41.menuData = JSON.parse(_this41.commonUtility.getSessionValue("menu")); // this.menuData.sort();
+                  _this40._treeControl = new _allianz_ngx_ndbx_tree__WEBPACK_IMPORTED_MODULE_3__["NxFlatTreeControl"]();
+                  _this40._dataSource = new _allianz_ngx_ndbx_tree__WEBPACK_IMPORTED_MODULE_3__["NxTreeFlatDataSource"](_this40._treeControl, JSON.parse(_this40.commonUtility.getSessionValue("menu")));
+                  _this40.menuData = JSON.parse(_this40.commonUtility.getSessionValue("menu")); // this.menuData.sort();
 
                   break;
 
@@ -11830,7 +11781,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     type: _class_modal__WEBPACK_IMPORTED_MODULE_5__["ModalType"].Confirm
                   };
 
-                  _this41.modalService.open(msg, 'sm');
+                  _this40.modalService.open(msg, 'sm');
 
                   break;
               }
@@ -12022,11 +11973,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(MenuService, [{
         key: "getMenus",
         value: function getMenus() {
-          var _this42 = this;
+          var _this41 = this;
 
           console.log(this.apiId);
           this.ApiConfig = this.apiCommon.getApiConfigByApiID(this.apiId);
           var apiUrl = "".concat(this.ApiConfig.domain).concat(this.ApiConfig.path);
+          var userId = "";
+          var accSource = "";
           console.log(apiUrl);
           var httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
@@ -12036,16 +11989,29 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             })
           };
           this.loadingService.show();
+          accSource = this.commonUtility.getSessionValue("accSource");
+
+          switch (accSource) {
+            case "STAFF":
+              userId = this.commonUtility.getSessionValue("loginUser");
+              break;
+
+            default:
+              userId = this.commonUtility.getSessionValue("agentId");
+              break;
+          }
+
           var rqbody = {
             UKEY: this.commonUtility.getSessionValue('authenticationToken'),
             WEB_SYSTEM_CODE: this.commonUtility.systemCode,
-            USER_ID: this.commonUtility.getSessionValue('loginUser')
+            USER_TYPE: accSource,
+            USER_ID: userId
           };
           console.log(rqbody);
           return this.http.post(apiUrl, JSON.stringify(rqbody), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["timeout"])(90 * 1000), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
             console.log('error:', error);
 
-            _this42.loadingService.hide();
+            _this41.loadingService.hide();
 
             if (error instanceof rxjs__WEBPACK_IMPORTED_MODULE_3__["TimeoutError"]) {}
 
@@ -12173,7 +12139,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(MstrLoginService, [{
         key: "mstrLogin",
         value: function mstrLogin(project, userID, dashboardUseMode) {
-          var _this43 = this;
+          var _this42 = this;
 
           var apiId = "mstrLogin";
           console.log(apiId);
@@ -12197,7 +12163,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return this.http.post(apiUrl, JSON.stringify(rqbody), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["timeout"])(90 * 1000), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
             console.log('error:', error);
 
-            _this43.loadingService.hide();
+            _this42.loadingService.hide();
 
             if (error instanceof rxjs__WEBPACK_IMPORTED_MODULE_3__["TimeoutError"]) {}
 

@@ -4,6 +4,7 @@ export interface envConfig {
     systemCode?:string;
     version?:string;
     platform?:string;
+    useAcc?:string;//0：舊帳號，1：新帳號
 }
 
 export interface IApiConfig {
