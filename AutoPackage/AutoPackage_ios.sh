@@ -1,3 +1,9 @@
+function pause(){
+        read -n 1 -p "$*" INP
+        if [ "$INP" != "" ] ; then
+                echo -ne '\b \n'
+        fi
+}
 # 變數定義
 # envDesc：環境描述 Uat,PreProd,Prod
 # isHicloud：是否上傳HiCloud
@@ -71,16 +77,16 @@ schemeNameBase="MSTR"
 HicloudBucketBase="mstr"
 
 
-cd $platformPath
-#--- git checkout master
-#--- git stash save
-#--- git stash clear
-#--- git clean -df
-#--- git pull
-#--- git fetch origin --tags --force
+cd $projectDir
+git checkout master
+git stash save
+git stash clear
+git clean -df
+git pull
+git fetch origin --tags --force
 
 echo -e "\n*************\nCheck Git Log\n*************\n"
-cd $platformPath
+cd $projectDir
 git log --oneline -5
 pause 'Press Enter to continue ...'
 
@@ -256,6 +262,9 @@ echo "Email="$Email
 #--- git checkout "v$MARKETING_VERSION"
 
 ### 備份/修改檔案(config.xml,environment.ts)===================================
+echo "$environmentFilePath/$environmentFile"
+echo "$backupFilePath/$environmentAutoFile"
+exit 1
 ### 備份原始檔案(未套用)
 cp "$environmentFilePath/$environmentFile" "$backupFilePath/$environmentAutoFile"
 cp "$configFilePath/$configFile" "$backupFilePath/$configAutoFile"
@@ -269,6 +278,8 @@ sed -i '' 's/%Version%/'$MARKETING_VERSION'/g' "$configFilePath/$configFile"
 sed -i '' 's/%AppName%/'$appDesc'/g' "$configFilePath/$configFile"
 sed -i '' 's/%SchemeName%/'$scheme_name'/g' "$configFilePath/$configFile"
 
+cp "$environmentFilePath/$environmentFile" "$backupFilePath/$environmentFile"
+cp "$configFilePath/$configFile" "$backupFilePath/$configFile"
 ### remove/add/build Platform
 cordova platform rm ios
 #cordova platform rm android
@@ -517,7 +528,4 @@ curl -s --request POST \
     --data @$s3cmdPath/$scheme_name-$isArxan.json
 echo -e "\n\n發送至${Email}成功，請至信箱檢查,若沒看到請至垃圾信件檢查.\n\n"
 ### ===========================================================
-# git checkout master
-### 回復原始檔案(未套用)
-cp "$backupFilePath/$environmentAutoFile" "$environmentFilePath/$environmentFile"
-cp "$backupFilePath/$configAutoFile" "$configFilePath/$configFile"
+git checkout main
