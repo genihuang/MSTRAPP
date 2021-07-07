@@ -33,7 +33,7 @@ projectDir="/Users/aztl/Documents/Project/MSTRAPP"
 sourcePath=$projectDir"/MSTR/src/app"
 environmentFilePath=$sourcePath"/environment"
 configFilePath=$projectDir
-backupFilePath=$projectDir"/File"
+bkFilePath=$projectDir"/File"
 environmentFile="environment.ts"
 configFile="config.xml"
 environmentAutoFile="environment_Auto.ts"
@@ -78,12 +78,12 @@ HicloudBucketBase="mstr"
 
 
 cd $projectDir
-git checkout main
-git stash save
-git stash clear
-git clean -df
-git pull
-git fetch origin --tags --force
+#--- git checkout main
+#--- git stash save
+#--- git stash clear
+#--- git clean -df
+#--- git pull
+#--- git fetch origin --tags --force
 
 echo -e "\n*************\nCheck Git Log\n*************\n"
 cd $projectDir
@@ -262,12 +262,12 @@ echo "Email="$Email
 #--- git checkout "v$MARKETING_VERSION"
 
 ### 備份/修改檔案(config.xml,environment.ts)===================================
-echo "$environmentFilePath/$environmentFile"
-echo "$backupFilePath/$environmentAutoFile"
-exit 1
+#echo "\n\n" $environmentFilePath/$environmentFile
+#echo "\n\n" $bkFilePath/$environmentAutoFile
+#exit 1
 ### 備份原始檔案(未套用)
-cp "$environmentFilePath/$environmentFile" "$backupFilePath/$environmentAutoFile"
-cp "$configFilePath/$configFile" "$backupFilePath/$configAutoFile"
+cp "$environmentFilePath/$environmentFile" "$bkFilePath/$environmentAutoFile"
+cp "$configFilePath/$configFile" "$bkFilePath/$configAutoFile"
 ### 套用變數至environment.ts
 cd $environmentFilePath
 sed -i '' 's/%env%/'$envCode'/g' "$environmentFilePath/$environmentFile"
@@ -278,14 +278,14 @@ sed -i '' 's/%Version%/'$MARKETING_VERSION'/g' "$configFilePath/$configFile"
 sed -i '' 's/%AppName%/'$appDesc'/g' "$configFilePath/$configFile"
 sed -i '' 's/%SchemeName%/'$scheme_name'/g' "$configFilePath/$configFile"
 
-cp "$environmentFilePath/$environmentFile" "$backupFilePath/$environmentFile"
-cp "$configFilePath/$configFile" "$backupFilePath/$configFile"
+cp "$environmentFilePath/$environmentFile" "$bkFilePath/$environmentFile"
+cp "$configFilePath/$configFile" "$bkFilePath/$configFile"
 ### remove/add/build Platform
 cordova platform rm ios
 #cordova platform rm android
 cordova platform add ios
 #cordova platform add android
-cordova build ios
+cordova prepare
 #cordova build android
 
 ### 參數設定===========================================================
@@ -303,12 +303,12 @@ ipaArxanPath="$exportPath/$scheme_name-$isArxan.ipa"
 exportOptionsPlist=$projectDir"/Export/$envDesc/ExportOptions.plist"
 # imagePat
 imagePath=$platformPath"/$scheme_name/Images.xcassets"
-imageBackPath=$backupFilePath"/$envDesc/Images.xcassets"
+imageBackPath=$bkFilePath"/$envDesc/Images.xcassets"
 # s3cmd Path
 s3cmdPath="$hicloudPath/$envDesc/$MARKETING_VERSION"
 
 ### 複製圖片====================================================
-cd imagePath
+cd $imagePath
 rm -rfv $imagePath
 cp -r $imageBackPath $imagePath 
 
