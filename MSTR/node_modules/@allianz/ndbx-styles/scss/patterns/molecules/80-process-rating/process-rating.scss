@@ -1,0 +1,72 @@
+.c-process-rating {
+  padding-top: 63px;
+  background-color: map-get($color-soft-light, "soft-beige-light");
+
+  @include media-breakpoint-response(mobile) {
+    padding-top: 43px;
+    background-color: map-get($color-soft-light, "soft-rose-light");
+  }
+
+  .c-process-rating__title {
+    padding-top: 23px;
+    padding-bottom: 69px;
+
+    @include media-breakpoint-response(mobile) {
+      padding-top: 18px;
+      padding-bottom:34px;
+    }
+  }
+
+  .c-process-rating__image {
+    height: 214px;
+    margin: 0 auto;
+
+    & > img {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 50%;
+      width: auto;
+    }
+  }
+
+  .c-process-rating__hidden--tips {
+    display: none;
+  }
+
+  .c-process-rating__label,
+  .c-process-rating__container {
+    display: flex;
+    font-size: $font-size-large;
+    width: 275px;
+    margin: 0 auto;
+
+    @include media-breakpoint-response(mobile) {
+      width: 100%;
+    }
+
+    .c-process-rating__icon {
+      font-size: $font-size-h2-mobile;
+      width: auto;
+      height: 35px;
+      margin: auto;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+  }
+
+  .c-process-rating__label {
+    padding-top: 22px;
+    margin-bottom: 12px;
+
+    @include media-breakpoint-response(mobile) {
+      margin-bottom: 50px;
+    }
+
+    .c-process-rating__label__text {
+      padding: 0 5px;
+      flex: 1;
+    }
+  }
+}

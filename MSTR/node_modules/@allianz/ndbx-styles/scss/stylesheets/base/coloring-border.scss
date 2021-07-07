@@ -1,0 +1,88 @@
+
+.t-border{
+  // Primary Basic Background
+  @each $key, $color in $color-basic {
+    &-#{$key} {
+      border-color: $color;
+    }
+  }
+  // Primary Action Background
+  @each $key, $color in $color-primary-action {
+    &-#{$key} {
+      border-color: $color;
+    }
+  }
+
+  //background rich
+  @each $key, $color in $color-rich {
+      &-#{$key} {
+          border-color: $color;
+      }
+  }
+
+  // rich light background
+  @each $key, $color in $color-rich-light {
+    &-#{$key} {
+      border-color: $color;
+    }
+  }
+
+  //background soft
+  @each $key, $color in $color-soft {
+    &-#{$key} {
+      border-color: $color;
+    }
+  }
+
+
+  //background soft light
+  @each $key, $color in $color-soft-light {
+    &-#{$key} {
+      border-color: $color;
+    }
+  }
+
+  //background soft lightest
+  @each $key, $color in $color-soft-lightest {
+    &-#{$key} {
+      border-color: $color;
+    }
+  }
+
+  //background vibrant
+  @each $key, $color in $color-vibrant {
+    &-#{$key} {
+      border-color: $color;
+    }
+  }
+
+  //background vibrant light
+  @each $key, $color in $color-vibrant-light {
+    &-#{$key} {
+      border-color: $color;
+    }
+  }
+
+  //action background
+  @each $key, $color in $color-direct {
+    &-#{$key} {
+      border-color: $color;
+    }
+  }
+
+  //process single color
+  @each $key, $color in $color-process {
+    &-#{$key} {
+      border-color: $color;
+    }
+  }
+
+  // Background Graytones
+  @each $key, $color in $color-grey-tones {
+    &-#{$key} {
+      border-color: $color;
+    }
+  }
+
+}
+

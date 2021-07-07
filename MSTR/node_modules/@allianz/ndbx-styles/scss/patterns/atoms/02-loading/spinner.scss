@@ -1,0 +1,126 @@
+@keyframes c-spinner {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.c-spinner {
+  position: relative;
+  display: block;
+
+  width: 65px;
+  height: 65px;
+}
+
+.c-spinner__spin-block {
+
+  left: calc(50% - 2px);
+  top: 3px;
+  width: 5px;
+  height: 15px;
+  transform-origin: 2px 30px;
+
+  position: absolute;
+  animation: c-spinner linear 1s infinite;
+  background: #000;
+
+  @media screen and (-ms-high-contrast: active) {
+    background: map-get($color-high-contrast, "yellow");
+  }
+
+  border-radius: 20%;
+
+
+  &:nth-child(1) {
+    transform: rotate(0deg);
+    animation-delay: -0.916666666666667s;
+  }
+
+  &:nth-child(2) {
+    transform: rotate(30deg);
+    animation-delay: -0.833333333333333s;
+  }
+
+  &:nth-child(3) {
+    transform: rotate(60deg);
+    animation-delay: -0.75s;
+  }
+
+  &:nth-child(4) {
+    transform: rotate(90deg);
+    animation-delay: -0.666666666666667s;
+  }
+
+  &:nth-child(5) {
+    transform: rotate(120deg);
+    animation-delay: -0.583333333333333s;
+  }
+
+  &:nth-child(6) {
+    transform: rotate(150deg);
+    animation-delay: -0.5s;
+  }
+
+  &:nth-child(7) {
+    transform: rotate(180deg);
+    animation-delay: -0.416666666666667s;
+  }
+
+  &:nth-child(8) {
+    transform: rotate(210deg);
+    animation-delay: -0.333333333333333s;
+  }
+
+  &:nth-child(9) {
+    transform: rotate(240deg);
+    animation-delay: -0.25s;
+  }
+
+  &:nth-child(10) {
+    transform: rotate(270deg);
+    animation-delay: -0.166666666666667s;
+  }
+
+  &:nth-child(11) {
+    transform: rotate(300deg);
+    animation-delay: -0.083333333333333s;
+  }
+
+  &:nth-child(12) {
+    transform: rotate(330deg);
+    animation-delay: 0s;
+  }
+
+}
+
+.c-spinner--medium {
+  width: 105px;
+  height: 105px;
+
+  & .c-spinner__spin-block {
+    left: calc(50% - 2px);
+    width: 8px;
+    height: 25px;
+    transform-origin: 4px 50px;
+  }
+}
+
+.c-spinner--large {
+
+  width: 160px;
+  height: 160px;
+
+  & .c-spinner__spin-block {
+    left: calc(50% - 5px);
+    width: 12px;
+    height: 34px;
+    transform-origin: 6px 77px;
+  }
+}
+
+
+
+

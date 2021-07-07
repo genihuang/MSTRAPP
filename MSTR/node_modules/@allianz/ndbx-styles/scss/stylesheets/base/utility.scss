@@ -1,0 +1,166 @@
+@import 'utilities/screenreaders';
+@import 'utilities/text';
+@import 'utilities/visibility';
+@import 'utilities/spacing';
+
+//  This will hide elements in the browser while keeping the content accessible for screen readers.
+//  Code Source: http://webaim.org/techniques/css/invisiblecontent/
+.u-aria-only {
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.u-full-width.u-full-width{
+  width: 100%;
+}
+.u-full-height{
+  height: 100%;
+}
+
+// this is going to deprecate soon.
+// please use .u-text-weight-bold
+.u-highlighted {
+  font-weight: $font-weight-bold;
+}
+
+/*rtl:ignore*/
+.u-ltr {
+  direction: ltr;
+}
+
+/*rtl:ignore*/
+.u-rtl {
+  direction: rtl;
+}
+
+//Margin utilities
+//double class is used to make it !important
+.u-margin-0 {
+  margin: 0px !important;
+}
+
+.u-margin-top-0  {
+  margin-top: 0 !important;
+}
+
+.u-margin-bottom-0 {
+  margin-bottom: 0 !important;
+}
+
+.u-margin-left-0 {
+  margin-left: 0 !important;
+}
+
+.u-margin-right-0 {
+  margin-right: 0 !important;
+}
+
+//Height utilities
+.u-height-100 {
+  height: 100px !important;
+}
+
+// Use u-margin-bottom-10 instance of using this class.
+// This class is going to remove soon
+.u-margin-bottom-sm {
+  margin-bottom: 10px !important;
+}
+.u-margin-bottom-md {
+  margin-bottom: 20px !important;
+}
+.u-margin-bottom-lg {
+  margin-bottom: 30px !important;
+}
+
+// generic padding set
+.u-padding-sm {
+  padding: 10px !important;
+}
+.u-padding-md {
+  padding: 20px !important;
+}
+.u-padding-lg {
+  padding: 30px !important;
+}
+.u-padding-right-sm{
+  padding-right: 10px !important;
+}
+.u-padding-right-md{
+  padding-right: 15px !important;
+}
+.u-padding-right-lg{
+  padding-right: 30px !important;
+}
+
+.u-padding-left-sm{
+  padding-left: 10px !important;
+}
+.u-padding-left-md{
+  padding-left: 15px !important;
+}
+.u-padding-left-lg{
+  padding-left: 30px !important;
+}
+.u-padding-top-sm {
+  padding-top: 10px !important;
+
+}
+.u-padding-top-md {
+  padding-top: 20px !important;
+}
+.u-padding-top-lg {
+  padding-top: 30px !important;
+}
+.u-padding-bottom-sm {
+  padding-bottom: 10px !important;
+}
+.u-padding-bottom-md {
+  padding-bottom: 20px !important;
+}
+.u-padding-bottom-lg {
+  padding-bottom: 30px !important;
+}
+
+
+// font size utility
+.font-size-sm{
+  font-size: $font-size-small;
+}
+
+.font-size-md{
+  font-size: $font-size-medium;
+}
+
+.font-size-lg{
+  font-size: $font-size-large;
+}
+
+.font-size-xlg{
+  font-size: $font-size-xxxlarge;
+}
+
+//background inherit
+.u-background-inherit{
+  background: inherit;
+}
+
+//flex utilities
+.u-flex-basis-0 {
+  flex-basis: 0 !important;
+}
+
+.u-flex-basis-auto {
+  flex-basis: auto !important;
+}
+
+.u-line-height-0 {
+  line-height: 0;
+}
+
+.u-opacity-50 {
+  opacity: 0.5;
+}

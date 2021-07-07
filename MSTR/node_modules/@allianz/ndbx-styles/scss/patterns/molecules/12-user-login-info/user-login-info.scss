@@ -1,0 +1,58 @@
+.c-user-login-info {
+  min-width: 350px;
+  padding: 32px 40px 50px 40px;
+  left: 0;
+
+  @include media-breakpoint-response(tablet) {
+    left: -65px;
+  }
+
+  &.c-tooltip__item {
+    box-shadow: 0 8px 20px rgba(map-get($color-grey-tones, grey-tone-1), 0.35);
+    border-radius: 5px;
+  }
+
+  .c-tooltip &:before,
+  .c-tooltip &:after {
+    left: 80%;
+  }
+}
+
+.c-user-login-info__section {
+  margin-bottom: 25px;
+
+  &+& {
+    margin-bottom: 34px;
+  }
+}
+
+.c-user-login-info__header {
+  font-weight: $font-weight-light;
+  font-size: $font-size-user-info-header;
+  line-height: $line-height-user-info-header;
+  margin-bottom: 23px;
+}
+
+.c-user-login-info__label {
+  font-size: $font-size-small;
+  font-weight: $font-weight-semibold;
+  margin-bottom: 10px;
+}
+
+.c-user-login-info__data .c-copy {
+  font-size: $font-size-xxlarge;
+  font-weight: $font-weight-light;
+}
+
+.c-user-login-info__link {
+  display: flex;
+  align-items: center;
+  text-transform: none;
+  font-size: $font-size-medium;
+  font-weight: $font-weight-regular;
+  color: map-get($color-grey-tones, grey-tone-1);
+
+  &:hover {
+    color: currentColor;
+  }
+}

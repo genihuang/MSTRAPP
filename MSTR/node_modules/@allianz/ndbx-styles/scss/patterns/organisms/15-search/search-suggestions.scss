@@ -1,0 +1,77 @@
+// Suggestions Box
+ .c-search__suggestions {
+   display: flex;
+
+   &--hidden {
+     display: none;
+   }
+ }
+
+.c-search__suggestions--opened {
+  display: flex;
+  flex-flow: row no-wrap;
+  padding: 15px 30px 50px 30px;
+
+  @include media-breakpoint-response(mobile) {
+    padding: 4px 20px 22px 20px;
+  }
+}
+
+ .c-search__suggestions-title {
+   flex: 0 1 ($header-logo-width + 80px);
+   font-weight: $font-weight-light;
+   color: map-get($color-grey-tones, grey-tone-1);
+   line-height: $line-height-large;
+   font-size: $font-size-xxlarge;
+   margin-top: 15px;
+
+   @include media-breakpoint-response(mobile) {
+     display: none;
+   }
+ }
+
+ .c-search__suggestions-content {
+   flex: 1 1 auto;
+ }
+
+.c-search__suggestions-item {
+  list-style-type: none;
+  margin-top: 15px;
+
+  @include media-breakpoint-response(mobile) {
+    margin-top: 21px;
+  }
+}
+
+.c-search__suggestions-item:hover {
+  list-style-type: none;
+}
+
+.c-search__suggestions-link {
+  display: block;
+  color: map-get($color-primary-action, primary-action-dark);
+  line-height: 2.4rem;
+  font-size: 2rem;
+  text-decoration: none;
+}
+
+.c-search__suggestions-link:hover {
+  text-decoration: underline;
+}
+
+// vue transition classes
+.animate-suggestions-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.animate-suggestions-enter-active,
+.animate-suggestions-leave-active {
+  transition: opacity 1s, transform 1s;
+}
+
+.animate-suggestions-enter,
+.animate-suggestions-leave-to { // list-leave-active for <2.1.8
+  opacity: 0;
+  transform: translateY(30px);
+}

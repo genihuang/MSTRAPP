@@ -1,0 +1,34 @@
+.c-map {
+  height: 0;
+  padding-bottom: percentage(9/16);
+  position: relative;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.c-map--16by9 {
+  padding-bottom: percentage(9/16);
+}
+
+.c-map--4by3 {
+  padding-bottom: percentage(3/4);
+}
+
+.c-map--1by1 {
+  padding-bottom: percentage(1);
+}
+
+.c-map__holder {
+  @include overlay;
+}
+
+
+.c-map__info {
+  height: 20vh;
+  padding: 20px;
+  text-align: center;
+  transform: translate(-50%, -100%);
+  width: 300px;
+
+  @include paperstyle;
+}

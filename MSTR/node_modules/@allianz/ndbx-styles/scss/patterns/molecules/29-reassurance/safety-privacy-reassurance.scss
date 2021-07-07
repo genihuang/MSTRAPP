@@ -1,0 +1,29 @@
+.c-reassurance{
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 33px;
+  @include media-breakpoint-response(mobile) {
+    padding-top: 40px;
+    padding-bottom: 34px;
+  }
+}
+.c-reassurance__content{
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+}
+.c-reassurance__content-image{
+  display: flex;
+  justify-content: center;
+}
+.c-reassurance__image {
+  padding-bottom: 14px;
+  .c-image__img{
+    height:44px;
+    width:44px;
+  }
+}
+
+.c-reassurance__text{
+  line-height: 24px;
+}

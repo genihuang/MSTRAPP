@@ -1,0 +1,50 @@
+.c-tag-filter {
+  position: relative;
+  min-height: 32px;
+  margin-top: 34px;
+  margin-bottom: 53px;
+  display: flex;
+  justify-content: space-between;
+
+  @include media-breakpoint-response(mobile) {
+    margin-top: 24px;
+    margin-bottom: 20px;
+  }
+
+  .c-taglist__item {
+    padding-left: 20px;
+    padding-right: 17px;
+  }
+
+  .c-taglist__close {
+    margin-left: 4px;
+  }
+
+  .c-taglist__close-icon {
+    width: 18px;
+    height: 18px;
+    display: block;
+    font-size: $font-size-xlarge;
+    line-height: $line-height-mobile-small;
+  }
+
+  .c-button-cloned {
+    position: relative;
+    margin-bottom: 0px;
+  }
+}
+
+.c-tag-filter__delete {
+  margin-left: 20px;
+
+  @include media-breakpoint-response(mobile) {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 10px;
+  }
+  .c-button {
+    width: 117px;
+    margin-bottom: 0;
+  }
+}

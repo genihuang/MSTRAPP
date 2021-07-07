@@ -1,0 +1,21 @@
+.c-legal-disclaimer {
+  padding: 60px 0 40px;
+}
+.c-legal-disclaimer__headline {
+  padding-bottom: 30px;
+  text-align: center;
+}
+.c-legal-disclaimer__description {
+  padding-bottom: 40px;
+}
+.c-legal-disclaimer__bottom {
+  text-align: center;
+}
+.c-legal-disclaimer__button {
+  min-width: 204px;
+  margin: 0 5px 20px;
+  text-align: center;
+  @include media-breakpoint-response(mobile) {
+    margin: 0 0 20px;
+  }
+}
