@@ -78,12 +78,12 @@ HicloudBucketBase="mstr"
 
 
 cd $projectDir
-#--- git checkout main
-#--- git stash save
-#--- git stash clear
-#--- git clean -df
-#--- git pull
-#--- git fetch origin --tags --force
+git checkout main
+git stash save
+git stash clear
+git clean -df
+git pull
+git fetch origin --tags --force
 
 echo -e "\n*************\nCheck Git Log\n*************\n"
 cd $projectDir
