@@ -78,7 +78,7 @@ HicloudBucketBase="mstr"
 
 
 cd $projectDir
-git checkout master
+git checkout main
 git stash save
 git stash clear
 git clean -df
