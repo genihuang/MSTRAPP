@@ -1,10 +1,10 @@
 import {envConfig,IApiConfig} from '../class/environment';
 
 export const envData:envConfig={
-    env :'14',
+    env :'%env%',
     systemId:'80',
     systemCode:'MSTR',
-    version:'1.0.4',
+    version:'%version%',
     platform:'1',//1:IOS,2:Android
     useAcc:'1' //0：舊帳號，1：新帳號
 };
