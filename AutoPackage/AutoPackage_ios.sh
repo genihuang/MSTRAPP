@@ -277,6 +277,7 @@ sed -i '' 's/%BundleID%/'$PRODUCT_BUNDLE_IDENTIFIER'/g' "$configFilePath/$config
 sed -i '' 's/%Version%/'$MARKETING_VERSION'/g' "$configFilePath/$configFile"
 sed -i '' 's/%AppName%/'$appDesc'/g' "$configFilePath/$configFile"
 sed -i '' 's/%SchemeName%/'$scheme_name'/g' "$configFilePath/$configFile"
+sed -i '' 's/%scheme_name%/'$scheme_name'/g' "$configFilePath/$configFile"
 
 cp "$environmentFilePath/$environmentFile" "$bkFilePath/$environmentFile"
 cp "$configFilePath/$configFile" "$bkFilePath/$configFile"
