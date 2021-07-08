@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="%BundleID%" version="%Version%" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name short="%AppName%">%SchemeName%</name>
+<widget id="tw.com.allianz.MSTR.UAT" version="1.0.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name short="安聯ｅ智慧_UAT">MSTR_UAT</name>
     <description>
         安聯ｅ智慧_A sample Apache Cordova application that responds to the deviceready event.
     </description>
@@ -39,7 +39,7 @@
         <icon height="58" src="res/ios/icon-small@2x.png" width="58" />
         <icon height="50" src="res/ios/Icon-App-50x50@1x.png" width="50" />
         <icon height="100" src="res/ios/Icon-App-50x50@2x.png" width="100" />
-          <config-file target="%scheme_name%-Info.plist" parent="NSAppTransportSecurity">
+          <config-file target="%SchemeName%/%SchemeName%-Info.plist" parent="NSAppTransportSecurity">
       <dict>
           <key>NSAllowsArbitraryLoads</key>
           <false/>
