@@ -41,16 +41,16 @@
   },
   "installed_plugins": {
     "cordova-plugin-device": {
-      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+      "PACKAGE_NAME": "tw.com.allianz.MSTR.UAT"
     },
     "cordova-plugin-inappbrowser": {
-      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
-    },
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+      "PACKAGE_NAME": "tw.com.allianz.MSTR.UAT"
     },
     "cordova-plugin-transport-security": {
-      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+      "PACKAGE_NAME": "tw.com.allianz.MSTR.UAT"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "tw.com.allianz.MSTR.UAT"
     }
   },
   "dependent_plugins": {},
@@ -76,7 +76,7 @@
   "plugin_metadata": {
     "cordova-plugin-device": "2.0.3",
     "cordova-plugin-inappbrowser": "3.1.0",
-    "cordova-plugin-whitelist": "1.3.4",
-    "cordova-plugin-transport-security": "0.1.2"
+    "cordova-plugin-transport-security": "0.1.2",
+    "cordova-plugin-whitelist": "1.3.4"
   }
 }

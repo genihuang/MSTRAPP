@@ -47492,7 +47492,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
        *
        *   pow(x, NaN)                           = NaN
        *   pow(x, ±0)                            = 1
-         *   pow(NaN, non-zero)                    = NaN
+        *   pow(NaN, non-zero)                    = NaN
        *   pow(abs(x) > 1, +Infinity)            = +Infinity
        *   pow(abs(x) > 1, -Infinity)            = +0
        *   pow(abs(x) == 1, ±Infinity)           = NaN

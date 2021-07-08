@@ -8,16 +8,16 @@
   },
   "installed_plugins": {
     "cordova-plugin-device": {
-      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+      "PACKAGE_NAME": "tw.com.allianz.MSTR.UAT"
     },
     "cordova-plugin-inappbrowser": {
-      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
-    },
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+      "PACKAGE_NAME": "tw.com.allianz.MSTR.UAT"
     },
     "cordova-plugin-transport-security": {
-      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+      "PACKAGE_NAME": "tw.com.allianz.MSTR.UAT"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "tw.com.allianz.MSTR.UAT"
     }
   },
   "dependent_plugins": {}

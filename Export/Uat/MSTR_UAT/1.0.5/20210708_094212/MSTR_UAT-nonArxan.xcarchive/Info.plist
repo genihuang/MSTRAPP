@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ApplicationProperties</key>
+	<dict>
+		<key>ApplicationPath</key>
+		<string>Applications/MSTR_UAT.app</string>
+		<key>Architectures</key>
+		<array>
+			<string>armv7</string>
+			<string>arm64</string>
+		</array>
+		<key>CFBundleIdentifier</key>
+		<string>tw.com.allianz.MSTR.UAT</string>
+		<key>CFBundleShortVersionString</key>
+		<string>1.0.5</string>
+		<key>CFBundleVersion</key>
+		<string>1.0.5</string>
+		<key>SigningIdentity</key>
+		<string>Apple Development: 資訊部開發人員 安聯人壽 (39ACA5FKS5)</string>
+		<key>Team</key>
+		<string>8PY49K88TN</string>
+	</dict>
+	<key>ArchiveVersion</key>
+	<integer>2</integer>
+	<key>CreationDate</key>
+	<date>2021-07-08T01:42:56Z</date>
+	<key>Name</key>
+	<string>MSTR_UAT</string>
+	<key>SchemeName</key>
+	<string>MSTR_UAT</string>
+</dict>
+</plist>

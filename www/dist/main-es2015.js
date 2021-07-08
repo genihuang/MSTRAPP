@@ -676,7 +676,7 @@ const envData = {
     env: '14',
     systemId: '80',
     systemCode: 'MSTR',
-    version: '1.0.4',
+    version: '1.0.5',
     platform: '1',
     useAcc: '1' //0：舊帳號，1：新帳號
 };

@@ -14,7 +14,7 @@
       <config-file target="*-Info.plist" parent="NSAppTransportSecurity">
           <dict>
               <key>NSAllowsArbitraryLoads</key>
-              <true/>
+              <false/>
           </dict>
       </config-file>
     </platform>
