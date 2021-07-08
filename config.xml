@@ -8,9 +8,10 @@
         Apache Cordova Team
     </author>
     <content src="dist/index.html" />
-    <access origin="*" />
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
+    <!--<access origin="*" />-->
+    <access origin="https://*.allianz.com.tw" /> 
+    <allow-navigation href="https://*.allianz.com.tw" />
+    <allow-intent href="https://*.allianz.com.tw/*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
