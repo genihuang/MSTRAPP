@@ -354,6 +354,8 @@ CURRENT_PROJECT_VERSION=$CURRENT_PROJECT_VERSION \
 #  xcarchive 是文件夾需用-d
 if [ -d "$archivePath" ]
 then
+cp "$bkFilePath/$environmentAutoFile" "$environmentFilePath/$environmentFile"
+cp "$bkFilePath/$configAutoFile" "$configFilePath/$configFile"
     echo -e "\n\narchive成功\n\n"
 else
     echo -e "\n\narchive失敗\n\n"
@@ -376,7 +378,6 @@ else
     echo -e "\n\n exportArchive失敗\n\n"
     exit 1
 fi
-### ===========================================================
 
 ### 檔案搬移至s3cmd資料夾===========================================================
 # 指定輸出資料夾不存在則創建
@@ -390,7 +391,6 @@ fi
 
 # 複製ipa到s3cmd目錄
 cp "$ipaArxanPath" "$s3cmdPath"
-
 # 檢查s3cmd目錄ipa檔案是否存在
 if [ -f "$ipaArxanPath" ]
 then
@@ -400,9 +400,6 @@ else
     echo -e "\n\n移動至s3cmd失敗\n\n"
     exit 1
 fi
-### ===========================================================
-
-
 
 ### 建立plist===========================================================
 cat > $s3cmdPath/$scheme_name-$isArxan.plist <<EOF
