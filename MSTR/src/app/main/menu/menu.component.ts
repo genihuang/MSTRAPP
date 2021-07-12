@@ -41,7 +41,7 @@ export class MenuComponent implements OnInit {
     private routes:Router,
     private loadingService:LoadingService,
     private appComponent:AppComponent,
-    private ngbModalService: NgbModal
+    //private ngbModalService: NgbModal
   ) {
     this._treeControl = new NxFlatTreeControl();
     this._dataSource = new NxTreeFlatDataSource(this._treeControl, this.menuData);

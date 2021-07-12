@@ -51,12 +51,12 @@ export class ContentComponent implements OnInit {
     private route: ActivatedRoute,
     private router:Router,
     private menuService: MenuService,
-    private mstrLoginService: MstrLoginService,
+    //private mstrLoginService: MstrLoginService,
     protected apiCommon:ApiCommonModule,
     private commonUtility: CommonUtilityModule,
-    private modalService: ModalService,
-    private loadingService: LoadingService,
-    private location: Location,
+    //private modalService: ModalService,
+    //private loadingService: LoadingService,
+    //private location: Location,
   ) {
     this.route.params.subscribe(
       (params: Params) => {
