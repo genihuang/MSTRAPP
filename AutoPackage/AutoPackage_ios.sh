@@ -289,13 +289,13 @@ cp "$configFilePath/$configFile" "$bkFilePath/$configFile"
 
 cd "$projectDir/MSTR"
 ### remove/add/build Platform
-cordova platform rm ios
+cordova platform rm ios --save
 #cordova platform rm android
-cordova platform add ios
+cordova platform add ios --save
 #cordova platform add android
+ng build
 cordova prepare
 #cordova build android
-
 ### 參數設定===========================================================
 xcworkspaceFileName=$scheme_name".xcworkspace"
 # archivePath 輸出archive
