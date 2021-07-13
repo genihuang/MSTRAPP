@@ -39,6 +39,12 @@
         <icon height="58" src="res/ios/icon-small@2x.png" width="58" />
         <icon height="50" src="res/ios/Icon-App-50x50@1x.png" width="50" />
         <icon height="100" src="res/ios/Icon-App-50x50@2x.png" width="100" />
+        <edit-config file="${APP_NAME}/${APP_NAME}-Info.plist" target="NSAppTransportSecurity" mode="merge">
+            <dict>
+            <key>NSAllowsArbitraryLoads</key>
+            <false/>
+            </dict>
+        </edit-config>
     </platform>
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <plugin name="cordova-plugin-device" spec="^2.0.3" />
