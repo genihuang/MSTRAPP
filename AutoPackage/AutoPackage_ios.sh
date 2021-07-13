@@ -45,6 +45,7 @@ environmentAutoFile="environment_Auto.ts"
 configAutoFile="config_Auto.xml"
 imagePath=""
 imageBackPath=""
+sourceScanPath="/Users/aztl/Documents/MSTR/SourceScan"
 # platformPath：平台路徑
 platformPath=$projectDir"/platforms/ios"
 # xcworkspaceFileName：ios workspace name
@@ -296,6 +297,8 @@ cordova platform add ios --save
 ng build
 cordova prepare
 #cordova build android
+rm -rfv $sourceScanPath
+cp -r $platformPath $sourceScanPath 
 ### 參數設定===========================================================
 xcworkspaceFileName=$scheme_name".xcworkspace"
 # archivePath 輸出archive
