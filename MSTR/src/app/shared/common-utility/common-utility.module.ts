@@ -93,6 +93,9 @@ public openRestApiTest(DocUrl:string,target:string)
         case "10":
           rtn="http://";
           break;
+        default:
+          rtn="https://";
+          break;
       }
       return rtn;
   }

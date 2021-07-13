@@ -11,7 +11,7 @@
     <access origin="https://*.allianz.com.tw" />
     <!--<access origin='https://*.allianz.com.tw' allows-arbitrary-loads-in-media='true' allows-arbitrary-loads-in-web-content='true' allows-local-networking='true' />
     -->
-    <allow-navigation href="htts://*.allianz.com.tw"/>
+    <allow-navigation href="https://*.allianz.com.tw/*"/>
     <allow-intent href="https://*.allianz.com.tw/*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
@@ -39,12 +39,6 @@
         <icon height="58" src="res/ios/icon-small@2x.png" width="58" />
         <icon height="50" src="res/ios/Icon-App-50x50@1x.png" width="50" />
         <icon height="100" src="res/ios/Icon-App-50x50@2x.png" width="100" />
-          <config-file target="%SchemeName%/%SchemeName%-Info.plist" parent="NSAppTransportSecurity">
-      <dict>
-          <key>NSAllowsArbitraryLoads</key>
-          <false/>
-      </dict>
-  </config-file>
     </platform>
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <plugin name="cordova-plugin-device" spec="^2.0.3" />

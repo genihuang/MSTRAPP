@@ -7213,18 +7213,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContentComponent", function() { return ContentComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _service_menu_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../service/menu.service */ "./src/app/service/menu.service.ts");
-/* harmony import */ var _service_mstr_login_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../service/mstr-login.service */ "./src/app/service/mstr-login.service.ts");
-/* harmony import */ var _shared_modal_modal_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../shared/modal/modal.service */ "./src/app/shared/modal/modal.service.ts");
-/* harmony import */ var _shared_loading_loading_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../shared/loading/loading.service */ "./src/app/shared/loading/loading.service.ts");
-/* harmony import */ var _shared_common_utility_common_utility_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../shared/common-utility/common-utility.module */ "./src/app/shared/common-utility/common-utility.module.ts");
-/* harmony import */ var _service_api_common_api_common_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../service/api-common/api-common.module */ "./src/app/service/api-common/api-common.module.ts");
-
-
-
-
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _service_menu_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../service/menu.service */ "./src/app/service/menu.service.ts");
+/* harmony import */ var _shared_common_utility_common_utility_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../shared/common-utility/common-utility.module */ "./src/app/shared/common-utility/common-utility.module.ts");
+/* harmony import */ var _service_api_common_api_common_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../service/api-common/api-common.module */ "./src/app/service/api-common/api-common.module.ts");
 
 
 
@@ -7232,16 +7224,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ContentComponent = class ContentComponent {
-    constructor(route, router, menuService, mstrLoginService, apiCommon, commonUtility, modalService, loadingService, location) {
+    constructor(route, router, menuService, 
+    //private mstrLoginService: MstrLoginService,
+    apiCommon, commonUtility) {
         this.route = route;
         this.router = router;
         this.menuService = menuService;
-        this.mstrLoginService = mstrLoginService;
         this.apiCommon = apiCommon;
         this.commonUtility = commonUtility;
-        this.modalService = modalService;
-        this.loadingService = loadingService;
-        this.location = location;
         this.showIndicators = false;
         this.subMenuCnt = 0;
         this.iconPath = "assets/images/object-icon/";
@@ -7576,15 +7566,11 @@ let ContentComponent = class ContentComponent {
     }
 };
 ContentComponent.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
-    { type: _service_menu_service__WEBPACK_IMPORTED_MODULE_4__["MenuService"] },
-    { type: _service_mstr_login_service__WEBPACK_IMPORTED_MODULE_5__["MstrLoginService"] },
-    { type: _service_api_common_api_common_module__WEBPACK_IMPORTED_MODULE_9__["ApiCommonModule"] },
-    { type: _shared_common_utility_common_utility_module__WEBPACK_IMPORTED_MODULE_8__["CommonUtilityModule"] },
-    { type: _shared_modal_modal_service__WEBPACK_IMPORTED_MODULE_6__["ModalService"] },
-    { type: _shared_loading_loading_service__WEBPACK_IMPORTED_MODULE_7__["LoadingService"] },
-    { type: _angular_common__WEBPACK_IMPORTED_MODULE_2__["Location"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
+    { type: _service_menu_service__WEBPACK_IMPORTED_MODULE_3__["MenuService"] },
+    { type: _service_api_common_api_common_module__WEBPACK_IMPORTED_MODULE_5__["ApiCommonModule"] },
+    { type: _shared_common_utility_common_utility_module__WEBPACK_IMPORTED_MODULE_4__["CommonUtilityModule"] }
 ];
 ContentComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -7796,15 +7782,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _allianz_ngx_ndbx_tree__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @allianz/ngx-ndbx/tree */ "./node_modules/@allianz/ngx-ndbx/fesm2015/allianz-ngx-ndbx-tree.js");
-/* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/fesm2015/ng-bootstrap.js");
-/* harmony import */ var _class_modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../class/modal */ "./src/app/class/modal.ts");
-/* harmony import */ var _service_menu_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../service/menu.service */ "./src/app/service/menu.service.ts");
-/* harmony import */ var _shared_modal_modal_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../shared/modal/modal.service */ "./src/app/shared/modal/modal.service.ts");
-/* harmony import */ var _shared_loading_loading_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../shared/loading/loading.service */ "./src/app/shared/loading/loading.service.ts");
-/* harmony import */ var _service_api_common_api_common_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../service/api-common/api-common.module */ "./src/app/service/api-common/api-common.module.ts");
-/* harmony import */ var _shared_common_utility_common_utility_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../shared/common-utility/common-utility.module */ "./src/app/shared/common-utility/common-utility.module.ts");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../app.component */ "./src/app/app.component.ts");
-
+/* harmony import */ var _class_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../class/modal */ "./src/app/class/modal.ts");
+/* harmony import */ var _service_menu_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../service/menu.service */ "./src/app/service/menu.service.ts");
+/* harmony import */ var _shared_modal_modal_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../shared/modal/modal.service */ "./src/app/shared/modal/modal.service.ts");
+/* harmony import */ var _shared_loading_loading_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../shared/loading/loading.service */ "./src/app/shared/loading/loading.service.ts");
+/* harmony import */ var _service_api_common_api_common_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../service/api-common/api-common.module */ "./src/app/service/api-common/api-common.module.ts");
+/* harmony import */ var _shared_common_utility_common_utility_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../shared/common-utility/common-utility.module */ "./src/app/shared/common-utility/common-utility.module.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../app.component */ "./src/app/app.component.ts");
 
 
 
@@ -7817,7 +7801,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let MenuComponent = class MenuComponent {
-    constructor(menuService, commonUtility, modalService, apiCommon, routes, loadingService, appComponent, ngbModalService) {
+    constructor(menuService, commonUtility, modalService, apiCommon, routes, loadingService, appComponent) {
         this.menuService = menuService;
         this.commonUtility = commonUtility;
         this.modalService = modalService;
@@ -7825,7 +7809,6 @@ let MenuComponent = class MenuComponent {
         this.routes = routes;
         this.loadingService = loadingService;
         this.appComponent = appComponent;
-        this.ngbModalService = ngbModalService;
         this.messages = [];
         this._hasChild = (_, node) => node.expandable;
         this._treeControl = new _allianz_ngx_ndbx_tree__WEBPACK_IMPORTED_MODULE_3__["NxFlatTreeControl"]();
@@ -7863,7 +7846,7 @@ let MenuComponent = class MenuComponent {
                         msg = {
                             headText: '選單資訊',
                             txtContent: '取得功能選單發生錯誤。',
-                            type: _class_modal__WEBPACK_IMPORTED_MODULE_5__["ModalType"].Confirm
+                            type: _class_modal__WEBPACK_IMPORTED_MODULE_4__["ModalType"].Confirm
                         };
                         this.modalService.open(msg, 'sm');
                         break;
@@ -7924,14 +7907,13 @@ let MenuComponent = class MenuComponent {
     }
 };
 MenuComponent.ctorParameters = () => [
-    { type: _service_menu_service__WEBPACK_IMPORTED_MODULE_6__["MenuService"] },
-    { type: _shared_common_utility_common_utility_module__WEBPACK_IMPORTED_MODULE_10__["CommonUtilityModule"] },
-    { type: _shared_modal_modal_service__WEBPACK_IMPORTED_MODULE_7__["ModalService"] },
-    { type: _service_api_common_api_common_module__WEBPACK_IMPORTED_MODULE_9__["ApiCommonModule"] },
+    { type: _service_menu_service__WEBPACK_IMPORTED_MODULE_5__["MenuService"] },
+    { type: _shared_common_utility_common_utility_module__WEBPACK_IMPORTED_MODULE_9__["CommonUtilityModule"] },
+    { type: _shared_modal_modal_service__WEBPACK_IMPORTED_MODULE_6__["ModalService"] },
+    { type: _service_api_common_api_common_module__WEBPACK_IMPORTED_MODULE_8__["ApiCommonModule"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
-    { type: _shared_loading_loading_service__WEBPACK_IMPORTED_MODULE_8__["LoadingService"] },
-    { type: _app_component__WEBPACK_IMPORTED_MODULE_11__["AppComponent"] },
-    { type: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_4__["NgbModal"] }
+    { type: _shared_loading_loading_service__WEBPACK_IMPORTED_MODULE_7__["LoadingService"] },
+    { type: _app_component__WEBPACK_IMPORTED_MODULE_10__["AppComponent"] }
 ];
 MenuComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -8042,85 +8024,6 @@ MenuService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         providedIn: 'root'
     })
 ], MenuService);
-
-
-
-/***/ }),
-
-/***/ "./src/app/service/mstr-login.service.ts":
-/*!***********************************************!*\
-  !*** ./src/app/service/mstr-login.service.ts ***!
-  \***********************************************/
-/*! exports provided: MstrLoginService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MstrLoginService", function() { return MstrLoginService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
-/* harmony import */ var _service_api_common_api_common_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../service/api-common/api-common.module */ "./src/app/service/api-common/api-common.module.ts");
-/* harmony import */ var _shared_common_utility_common_utility_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../shared/common-utility/common-utility.module */ "./src/app/shared/common-utility/common-utility.module.ts");
-/* harmony import */ var _shared_loading_loading_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../shared/loading/loading.service */ "./src/app/shared/loading/loading.service.ts");
-
-
-
-
-
-
-
-
-let MstrLoginService = class MstrLoginService {
-    constructor(apiCommon, commonUtility, loadingService, http) {
-        this.apiCommon = apiCommon;
-        this.commonUtility = commonUtility;
-        this.loadingService = loadingService;
-        this.http = http;
-    }
-    mstrLogin(project, userID, dashboardUseMode) {
-        var apiId = "mstrLogin";
-        console.log(apiId);
-        this.ApiConfig = this.apiCommon.getApiConfigByApiID(apiId);
-        const apiUrl = `${this.ApiConfig.domain}${this.ApiConfig.path}`;
-        console.log(apiUrl);
-        const httpOptions = {
-            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
-                'Content-Type': 'application/json',
-                'authenticationToken': this.commonUtility.getSessionValue('authenticationToken')
-            })
-        };
-        this.loadingService.show();
-        const rqbody = {
-            MetaData: this.apiCommon.reqCommon,
-            project: project,
-            userID: userID,
-            dashboardUseMode: dashboardUseMode
-        };
-        console.log(rqbody);
-        return this.http.post(apiUrl, JSON.stringify(rqbody), httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["timeout"])(90 * 1000), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(error => {
-            console.log('error:', error);
-            this.loadingService.hide();
-            if (error instanceof rxjs__WEBPACK_IMPORTED_MODULE_3__["TimeoutError"]) {
-            }
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["throwError"])(error);
-        }));
-    }
-};
-MstrLoginService.ctorParameters = () => [
-    { type: _service_api_common_api_common_module__WEBPACK_IMPORTED_MODULE_5__["ApiCommonModule"] },
-    { type: _shared_common_utility_common_utility_module__WEBPACK_IMPORTED_MODULE_6__["CommonUtilityModule"] },
-    { type: _shared_loading_loading_service__WEBPACK_IMPORTED_MODULE_7__["LoadingService"] },
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
-];
-MstrLoginService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    })
-], MstrLoginService);
 
 
 

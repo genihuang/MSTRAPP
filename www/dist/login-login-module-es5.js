@@ -510,7 +510,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                 break;
 
-              case -1:
+              default:
                 msg = {
                   headText: '維護資訊',
                   txtContent: res.po_GetMaintainData.ReturnMessage,

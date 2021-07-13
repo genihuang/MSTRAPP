@@ -29,10 +29,10 @@ export class AppLoginService {
     var apiId:string = "appLogin";
     switch(this.commonUtility.accType)
     {
-      case "0":
-        break;
       case "1":
         apiId="commonLogin";
+        break;
+      default:
         break;
     }
     console.log(apiId);
@@ -77,10 +77,10 @@ export class AppLoginService {
     var apiId:string = "versionCheck";
     switch(this.commonUtility.accType)
     {
-      case "0":
-        break;
       case "1":
         apiId="commonVersionCheck";
+        break;
+      default:
         break;
     }
     console.log(apiId);

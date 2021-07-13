@@ -22,13 +22,5 @@
     },
     "is_top_level": true,
     "variables": {}
-  },
-  "cordova-plugin-transport-security": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-transport-security@0.1.2"
-    },
-    "is_top_level": true,
-    "variables": {}
   }
 }

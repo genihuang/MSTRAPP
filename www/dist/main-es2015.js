@@ -673,10 +673,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 
 const envData = {
-    env: '14',
+    env: '%env%',
     systemId: '80',
     systemCode: 'MSTR',
-    version: '1.0.5',
+    version: '%version%',
     platform: '1',
     useAcc: '1' //0：舊帳號，1：新帳號
 };
@@ -1219,10 +1219,10 @@ let AppLoginService = class AppLoginService {
     appLogin(account, pwd) {
         var apiId = "appLogin";
         switch (this.commonUtility.accType) {
-            case "0":
-                break;
             case "1":
                 apiId = "commonLogin";
+                break;
+            default:
                 break;
         }
         console.log(apiId);
@@ -1258,10 +1258,10 @@ let AppLoginService = class AppLoginService {
     versionCheck(appVersion, lastUpdateTime, platform) {
         var apiId = "versionCheck";
         switch (this.commonUtility.accType) {
-            case "0":
-                break;
             case "1":
                 apiId = "commonVersionCheck";
+                break;
+            default:
                 break;
         }
         console.log(apiId);
@@ -1423,6 +1423,9 @@ let CommonUtilityModule = class CommonUtilityModule {
         switch (_environment_environment__WEBPACK_IMPORTED_MODULE_4__["envData"].env) {
             case "10":
                 rtn = "http://";
+                break;
+            default:
+                rtn = "https://";
                 break;
         }
         return rtn;

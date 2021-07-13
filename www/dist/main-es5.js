@@ -1254,10 +1254,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     "./node_modules/tslib/tslib.es6.js");
 
     var envData = {
-      env: '14',
+      env: '%env%',
       systemId: '80',
       systemCode: 'MSTR',
-      version: '1.0.5',
+      version: '%version%',
       platform: '1',
       useAcc: '1' //0：舊帳號，1：新帳號
 
@@ -1896,11 +1896,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var apiId = "appLogin";
 
           switch (this.commonUtility.accType) {
-            case "0":
-              break;
-
             case "1":
               apiId = "commonLogin";
+              break;
+
+            default:
               break;
           }
 
@@ -1943,11 +1943,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var apiId = "versionCheck";
 
           switch (this.commonUtility.accType) {
-            case "0":
-              break;
-
             case "1":
               apiId = "commonVersionCheck";
+              break;
+
+            default:
               break;
           }
 
@@ -2179,6 +2179,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           switch (_environment_environment__WEBPACK_IMPORTED_MODULE_4__["envData"].env) {
             case "10":
               rtn = "http://";
+              break;
+
+            default:
+              rtn = "https://";
               break;
           }
 

@@ -357,7 +357,7 @@ let LoginComponent = class LoginComponent {
                         }
                     }
                     break;
-                case -1:
+                default:
                     msg = {
                         headText: '維護資訊',
                         txtContent: res.po_GetMaintainData.ReturnMessage,
