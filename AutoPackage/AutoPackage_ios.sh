@@ -4,6 +4,11 @@ function pause(){
                 echo -ne '\b \n'
         fi
 }
+function exitExecSh(){
+    cd $projectDir
+    git checkout main    
+    exit 1
+}
 # 變數定義
 # envDesc：環境描述 Uat,PreProd,Prod
 # isHicloud：是否上傳HiCloud
@@ -137,11 +142,11 @@ if [ -n "$env" ]
         echo "scheme_name="$scheme_name
     else
         echo "別亂輸入好嗎？"
-        exit 1
+        exitExecSh
     fi
 else
     echo "別不輸入好嗎？"
-    exit 1
+    exitExecSh
 fi
 ### ===========================================================
 
