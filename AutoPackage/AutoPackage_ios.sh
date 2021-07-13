@@ -286,6 +286,8 @@ sed -i '' 's/%scheme_name%/'$scheme_name'/g' "$configFilePath/$configFile"
 
 cp "$environmentFilePath/$environmentFile" "$bkFilePath/$environmentFile"
 cp "$configFilePath/$configFile" "$bkFilePath/$configFile"
+
+cd "$projectDir/MSTR"
 ### remove/add/build Platform
 cordova platform rm ios
 #cordova platform rm android
