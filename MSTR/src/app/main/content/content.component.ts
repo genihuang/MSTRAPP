@@ -45,7 +45,7 @@ export class ContentComponent implements OnInit {
   showIndicators: boolean = false;
   subMenuCnt: number = 0;
   iconPath: string = "assets/images/object-icon/"
-  
+
 
   constructor(
     private route: ActivatedRoute,
@@ -383,8 +383,9 @@ export class ContentComponent implements OnInit {
     parm += "&Token="+this.commonUtility.getSessionValue('authenticationToken');
     parm += "&ObjectId="+menu.web_object;
     parm += "&accType="+this.commonUtility.accType;
-    console.log(apiUrl);
+    //console.log(apiUrl+parm);
     this.commonUtility.openUrl(apiUrl+parm, target);
+    //this.testOpenUrl(apiUrl+parm, target);
   }
 
   chunks() {
@@ -397,7 +398,23 @@ export class ContentComponent implements OnInit {
     console.log(results);
     return results;
   }
+  testOpenUrl(url:string, target:string)
+  {
+   // document.cordova.InAppBrowser.open(encodeURI(url), target, 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
+   console.log(url);
+    document.addEventListener('deviceready', () => {
+      console.warn("AAA");
+      //cordova.InAppBrowser.open(encodeURI(url), target, 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
+      window.open = cordova.InAppBrowser.open;
+      window.open(encodeURI(url), target, 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
+      //var ref=cordova.InAppBrowser.open(encodeURI(url), target, 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
+    },false) ;   
+  }
   test(parm: string) {
     console.log(parm);
   }
 }
+function onDeviceReady() {
+  throw new Error('Function not implemented.');
+}
+

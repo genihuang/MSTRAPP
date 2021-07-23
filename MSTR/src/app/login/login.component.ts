@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
   isShowMaintain:boolean=false;
   showBeginTime:string;
   showEndTime:string;
+  isComposite:boolean=false;
   // rsbody:apiLoginData.resLogin;
   constructor(
     public formBuilder:FormBuilder,
@@ -62,17 +63,39 @@ export class LoginComponent implements OnInit {
     this.getMaintainData();
     
   }
+
   ngOnInit() {
     document.addEventListener('deviceready', () => {
       window.CacheClear();
     })  
      this.getMaintainData();
   };
+  onInput($event:any) {
+    if (!$event || this.isComposite) {
+        return;
+    }
+    const target = $event.target;
+    //const regexp = new RegExp("^[a-zA-Z0-9 ]+$");
+    //target.value = target.value.replace(regexp, '');
+    //console.warn(target.value);
+}
+onBlur($event:any){
+  this.onInput($event);
+  this.loginForm.controls['account'].setValue($event.target.value);
+}
+onCompositionstart(){
+  this.isComposite=true;
+}
+onCompositionend($event:any){
+  this.isComposite=false;
+  this.onInput($event);
+}
   onClickSubmit(data){
     var msg:ModalOptions;
     var result:boolean=true;
     var isLoginSucess:boolean=false;
-    if (data.accout=='' || data.pwd =='')
+
+    if (data.account=='' || data.pwd =='')
     {
       msg={
         headText:'資料驗證',
@@ -186,7 +209,7 @@ export class LoginComponent implements OnInit {
               modalRtn.result.then((result) => {
                 if (result =='NEXT'){
                   isLoginSucess=false;
-                  this.modifyPwd(data.account.toUpperCase());
+                  this.enableAcc(data.account.toUpperCase());
                 }               
               }, (reason) => {
                 console.log(reason)
@@ -538,14 +561,81 @@ export class LoginComponent implements OnInit {
   forgetPassword()
   {
     var Page:string;
-    Page = this.apiCommon.getApiUrl("forgetPwdPage");
-    this.commonUtility.forgetPassword(Page);
+    var apiId:string;
+    apiId="forgetPwdPage";
+    switch(this.commonUtility.accType)
+    {
+      case "1":
+        apiId="newForgetPassword";
+        break;
+      default:
+        break;
+    } 
+    Page = this.apiCommon.getApiUrl(apiId);
+    switch(this.commonUtility.accType)
+    {
+      case "1":
+        Page+='?SystemCode='+this.commonUtility.systemId+"&Kind=B";
+        break;
+      default:
+        Page+='&SystemID='+this.commonUtility.systemId ;
+        break;
+    }   
+    //this.commonUtility.forgetPassword(Page);
+    this.commonUtility.openUrl(Page, "_blank");
   }
   modifyPwd(account:string)
   {
     var Page:string;
-    Page = this.apiCommon.getApiUrl("modifyPwdPage");
-    this.commonUtility.modifyPwd(account,Page);
+    var apiId:string;
+    apiId="modifyPwdPage";
+    switch(this.commonUtility.accType)
+    {
+      case "1":
+        apiId="newForgetPassword";
+        break;
+      default:
+        break;
+    } 
+    Page = this.apiCommon.getApiUrl(apiId);
+    switch(this.commonUtility.accType)
+    {
+      case "1":
+        Page+='?SystemCode='+this.commonUtility.systemId+"&Kind=B";
+        break;
+      default:
+        Page+='&SystemID='+this.commonUtility.systemId + '&Account='+account;
+        break;
+    } 
+    //this.commonUtility.modifyPwd(account,Page);
+    this.commonUtility.openUrl(Page, "_blank");
+  }
+  enableAcc(account:string)
+  {
+    var Page:string;
+    var apiId:string;
+    apiId="modifyPwdPage";
+    switch(this.commonUtility.accType)
+    {
+      case "1":
+        apiId="newForgetPassword";
+        break;
+      default:
+        break;
+    } 
+    Page = this.apiCommon.getApiUrl(apiId);
+    switch(this.commonUtility.accType)
+    {
+      case "1":
+        Page+='?SystemCode='+this.commonUtility.systemId+"&Kind=A";
+        break;
+      default:
+        Page+='&SystemID='+this.commonUtility.systemId + '&Account='+account;
+        break;
+    } 
+    console.warn(Page);
+    //this.commonUtility.modifyPwd(account,Page);   
+    this.commonUtility.openUrl(Page, "_blank"); 
   }
   open(modalOptions:ModalOptions):any{
     var rtn:string;

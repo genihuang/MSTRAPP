@@ -8,6 +8,7 @@ import {ModalComponent} from './shared/modal/modal.component'
 import {ModalService} from './shared/modal/modal.service';
 import { LoadingService } from './shared/loading/loading.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -50,6 +51,7 @@ export class AppComponent implements OnInit, OnDestroy{
     clearTimeout(this.userActivity);
     this.setTimeout("mouseenter");
   }
+
   ngOnInit() {
     console.log(this.router.url);
     this.handleLoadingViewChange();

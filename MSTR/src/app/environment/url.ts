@@ -8,38 +8,43 @@ import { map } from 'rxjs/operators';
 export const apiDomain_Uat: IApiDomain[] = ([
     {
         apiDomainKey: "utility",
-        //apiDomain:"http://t2.allianz.com.tw/wsUtility/"
-        apiDomain:"https://esuat.allianz.com.tw/service/wsUtility/"
+        apiDomain:"http://t2.allianz.com.tw/wsUtility/",
+        apiSubDomain:"https://esuat.allianz.com.tw/service/wsUtility/"
     },
     {
         apiDomainKey: "discover",
-        //apiDomain:"http://t2.allianz.com.tw/wsIllustrationIII/"
-        apiDomain:"https://esuat.allianz.com.tw/service/wsIllustrationIII/"
+        apiDomain:"https://t2.allianz.com.tw/wsIllustrationIII/",
+        apiSubDomain:"https://esuat.allianz.com.tw/service/wsIllustrationIII/"
     },
     {
         apiDomainKey: "wsaz",
-        //apiDomain: "https://t5.allianz.com.tw/WSAZ/"
-        apiDomain:"https://esuat.allianz.com.tw/service/WSAZ/"
+        apiDomain: "https://t5.allianz.com.tw/WSAZ/",
+        apiSubDomain:"https://esuat.allianz.com.tw/service/WSAZ/"
     },
     {
         apiDomainKey: "MstrPage",
-        //apiDomain: "http://t1.allianz.com.tw/MSTR/"
-        apiDomain: "https://esuat.allianz.com.tw/partner/MSTR/"
+        apiDomain: "https://t1.allianz.com.tw/MSTR/",
+        apiSubDomain: "https://esuat.allianz.com.tw/partner/MSTR/"
     },
     {
         apiDomainKey:"w2Util_pp",
-        //apiDomain:"http://t5.allianz.com.tw/w2Util/"
-        apiDomain:"https://esuat.allianz.com.tw/service/w2Util/"
+        apiDomain:"https://t5.allianz.com.tw/w2Util/",
+        apiSubDomain:"https://esuat.allianz.com.tw/service/w2Util/"
     },
     {
         apiDomainKey:"AZPL",
-        //apiDomain:"http://t1.allianz.com.tw/eProCommonsite/"
-        apiDomain:"https://esuat.allianz.com.tw/partner/eProCommonsite/"
+        apiDomain:"https://t1.allianz.com.tw/eProCommonsite/",
+        apiSubDomain:"https://esuat.allianz.com.tw/partner/eProCommonsite/"
     },
     {
         apiDomainKey:"w2UtilAPI",
-        //apiDomain:"http://t5.allianz.com.tw/w2UtilAPI/"
-        apiDomain:"https://esuat.allianz.com.tw/service/w2UtilAPI/"
+        apiDomain:"https://t5.allianz.com.tw/w2UtilAPI/",
+        apiSubDomain:"https://esuat.allianz.com.tw/service/w2UtilAPI/"
+    },
+    {
+        apiDomainKey:"accountManager",
+        apiDomain:"https://t1.allianz.com.tw/accountManager/",
+        apiSubDomain:"https://esuat.allianz.com.tw/partner/accountManager/"
     }
 ]);
 export const apiConfig_Uat: IApiConfig[] = ([
@@ -88,6 +93,10 @@ export const apiConfig_Uat: IApiConfig[] = ([
         keyId:""
     },
     {
+        apiID:"newForgetPassword",
+        keyId:""
+    },
+    {
         apiID:"maintainData",
         keyId:"1EECE5B6-3A06-4F0D-BF72-FD08762D2B1C"
     },
@@ -100,34 +109,46 @@ export const apiConfig_Uat: IApiConfig[] = ([
 export const apiDomain_PreProd: IApiDomain[] = ([
     {
         apiDomainKey: "utility",
-        apiDomain: 'http://113.196.86.105/wsUtility/'
+        apiDomain: 'http://113.196.86.105/wsUtility/',
+        apiSubDomain:""
     },
     {
         apiDomainKey: "discover",
-        apiDomain: "http://113.196.86.105/wsIllustrationIII/"
+        apiDomain: "http://113.196.86.105/wsIllustrationIII/",
+        apiSubDomain:""
     },
     {
         apiDomainKey: "wsaz",
-        apiDomain: "https://preW2.allianz.com.tw/WSAZ/"
+        apiDomain: "https://preW2.allianz.com.tw/WSAZ/",
+        apiSubDomain:""
     },
     {
         apiDomainKey: "MstrPage",
         // apiDomain: "http://113.196.86.102/WSAZ/"
-        apiDomain: "https://preW2.allianz.com.tw/MSTR/"
+        apiDomain: "https://preW2.allianz.com.tw/MSTR/",
+        apiSubDomain:""
     },
 
     {
         apiDomainKey:"w2Util_pp",
-        apiDomain:"https://preW2.allianz.com.tw/w2Util/"
+        apiDomain:"https://preW2.allianz.com.tw/w2Util/",
+        apiSubDomain:""
     },
     {
         apiDomainKey:"AZPL",
-        apiDomain:"https://preW2.allianz.com.tw/eProCommonsite/"
+        apiDomain:"https://preW2.allianz.com.tw/eProCommonsite/",
+        apiSubDomain:""
     },
     {
         apiDomainKey:"w2UtilAPI",
         //apiDomain:"http://t5.allianz.com.tw/w2UtilAPI/"
-        apiDomain:"https://preW2.allianz.com.tw/w2UtilAPI/"
+        apiDomain:"https://preW2.allianz.com.tw/w2UtilAPI/",
+        apiSubDomain:""
+    },
+    {
+        apiDomainKey:"accountManager",
+        apiDomain:"https://preFirst2.allianz.com.tw/accountManager/",
+        apiSubDomain:""
     }
 ]);
 
@@ -177,6 +198,10 @@ export const apiConfig_PreProd: IApiConfig[] = ([
         keyId:""
     },
     {
+        apiID:"newForgetPassword",
+        keyId:""
+    },
+    {
         apiID:"maintainData",
         keyId:"5B98F6AD-5E60-4965-B9F1-5423C7275AAD"
     },
@@ -189,38 +214,43 @@ export const apiConfig_PreProd: IApiConfig[] = ([
 export const apiDomain_Prod: IApiDomain[] = ([
     {
         apiDomainKey: "utility",
-        //apiDomain: "https://first2.allianz.com.tw/wsUtility/"
-        apiDomain: "https://es.allianz.com.tw/service/wsUtility/"
+        apiDomain: "https://first2.allianz.com.tw/wsUtility/",
+        apiSubDomain: "https://es.allianz.com.tw/service/wsUtility/"
     },
     {
         apiDomainKey: "discover",
-        //apiDomain: "https://first2.allianz.com.tw/wsIllustrationIII/"
-        apiDomain:"https://es.allianz.com.tw/service/wsIllustrationIII/"
+        apiDomain: "https://first2.allianz.com.tw/wsIllustrationIII/",
+        apiSubDomain:"https://es.allianz.com.tw/service/wsIllustrationIII/"
     },
     {
         apiDomainKey: "wsaz",
-        //apiDomain: "https://w2.allianz.com.tw/WSAZ/"
-        apiDomain:"https://es.allianz.com.tw/service/WSAZ/"
+        apiDomain: "https://w2.allianz.com.tw/WSAZ/",
+        apiSubDomain:"https://es.allianz.com.tw/service/WSAZ/"
     },
     {
         apiDomainKey: "MstrPage",
-        //apiDomain: "https://w2.allianz.com.tw/MSTR/"
-        apiDomain: "https://es.allianz.com.tw/partner/MSTR/"
+        apiDomain: "https://w2.allianz.com.tw/MSTR/",
+        apiSubDomain: "https://es.allianz.com.tw/partner/MSTR/"
     },
     {
         apiDomainKey:"w2Util_pp",
-        //apiDomain:"https://w2.allianz.com.tw/w2Util/"
-        apiDomain:"https://es.allianz.com.tw/service/w2Util/"
+        apiDomain:"https://w2.allianz.com.tw/w2Util/",
+        apiSubDomain:"https://es.allianz.com.tw/service/w2Util/"
     },
     {
         apiDomainKey:"AZPL",
-        //apiDomain:"https://www.azpl.com.tw/eProCommonsite/"
-        apiDomain:"https://es.allianz.com.tw/partner/eProCommonsite/"
+        apiDomain:"https://www.azpl.com.tw/eProCommonsite/",
+        apiSubDomain:"https://es.allianz.com.tw/partner/eProCommonsite/"
     },
     {
         apiDomainKey:"w2UtilAPI",
-        //apiDomain:"https://w2.allianz.com.tw/w2UtilAPI/"
-        apiDomain:"https://es.allianz.com.tw/service/w2UtilAPI/"
+        apiDomain:"https://w2.allianz.com.tw/w2UtilAPI/",
+        apiSubDomain:"https://es.allianz.com.tw/service/w2UtilAPI/"
+    },
+    {
+        apiDomainKey:"accountManager",
+        apiDomain:"https://first2.allianz.com.tw/accountManager/",
+        apiSubDomain:"https://es.allianz.com.tw/partner/accountManager/"
     }
 ]);
 export const apiConfig_Prod: IApiConfig[] = ([
@@ -266,6 +296,10 @@ export const apiConfig_Prod: IApiConfig[] = ([
     },
     {
         apiID:"forgetPwdPage",
+        keyId:""
+    },
+    {
+        apiID:"newForgetPassword",
         keyId:""
     },
     {

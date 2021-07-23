@@ -8,6 +8,10 @@ import { Route } from '@angular/compiler/src/core';
 declare const cordova;
 declare const window;
 declare const document;
+document.addEventListener("deviceready",onDeviceReady,false);
+function onDeviceReady() {
+  window.open=cordova.InAppBrowser.open;
+}
 
 @NgModule({
   declarations: [],
@@ -44,12 +48,17 @@ export class CommonUtilityModule {
     }
     return rtn;
   }
+
   public openUrl(url:string, target:string)
   {
-    console.log(url);
-    document.addEventListener('deviceready', () => {
-      cordova.InAppBrowser.open(encodeURI(url), target, 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
-    }) ;   
+    //var ref=cordova.InAppBrowser.open(encodeURI(url), target, 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
+     document.addEventListener('deviceready', () => {
+       console.warn("AAA");
+       //cordova.InAppBrowser.open(encodeURI(url), target, 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
+       window.open = cordova.InAppBrowser.open;
+       window.open(encodeURI(url), target, 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
+       //var ref=cordova.InAppBrowser.open(encodeURI(url), target, 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
+     }) ;   
   }
 /* public openRouteUrl(DocUrl:string,target:string)
 {
@@ -81,7 +90,7 @@ public openRestApiTest(DocUrl:string,target:string)
   public forgetPassword(page:string){
     // forgetPwdPage = this.apiCommon.getApiUrl("forgetPwdPage");
     // forgetPwdPage = "https://t1.allianz.com.tw/eProAgent/";
-    page+='&SystemID='+this.systemId ;
+    //page+='&SystemID='+this.systemId ;
     console.log(page);
     this.openUrl(page,"_blank");
   }
@@ -188,6 +197,9 @@ public formatTime(date:Date):string
   }
   get accType():string{
     return env.envData.useAcc;
+  }
+  get isSubDomain():string{
+    return env.envData.useSubDomain;
   }
   //設定登入資訊
   private setToken(value:string){

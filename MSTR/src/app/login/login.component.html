@@ -11,16 +11,19 @@
           <span class="LoginInputGroup-text" id="basic-addon1"><i class="fas fa-user-alt"></i></span>
         </div>
         <div class="LoginInputGroup-cut"><div></div></div>
-        
-        <input type="text" class="form-control" placeholder="使用者名稱" id="account" formControlName="account">
+        <input type="text" class="form-control" placeholder="使用者名稱" id="account" formControlName="account" 
+        (compositionstart)="onCompositionstart()"
+        (compositionend)="onCompositionend($event)"
+        (input)="onInput($event)"
+        (blur)="onBlur($event)"
+        >
       </div>
       <div class="LoginInputGroup">
         <div class="LoginInputGroup-prepend">
           <span class="LoginInputGroup-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
         </div>
         <div class="LoginInputGroup-cut"><div></div></div>
-        <input type="password" class="form-control" placeholder="密碼" id="pwd" formControlName="pwd">
-       
+        <input type="password" class="form-control" placeholder="密碼" id="pwd" formControlName="pwd"> 
       </div>
       <input class="btnLogin" type="submit" value="登入"/>
       <div class="forgetPassword" (click)="forgetPassword();">

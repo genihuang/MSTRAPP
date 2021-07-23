@@ -39,7 +39,6 @@ export class AppLoginService {
     this.ApiConfig = this.apiCommon.getApiConfigByApiID(apiId);
     const apiUrl = this.apiCommon.getApiUrl(apiId);
     console.log(apiUrl);
-    console.warn()
 
     const httpOptions = {
       headers: new HttpHeaders({

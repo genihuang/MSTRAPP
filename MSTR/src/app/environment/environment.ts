@@ -6,7 +6,8 @@ export const envData:envConfig={
     systemCode:'MSTR',
     version:'%version%',
     platform:'1',//1:IOS,2:Android
-    useAcc:'1' //0：舊帳號，1：新帳號
+    useAcc:'1', //0：舊帳號，1：新帳號
+    useSubDomain:'Y'
 };
 
 export const apiPath : IApiConfig []=([
@@ -67,6 +68,16 @@ export const apiPath : IApiConfig []=([
     },
     {
         apiID:"forgetPwdPage",
+        domainKey:"AZPL",
+        path:"ModifyPwd/modifyPwd.aspx?Mode=Q"        
+    },
+    {
+        apiID:"newForgetPassword",
+        domainKey:"accountManager",
+        path:"forgetPassword.aspx"        
+    },
+    {
+        apiID:"insPwdToken",
         domainKey:"AZPL",
         path:"ModifyPwd/modifyPwd.aspx?Mode=Q"        
     },

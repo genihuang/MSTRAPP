@@ -44,7 +44,12 @@ export class ApiCommonModule {
     pApiConfig.forEach(
       apiConfig => {
         apiConfig.domainKey=apiPath.find(path=>path.apiID==apiConfig.apiID).domainKey;
-        apiConfig.domain = this.ApiDomain.find(domain=>domain.apiDomainKey==apiConfig.domainKey).apiDomain;
+        if(this.commonUtility.isSubDomain=="Y"){
+          apiConfig.domain=this.ApiDomain.find(domain=>domain.apiDomainKey==apiConfig.domainKey).apiSubDomain;
+        }
+        else{
+          apiConfig.domain=this.ApiDomain.find(domain=>domain.apiDomainKey==apiConfig.domainKey).apiDomain;
+        }
         apiConfig.path=apiPath.find(path=>path.apiID==apiConfig.apiID).path;
     });
     return pApiConfig;
@@ -81,6 +86,7 @@ export class ApiCommonModule {
     var domain:string;
     var path:string;
     var apiConfig:IApiConfig[] =this.allApiConfig;
+
     domain = apiConfig.find(url=>url.apiID==apiID).domain;
     path = apiConfig.find(url=>url.apiID==apiID).path;
     return `${domain}${path}`;
