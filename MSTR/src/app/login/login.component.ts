@@ -180,8 +180,20 @@ onCompositionend($event:any){
                     result = this.versionCheck();
                     if (result)
                     {
-                      this.ngZone.run(()=>this.router.navigateByUrl('/main'));
+                      if(this.commonUtility.accType=='0')
+                      {
+                        this.commonUtility.accSource="STAFF";  
+                        this.ngZone.run(()=>this.router.navigateByUrl('/main'));
+                      }
+                      else
+                      {
+                        result=this.getTokenDetail();
+                      }
                     }
+                    // if (result)
+                    // {
+                    //   this.ngZone.run(()=>this.router.navigateByUrl('/main'));
+                    // }
                     break;
                   default:
                     result=false;
@@ -585,6 +597,7 @@ onCompositionend($event:any){
     // }   
     //this.commonUtility.forgetPassword(Page);
     //this.commonUtility.openUrl(Page, "_blank");
+    console.warn(Page);
     this.commonUtility.ModifyPwd("",Page,kind);
   }
   modifyPwd(account:string)

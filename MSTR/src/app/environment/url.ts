@@ -97,6 +97,10 @@ export const apiConfig_Uat: IApiConfig[] = ([
         keyId:""
     },
     {
+        apiID:"newResetPassword",
+        keyId:""
+    },
+    {
         apiID:"newInsPwdToken",
         keyId:"C8837B63-7659-4413-BDED-47DB7B94058F"
     },
@@ -206,6 +210,10 @@ export const apiConfig_PreProd: IApiConfig[] = ([
         keyId:""
     },
     {
+        apiID:"newResetPassword",
+        keyId:""
+    },
+    {
         apiID:"newInsPwdToken",
         keyId:"43F59B44-6363-4B79-AB53-F71275B0958A"
     },
@@ -308,6 +316,10 @@ export const apiConfig_Prod: IApiConfig[] = ([
     },
     {
         apiID:"newForgetPassword",
+        keyId:""
+    },
+    {
+        apiID:"newResetPassword",
         keyId:""
     },
     {
