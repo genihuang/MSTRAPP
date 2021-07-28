@@ -8,6 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import {MyFlatTreeNode,MenuNode} from '../../class/menu';
 import {ModalOptions,ModalType} from '../../class/modal';
+import {AppLoginService} from '../../service/app-login.service';
 import {MenuService} from '../../service/menu.service';
 import {ModalService} from '../../shared/modal/modal.service';
 import {LoadingService} from '../../shared/loading/loading.service';
@@ -32,8 +33,10 @@ export class MenuComponent implements OnInit {
   logMessage: string;
   messages = [];
   bodyText: string;
+  pwdToken:string;
 
   constructor(
+    private loginService:AppLoginService,
     private menuService:MenuService,
     private commonUtility:CommonUtilityModule,
     private modalService:ModalService,
@@ -148,11 +151,76 @@ export class MenuComponent implements OnInit {
     // this.commonUtility.logout();
   }
   modifyPwd(){
-    var Page:string;
     var account = this.commonUtility.getSessionValue("loginUser");
-    Page = this.apiCommon.getApiUrl("modifyPwdPage");
-    this.commonUtility.modifyPwd(account,Page);
+    var apiId:string;
+    var kind:string;
+    apiId="modifyPwdPage";
+    kind="C";
+    if (this.commonUtility.accType=="1")
+    {
+      this.getPwdToken(account);
+    }
+    else
+    {
+      //this.commonUtility.modifyPwd(account,Page);
+      this.commonUtility.ModifyPwd(account,apiId,kind);
+    }
     // this.logout();
   }
-
+  newModifyPwd(token:string)
+  {
+    var apiId:string;
+    apiId="newResetPassword";
+    this.commonUtility.resetPwd(token);
+    //this.commonUtility.modifyPwd(account,Page);   
+    //this.commonUtility.openUrl(Page, "_blank"); 
+  }
+  getPwdToken(account:string){
+    var msg:ModalOptions;
+    var result:boolean=true;
+    this.loginService.getPwdToken(account, "C")
+    .subscribe(
+      res=>{
+        this.loadingService.hide();
+        switch (res.ResponseDetails.responseCode) {
+          case "000":
+            this.pwdToken=res.Token
+            result=true;
+            break;
+          case "008":
+            msg={
+              headText:'取Token發生錯誤',
+              txtContent :res.ReasonCode.map(
+                item=>
+                `${item.reasonMsg}(錯誤碼：${item.reasonCode})`
+                )
+                .join(' '),
+              type:ModalType.Confirm
+            };          
+            this.modalService.open(msg,'sm');
+            result=false;
+            break;
+          default:
+            msg={
+              headText:'取Token失敗',
+              txtContent :'資料異常，請聯絡系統管理員。',
+              type:ModalType.Confirm
+            }; 
+            this.modalService.open(msg,'sm');
+            result=false;
+            break;
+        };
+      },
+      err=>{
+        console.log("error");
+      },
+      ()=>{
+        console.log('onComplete');
+        if (result)
+        {
+          this.newModifyPwd(this.pwdToken);
+        }
+      }
+    );
+  }
 }

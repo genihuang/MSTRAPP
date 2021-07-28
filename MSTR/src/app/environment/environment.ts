@@ -77,9 +77,19 @@ export const apiPath : IApiConfig []=([
         path:"forgetPassword.aspx"        
     },
     {
+        apiID:"newResetPassword",
+        domainKey:"accountManager",
+        path:"resetPassword.aspx"        
+    },
+    {
         apiID:"insPwdToken",
         domainKey:"AZPL",
         path:"ModifyPwd/modifyPwd.aspx?Mode=Q"        
+    },
+    {
+        apiID:"newInsPwdToken",
+        domainKey:"utility",
+        path:"Common/insPwdToken"
     },
     {
         apiID:"maintainData",

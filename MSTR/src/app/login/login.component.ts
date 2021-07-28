@@ -562,7 +562,9 @@ onCompositionend($event:any){
   {
     var Page:string;
     var apiId:string;
+    var kind:string;
     apiId="forgetPwdPage";
+    kind="B";
     switch(this.commonUtility.accType)
     {
       case "1":
@@ -571,24 +573,27 @@ onCompositionend($event:any){
       default:
         break;
     } 
-    Page = this.apiCommon.getApiUrl(apiId);
-    switch(this.commonUtility.accType)
-    {
-      case "1":
-        Page+='?SystemCode='+this.commonUtility.systemId+"&Kind=B";
-        break;
-      default:
-        Page+='&SystemID='+this.commonUtility.systemId ;
-        break;
-    }   
+    // Page = this.apiCommon.getApiUrl(apiId);
+    // switch(this.commonUtility.accType)
+    // {
+    //   case "1":
+    //     Page+='?SystemCode='+this.commonUtility.systemId+"&Kind=B";
+    //     break;
+    //   default:
+    //     Page+='&SystemID='+this.commonUtility.systemId ;
+    //     break;
+    // }   
     //this.commonUtility.forgetPassword(Page);
-    this.commonUtility.openUrl(Page, "_blank");
+    //this.commonUtility.openUrl(Page, "_blank");
+    this.commonUtility.ModifyPwd("",apiId,kind);
   }
   modifyPwd(account:string)
   {
     var Page:string;
     var apiId:string;
+    var kind:string;
     apiId="modifyPwdPage";
+    kind="B";
     switch(this.commonUtility.accType)
     {
       case "1":
@@ -597,24 +602,27 @@ onCompositionend($event:any){
       default:
         break;
     } 
-    Page = this.apiCommon.getApiUrl(apiId);
-    switch(this.commonUtility.accType)
-    {
-      case "1":
-        Page+='?SystemCode='+this.commonUtility.systemId+"&Kind=B";
-        break;
-      default:
-        Page+='&SystemID='+this.commonUtility.systemId + '&Account='+account;
-        break;
-    } 
+    // Page = this.apiCommon.getApiUrl(apiId);
+    // switch(this.commonUtility.accType)
+    // {
+    //   case "1":
+    //     Page+='?SystemCode='+this.commonUtility.systemId+"&Kind=B";
+    //     break;
+    //   default:
+    //     Page+='&SystemID='+this.commonUtility.systemId + '&Account='+account;
+    //     break;
+    // } 
     //this.commonUtility.modifyPwd(account,Page);
-    this.commonUtility.openUrl(Page, "_blank");
+    //this.commonUtility.openUrl(Page, "_blank");
+    this.commonUtility.ModifyPwd(account,apiId,kind);
   }
   enableAcc(account:string)
   {
-    var Page:string;
+    //var Page:string;
     var apiId:string;
+    var kind:string;
     apiId="modifyPwdPage";
+    kind="A";
     switch(this.commonUtility.accType)
     {
       case "1":
@@ -623,19 +631,20 @@ onCompositionend($event:any){
       default:
         break;
     } 
-    Page = this.apiCommon.getApiUrl(apiId);
-    switch(this.commonUtility.accType)
-    {
-      case "1":
-        Page+='?SystemCode='+this.commonUtility.systemId+"&Kind=A";
-        break;
-      default:
-        Page+='&SystemID='+this.commonUtility.systemId + '&Account='+account;
-        break;
-    } 
-    console.warn(Page);
+    // Page = this.apiCommon.getApiUrl(apiId);
+    // switch(this.commonUtility.accType)
+    // {
+    //   case "1":
+    //     Page+='?SystemCode='+this.commonUtility.systemId+"&Kind=A";
+    //     break;
+    //   default:
+    //     Page+='&SystemID='+this.commonUtility.systemId + '&Account='+account;
+    //     break;
+    // } 
+    // console.warn(Page);
     //this.commonUtility.modifyPwd(account,Page);   
-    this.commonUtility.openUrl(Page, "_blank"); 
+    //this.commonUtility.openUrl(Page, "_blank"); 
+    this.commonUtility.ModifyPwd(account,apiId,kind);
   }
   open(modalOptions:ModalOptions):any{
     var rtn:string;

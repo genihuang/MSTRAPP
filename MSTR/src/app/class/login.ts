@@ -1,6 +1,7 @@
 import * as commonData from './common'
 export interface reqLogin {
     MetaData?:commonData.reqCommon,
+    ModifyKind?:string,
     LoginData?:loginData
 }
 export interface resLogin{
@@ -62,6 +63,11 @@ export interface tokenData
     Token?:string,
     StartTime?:string,
     EndTime?:string
+}
+export interface resPwdToken{
+    ResponseDetails?:commonData.ResponseDetails,
+    ReasonCode?:commonData.ReasonCode[],
+    Token?:string
 }
 export interface tokenDetail
 {

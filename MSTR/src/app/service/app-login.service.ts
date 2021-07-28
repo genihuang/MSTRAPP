@@ -151,4 +151,42 @@ export class AppLoginService {
         }),
       );
   }
+  //for new account
+  getPwdToken(account:string,modifyKind:string):Observable<login.resPwdToken>{
+    var apiId:string = "newInsPwdToken";
+    console.log(apiId);
+    this.ApiConfig = this.apiCommon.getApiConfigByApiID(apiId);
+    const apiUrl = this.apiCommon.getApiUrl(apiId);
+    console.log(apiUrl);
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':'application/json',
+        'apiKey':this.ApiConfig.keyId
+      })
+    };
+    this.loadingService.show();
+    const rqbody:login.reqLogin={
+      MetaData:this.apiCommon.reqCommon,
+      ModifyKind:modifyKind,
+      LoginData:{
+        Account:account
+      }
+    }
+
+    console.log(rqbody);
+
+    return this.http.post<login.resPwdToken>(apiUrl, JSON.stringify(rqbody), httpOptions)
+      .pipe(
+        timeout(90 * 1000),
+        
+        catchError( error => {
+          console.warn('error:', error);
+          this.loadingService.hide();
+          if (error instanceof TimeoutError) {
+          }
+          return throwError( error );
+        }),
+      );    
+  }
 }

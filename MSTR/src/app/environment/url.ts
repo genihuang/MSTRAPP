@@ -97,6 +97,10 @@ export const apiConfig_Uat: IApiConfig[] = ([
         keyId:""
     },
     {
+        apiID:"newInsPwdToken",
+        keyId:"C8837B63-7659-4413-BDED-47DB7B94058F"
+    },
+    {
         apiID:"maintainData",
         keyId:"1EECE5B6-3A06-4F0D-BF72-FD08762D2B1C"
     },
@@ -202,6 +206,10 @@ export const apiConfig_PreProd: IApiConfig[] = ([
         keyId:""
     },
     {
+        apiID:"newInsPwdToken",
+        keyId:"43F59B44-6363-4B79-AB53-F71275B0958A"
+    },
+    {
         apiID:"maintainData",
         keyId:"5B98F6AD-5E60-4965-B9F1-5423C7275AAD"
     },
@@ -301,6 +309,10 @@ export const apiConfig_Prod: IApiConfig[] = ([
     {
         apiID:"newForgetPassword",
         keyId:""
+    },
+    {
+        apiID:"newInsPwdToken",
+        keyId:"2721CDA3-DB17-42B9-8F2F-D1FE9FFD5963"
     },
     {
         apiID:"maintainData",

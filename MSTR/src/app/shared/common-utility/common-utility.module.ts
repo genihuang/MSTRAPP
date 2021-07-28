@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import * as login from '../../class/login';
 import * as env from '../../environment/environment';
+import {ApiCommonModule} from '../../service/api-common/api-common.module';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { Route } from '@angular/compiler/src/core';
 declare const cordova;
@@ -21,6 +22,7 @@ function onDeviceReady() {
 })
 export class CommonUtilityModule { 
   constructor(
+    protected apiCommon:ApiCommonModule,
     private route:Router
   ) { 
   }
@@ -80,11 +82,36 @@ public openRestApiTest(DocUrl:string,target:string)
   });
 } */
 
-  public modifyPwd(account:string, page:string){
-    // modifyPwdPage = this.apiCommon.getApiUrl("modifyPwdPage");
-    page+='&SystemID='+this.systemId + '&Account='+account;
-    console.log(page);
-    this.openUrl(page,"_blank");
+  // public modifyPwd(account:string, page:string){
+  //   // modifyPwdPage = this.apiCommon.getApiUrl("modifyPwdPage");
+  //   page+='&SystemID='+this.systemId + '&Account='+account;
+  //   console.log(page);
+  //   this.openUrl(page,"_blank");
+  // }
+
+  public ModifyPwd(account:string,apiId:string,kind:string){
+    var Page:string;
+    var apiId:string;
+    Page = this.apiCommon.getApiUrl(apiId);
+    switch(this.accType)
+    {
+      case "1":
+        Page+='?SystemCode='+this.systemId+"&Kind="+kind;
+        break;
+      default:
+        Page+='&SystemID='+this.systemId+'&Account='+account;
+        break;
+    } 
+    //this.commonUtility.modifyPwd(account,Page);
+    this.openUrl(Page, "_blank");
+  }
+  public resetPwd(token:string)
+  {
+    var Page:string;
+    var apiId:string;
+    Page = this.apiCommon.getApiUrl(apiId);   
+    Page+='?token='+token;
+    this.openUrl(Page, "_blank");
   }
 
   public forgetPassword(page:string){
