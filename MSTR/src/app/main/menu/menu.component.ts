@@ -154,6 +154,7 @@ export class MenuComponent implements OnInit {
     var account = this.commonUtility.getSessionValue("loginUser");
     var apiId:string;
     var kind:string;
+    var page:string;
     apiId="modifyPwdPage";
     kind="C";
     if (this.commonUtility.accType=="1")
@@ -163,15 +164,18 @@ export class MenuComponent implements OnInit {
     else
     {
       //this.commonUtility.modifyPwd(account,Page);
-      this.commonUtility.ModifyPwd(account,apiId,kind);
+      page = this.apiCommon.getApiUrl(apiId);
+      this.commonUtility.ModifyPwd(account,page,kind);
     }
     // this.logout();
   }
   newModifyPwd(token:string)
   {
     var apiId:string;
+    var page:string;
     apiId="newResetPassword";
-    this.commonUtility.resetPwd(token);
+    page=this.apiCommon.getApiUrl(apiId);
+    this.commonUtility.resetPwd(token,page);
     //this.commonUtility.modifyPwd(account,Page);   
     //this.commonUtility.openUrl(Page, "_blank"); 
   }

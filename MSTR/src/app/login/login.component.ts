@@ -573,7 +573,7 @@ onCompositionend($event:any){
       default:
         break;
     } 
-    // Page = this.apiCommon.getApiUrl(apiId);
+    Page = this.apiCommon.getApiUrl(apiId);
     // switch(this.commonUtility.accType)
     // {
     //   case "1":
@@ -585,7 +585,7 @@ onCompositionend($event:any){
     // }   
     //this.commonUtility.forgetPassword(Page);
     //this.commonUtility.openUrl(Page, "_blank");
-    this.commonUtility.ModifyPwd("",apiId,kind);
+    this.commonUtility.ModifyPwd("",Page,kind);
   }
   modifyPwd(account:string)
   {
@@ -602,7 +602,7 @@ onCompositionend($event:any){
       default:
         break;
     } 
-    // Page = this.apiCommon.getApiUrl(apiId);
+    Page = this.apiCommon.getApiUrl(apiId);
     // switch(this.commonUtility.accType)
     // {
     //   case "1":
@@ -614,11 +614,11 @@ onCompositionend($event:any){
     // } 
     //this.commonUtility.modifyPwd(account,Page);
     //this.commonUtility.openUrl(Page, "_blank");
-    this.commonUtility.ModifyPwd(account,apiId,kind);
+    this.commonUtility.ModifyPwd(account,Page,kind);
   }
   enableAcc(account:string)
   {
-    //var Page:string;
+    var Page:string;
     var apiId:string;
     var kind:string;
     apiId="modifyPwdPage";
@@ -631,7 +631,7 @@ onCompositionend($event:any){
       default:
         break;
     } 
-    // Page = this.apiCommon.getApiUrl(apiId);
+    Page = this.apiCommon.getApiUrl(apiId);
     // switch(this.commonUtility.accType)
     // {
     //   case "1":
@@ -644,7 +644,7 @@ onCompositionend($event:any){
     // console.warn(Page);
     //this.commonUtility.modifyPwd(account,Page);   
     //this.commonUtility.openUrl(Page, "_blank"); 
-    this.commonUtility.ModifyPwd(account,apiId,kind);
+    this.commonUtility.ModifyPwd(account,Page,kind);
   }
   open(modalOptions:ModalOptions):any{
     var rtn:string;

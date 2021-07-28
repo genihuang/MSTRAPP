@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import * as login from '../../class/login';
 import * as env from '../../environment/environment';
-import {ApiCommonModule} from '../../service/api-common/api-common.module';
+//import {ApiCommonModule} from '../../service/api-common/api-common.module';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { Route } from '@angular/compiler/src/core';
 declare const cordova;
@@ -22,7 +22,7 @@ function onDeviceReady() {
 })
 export class CommonUtilityModule { 
   constructor(
-    protected apiCommon:ApiCommonModule,
+    //protected apiCommon:ApiCommonModule,
     private route:Router
   ) { 
   }
@@ -89,10 +89,10 @@ public openRestApiTest(DocUrl:string,target:string)
   //   this.openUrl(page,"_blank");
   // }
 
-  public ModifyPwd(account:string,apiId:string,kind:string){
+  public ModifyPwd(account:string,page:string,kind:string){
     var Page:string;
     var apiId:string;
-    Page = this.apiCommon.getApiUrl(apiId);
+    Page = page;
     switch(this.accType)
     {
       case "1":
@@ -105,11 +105,11 @@ public openRestApiTest(DocUrl:string,target:string)
     //this.commonUtility.modifyPwd(account,Page);
     this.openUrl(Page, "_blank");
   }
-  public resetPwd(token:string)
+  public resetPwd(token:string,page:string)
   {
     var Page:string;
     var apiId:string;
-    Page = this.apiCommon.getApiUrl(apiId);   
+    Page = page;
     Page+='?token='+token;
     this.openUrl(Page, "_blank");
   }
