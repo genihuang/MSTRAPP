@@ -17,16 +17,42 @@ export class ModalService {
     private ngbModalService: NgbModal
     ) { }
 
-  open(modalOptions:ModalOptions,screenSize:string):any{
+    open(modalOptions:ModalOptions,screenSize:string):any{
+      var rtn:string;
+      console.log(screenSize);
+      const modalRef = this.ngbModalService.open(ModalComponent,
+        {
+          scrollable: true,
+          centered:true,
+          size:screenSize,
+          keyboard: false,
+          backdrop: 'static',
+        });
+   
+      let data = modalOptions;
+   
+      modalRef.componentInstance.fromParent = data;
+      console.log(modalRef.componentInstance.fromParent);
+      // return this.http.post<login.resMstrLogin>(apiUrl, JSON.stringify(rqbody), httpOptions)
+       modalRef.result.then((result) => {
+         console.log(result);
+        return result;
+        console.log(rtn);
+      }, (reason) => {
+        console.log(reason)
+      }
+      );
+    }
+  openCustome(modalOptions:ModalOptions,customeClass:string):any{
     var rtn:string;
-    console.log(screenSize);
+    console.log(customeClass);
     const modalRef = this.ngbModalService.open(ModalComponent,
       {
         scrollable: true,
         centered:true,
-        size:screenSize,
         keyboard: false,
-        backdrop: 'static'
+        backdrop: 'static',
+        windowClass:customeClass
       });
  
     let data = modalOptions;

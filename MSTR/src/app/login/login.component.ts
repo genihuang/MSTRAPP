@@ -1,5 +1,5 @@
 import { Component, OnInit,NgZone,ViewChild,AfterContentInit } from '@angular/core';
-import {Router,ActivatedRoute} from '@angular/router';
+import {Router,ActivatedRoute,Params} from '@angular/router';
 import {FormBuilder,FormControl,FormGroup,Validator, Form, Validators} from '@angular/forms'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, of } from 'rxjs';
@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
   showBeginTime:string;
   showEndTime:string;
   isComposite:boolean=false;
+  token:string;
   // rsbody:apiLoginData.resLogin;
   constructor(
     public formBuilder:FormBuilder,
@@ -57,9 +58,20 @@ export class LoginComponent implements OnInit {
       account:'',
       pwd:''
     });
+    
+    route.url.subscribe(() => {      
+      this.token=route.snapshot.firstChild.url.toString();
+     });
+    // console.warn(this.route.firstChild);
+    // this.route.params.subscribe(
+    //   (params: Params) => {
+    //     this.token = params["token"];
+    //     console.warn(this.token);
+    //   }
+    // );
     this.appVersion=envData.version;
     this.appEnvironment = commonUtility.getEnvironment();
-    localStorage.removeItem("miantain");
+    localStorage.removeItem("maintain");
     this.getMaintainData();
     
   }
@@ -183,7 +195,7 @@ onCompositionend($event:any){
                       if(this.commonUtility.accType=='0')
                       {
                         this.commonUtility.accSource="STAFF";  
-                        this.ngZone.run(()=>this.router.navigateByUrl('/main'));
+                        this.ngZone.run(()=>this.router.navigateByUrl('~/main'));
                       }
                       else
                       {
@@ -264,7 +276,7 @@ onCompositionend($event:any){
             if(this.commonUtility.accType=='0')
             {
               this.commonUtility.accSource="STAFF";  
-              this.ngZone.run(()=>this.router.navigateByUrl('/main'));
+              this.ngZone.run(()=>this.router.navigateByUrl('~/main'));
             }
             else
             {
@@ -388,7 +400,19 @@ onCompositionend($event:any){
       console.log('onComplete');
       if (Result)
       {
-        
+        console.warn("token:"+this.token);
+        if (this.token=='')
+        {
+          console.warn("no Token");
+        }else{
+          // console.warn("get Token Data");
+          // msg={
+          //   headText:'test',
+          //   txtContent :'test',
+          //   type:ModalType.Confirm
+          // }; 
+          // this.modalService.open(msg,'sm');
+        }
       }
       else
       {
@@ -654,7 +678,7 @@ onCompositionend($event:any){
     //     Page+='&SystemID='+this.commonUtility.systemId + '&Account='+account;
     //     break;
     // } 
-    // console.warn(Page);
+    //console.warn(Page);
     //this.commonUtility.modifyPwd(account,Page);   
     //this.commonUtility.openUrl(Page, "_blank"); 
     this.commonUtility.ModifyPwd(account,Page,kind);

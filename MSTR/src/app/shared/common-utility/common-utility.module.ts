@@ -1,14 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { DeviceDetectorService,DeviceInfo } from 'ngx-device-detector';
+import { DomSanitizer } from '@angular/platform-browser'; 
+
 import * as login from '../../class/login';
 import * as env from '../../environment/environment';
+import {ModalOptions,ModalType} from '../../class/modal';
 //import {ApiCommonModule} from '../../service/api-common/api-common.module';
+import {ModalService} from '../../shared/modal/modal.service';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { Route } from '@angular/compiler/src/core';
+import { stringify } from '@angular/compiler/src/util';
 declare const cordova;
 declare const window;
 declare const document;
+
 document.addEventListener("deviceready",onDeviceReady,false);
 function onDeviceReady() {
   window.open=cordova.InAppBrowser.open;
@@ -23,6 +30,9 @@ function onDeviceReady() {
 export class CommonUtilityModule { 
   constructor(
     //protected apiCommon:ApiCommonModule,
+    private deviceDetectorService:DeviceDetectorService,
+    private modalService:ModalService,
+    private sanitizer: DomSanitizer,
     private route:Router
   ) { 
   }
@@ -53,14 +63,34 @@ export class CommonUtilityModule {
 
   public openUrl(url:string, target:string)
   {
+    var deviceInfo:DeviceInfo;
+    var os:string;
+    deviceInfo=this.deviceDetectorService.getDeviceInfo();
+    os=deviceInfo.os;
+
     //var ref=cordova.InAppBrowser.open(encodeURI(url), target, 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
-     document.addEventListener('deviceready', () => {
-       console.warn("AAA");
-       //cordova.InAppBrowser.open(encodeURI(url), target, 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
-       window.open = cordova.InAppBrowser.open;
-       window.open(encodeURI(url), target, 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
-       //var ref=cordova.InAppBrowser.open(encodeURI(url), target, 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
-     }) ;   
+    if (os=="iOS")
+    {
+      document.addEventListener('deviceready', () => {
+        console.warn("AAA");
+        //cordova.InAppBrowser.open(encodeURI(url), target, 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
+        window.open = cordova.InAppBrowser.open;
+        window.open(encodeURI(url), target, 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
+        //var ref=cordova.InAppBrowser.open(encodeURI(url), target, 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
+      }) ;  
+    }
+    else
+    {
+      console.warn("BBB");
+      var msg:ModalOptions;
+      msg={
+        headText:'',
+        linkContent:url,
+        type:ModalType.Confirm
+      };
+      this.modalService.open(msg,'full');
+      //window.open(encodeURI(url), "_system", 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
+    } 
   }
 /* public openRouteUrl(DocUrl:string,target:string)
 {
@@ -102,6 +132,7 @@ public openRestApiTest(DocUrl:string,target:string)
         Page+='&SystemID='+this.systemId+'&Account='+account;
         break;
     } 
+    console.warn(Page);
     //this.commonUtility.modifyPwd(account,Page);
     this.openUrl(Page, "_blank");
   }

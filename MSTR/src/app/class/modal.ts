@@ -3,6 +3,7 @@ export interface ModalOptions {
     headText?: string;
     imgContent?: string;
     txtContent?: string;
+    linkContent?:string;
     showWarning?: boolean;
   }
   

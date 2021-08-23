@@ -7,7 +7,11 @@ import {LoginComponent} from './login.component';
 const routes: Routes = [
   {
     path:'',
-    component:LoginComponent
+    component:LoginComponent,
+    children: [
+      {path: "", component: LoginComponent},
+      {path: ":token", component: LoginComponent}
+  ]
   }
 ];
 

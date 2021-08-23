@@ -5,6 +5,7 @@ import { NxTreeFlatDataSource, NxFlatTreeControl, NxTreeNode, NxFlatTreeNode } f
 import {NxMenuModule} from '@allianz/ngx-ndbx/menu'
 import { Observable, of } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+//import { DeviceDetectorService,DeviceInfo } from 'ngx-device-detector';
 
 import {MyFlatTreeNode,MenuNode} from '../../class/menu';
 import {ModalOptions,ModalType} from '../../class/modal';
@@ -44,6 +45,7 @@ export class MenuComponent implements OnInit {
     private routes:Router,
     private loadingService:LoadingService,
     private appComponent:AppComponent,
+    //private deviceDetectorService:DeviceDetectorService,
     //private ngbModalService: NgbModal
   ) {
     this._treeControl = new NxFlatTreeControl();
@@ -64,6 +66,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
+    //console.warn(this.deviceDetectorService.getDeviceInfo().browser); 
     this.getMenus();
   }
 

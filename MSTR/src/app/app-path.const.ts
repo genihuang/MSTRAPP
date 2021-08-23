@@ -1,4 +1,4 @@
 export const appPath={
-    login:'',
+    login:'home',
     main:'main'
 }

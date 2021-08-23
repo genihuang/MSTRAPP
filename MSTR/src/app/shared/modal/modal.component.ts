@@ -24,6 +24,15 @@ export class ModalComponent implements OnInit {
   ngOnInit() {
     console.log(this.fromParent);
     this.options=this.fromParent;
+    console.warn(this.ModalType);
+    if (ModalType.Doc)
+    {
+      this.urlSafe=this.sanitizer.bypassSecurityTrustResourceUrl(this.options.linkContent);
+    }
+    else{
+
+    }
+    
   }
   closeModal(sendData) {
     this.activeModal.close(sendData);

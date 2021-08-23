@@ -54,7 +54,7 @@ export class ContentComponent implements OnInit {
     //private mstrLoginService: MstrLoginService,
     protected apiCommon:ApiCommonModule,
     private commonUtility: CommonUtilityModule,
-    //private modalService: ModalService,
+    private modalService: ModalService,
     //private loadingService: LoadingService,
     //private location: Location,
   ) {
@@ -67,11 +67,11 @@ export class ContentComponent implements OnInit {
           this.selMenuBK = 'pic-Default';
         }
         if (this.code != null) {
-          console.warn("content_A" + this.code);
+          //console.warn("content_A" + this.code);
           this.getTabMenu(this.code);
         }
         else {
-          console.warn("content_B" + this.code);
+          //console.warn("content_B" + this.code);
           //this.subMenus = JSON.parse(sessionStorage.getItem("object"));
         }
         // this.menuService.getSubMenus(this.code)
@@ -373,6 +373,7 @@ export class ContentComponent implements OnInit {
   } */
   RestApi(menu: ObjectNode, target:string)
   {
+    var msg:ModalOptions;
     var apiId:string = "mstrRestApiPage";
     var ApiConfig:IApiConfig = this.apiCommon.getApiConfigByApiID(apiId);
     var parm:string ="";
@@ -383,8 +384,16 @@ export class ContentComponent implements OnInit {
     parm += "&Token="+this.commonUtility.getSessionValue('authenticationToken');
     parm += "&ObjectId="+menu.web_object;
     parm += "&accType="+this.commonUtility.accType;
-    //console.log(apiUrl+parm);
-    this.commonUtility.openUrl(apiUrl+parm, target);
+    console.warn(apiUrl+parm);
+    msg={
+      headText:'',
+      //txtContent:"aaaaaa",
+      linkContent :apiUrl+parm,
+      type:ModalType.Doc
+    }; 
+    
+    this.modalService.openCustome(msg,'full');
+    //this.commonUtility.openUrl(apiUrl+parm, target);
     //this.testOpenUrl(apiUrl+parm, target);
   }
 
