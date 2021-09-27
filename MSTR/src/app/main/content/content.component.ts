@@ -392,8 +392,8 @@ export class ContentComponent implements OnInit {
       type:ModalType.Doc
     }; 
     
-    this.modalService.openCustome(msg,'full');
-    //this.commonUtility.openUrl(apiUrl+parm, target);
+    //this.modalService.openCustome(msg,'full');
+    this.commonUtility.openUrl(apiUrl+parm, target);
     //this.testOpenUrl(apiUrl+parm, target);
   }
 

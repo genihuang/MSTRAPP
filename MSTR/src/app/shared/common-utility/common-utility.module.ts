@@ -88,7 +88,7 @@ export class CommonUtilityModule {
         linkContent:url,
         type:ModalType.Confirm
       };
-      this.modalService.open(msg,'full');
+      this.modalService.openCustome(msg,'full');
       //window.open(encodeURI(url), "_system", 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
     } 
   }

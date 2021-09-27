@@ -5,7 +5,8 @@ export interface envConfig {
     version?:string;
     platform?:string;
     useAcc?:string;//0：舊帳號，1：新帳號
-    useSubDomain?:string
+    useSubDomain?:string;
+    needMaintain?:string;
 }
 
 export interface IApiConfig {

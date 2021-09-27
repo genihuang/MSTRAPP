@@ -7,7 +7,8 @@ export const envData:envConfig={
     version:'%version%',
     platform:'1',//1:IOS,2:Android
     useAcc:'1', //0：舊帳號，1：新帳號
-    useSubDomain:'Y'
+    useSubDomain:'Y',
+    needMaintain:'Y'
 };
 
 export const apiPath : IApiConfig []=([

@@ -72,7 +72,10 @@ export class LoginComponent implements OnInit {
     this.appVersion=envData.version;
     this.appEnvironment = commonUtility.getEnvironment();
     localStorage.removeItem("maintain");
-    this.getMaintainData();
+    if(envData.needMaintain=="Y")
+    {
+      this.getMaintainData();
+    }
     
   }
 
@@ -80,7 +83,10 @@ export class LoginComponent implements OnInit {
     document.addEventListener('deviceready', () => {
       window.CacheClear();
     })  
-     this.getMaintainData();
+    if(envData.needMaintain=="Y")
+    {
+      this.getMaintainData();
+    }
   };
   onInput($event:any) {
     if (!$event || this.isComposite) {
