@@ -3,6 +3,7 @@ import * as commonData from './common';
 
 export interface reqMenu {
   UKEY?:string;
+  Token?:string;
   WEB_SYSTEM_CODE?:string;
   USER_TYPE?:string;
   USER_ID?:string;

@@ -36,6 +36,7 @@ export class MenuService {
       headers: new HttpHeaders({
         'Content-Type':'application/json',
         'UKEY':this.commonUtility.getSessionValue('authenticationToken'),
+        'Token':this.commonUtility.getSessionValue('authenticationToken'),
         'KeyId':this.ApiConfig.keyId
       })
     };
@@ -51,6 +52,7 @@ export class MenuService {
     }
     const rqbody:Menu.reqMenu={
       UKEY:this.commonUtility.getSessionValue('authenticationToken'),
+      Token:this.commonUtility.getSessionValue('authenticationToken'),
       WEB_SYSTEM_CODE:this.commonUtility.systemCode,
       USER_TYPE:accSource,
       USER_ID:userId
