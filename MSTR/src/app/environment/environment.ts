@@ -101,6 +101,26 @@ export const apiPath : IApiConfig []=([
         apiID:"tokenData",
         domainKey:"utility",
         path:"Common/getTokenData"
+    },
+    {
+        apiID:"generateSetupCode",
+        domainKey:"utility",
+        path:"TwoFactorAuth/generateSetupCode"
+    },
+    {
+        apiID:"getSetupCodeUrl",
+        domainKey:"accountManager",
+        path:"getSetupCode.aspx"
+    },
+    {
+        apiID:"validateTwoFactorPIN",
+        domainKey:"utility",
+        path:"TwoFactorAuth/validateTwoFactorPIN"
+    },
+    {
+        apiID:"resetTwoFactorDeviceUrl",
+        domainKey:"accountManager",
+        path:"resetTwoFactor.aspx"
     }
 ]);
 export const contentSize:number=8;
