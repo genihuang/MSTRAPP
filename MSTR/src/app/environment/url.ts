@@ -111,6 +111,22 @@ export const apiConfig_Uat: IApiConfig[] = ([
     {
         apiID:"tokenData",
         keyId:"263E0FE2-8FA7-45AC-AAD7-610D57DAF364"
+    },
+    {
+        apiID:"generateSetupCode",
+        keyId:"7BAF48C5-F381-472B-B202-248AB60D219E"
+    },
+    {
+        apiID:"getSetupCodeUrl",
+        keyId:""
+    },
+    {
+        apiID:"validateTwoFactorPIN",
+        keyId:"D67C6043-B543-44DC-810C-8D996A7A3255"
+    },
+    {
+        apiID:"resetTwoFactorDeviceUrl",
+        keyId:""
     }
 ]);
 
@@ -118,45 +134,45 @@ export const apiDomain_PreProd: IApiDomain[] = ([
     {
         apiDomainKey: "utility",
         apiDomain: 'http://113.196.86.105/wsUtility/',
-        apiSubDomain:""
+        apiSubDomain:"https://espreprod.allianz.com.tw/service/wsUtility/"
     },
     {
         apiDomainKey: "discover",
         apiDomain: "http://113.196.86.105/wsIllustrationIII/",
-        apiSubDomain:""
+        apiSubDomain:"https://espreprod.allianz.com.tw/service/wsIllustrationIII/"
     },
     {
         apiDomainKey: "wsaz",
         apiDomain: "https://preW2.allianz.com.tw/WSAZ/",
-        apiSubDomain:""
+        apiSubDomain:"https://espreprod.allianz.com.tw/service/WSAZ/"
     },
     {
         apiDomainKey: "MstrPage",
         // apiDomain: "http://113.196.86.102/WSAZ/"
         apiDomain: "https://preW2.allianz.com.tw/MSTR/",
-        apiSubDomain:""
+        apiSubDomain:"https://espreprod.allianz.com.tw/partner/MSTR/"
     },
 
     {
         apiDomainKey:"w2Util_pp",
         apiDomain:"https://preW2.allianz.com.tw/w2Util/",
-        apiSubDomain:""
+        apiSubDomain:"https://espreprod.allianz.com.tw/service/w2Util/"
     },
     {
         apiDomainKey:"AZPL",
         apiDomain:"https://preW2.allianz.com.tw/eProCommonsite/",
-        apiSubDomain:""
+        apiSubDomain:"https://espreprod.allianz.com.tw/partner/eProCommonsite/"
     },
     {
         apiDomainKey:"w2UtilAPI",
         //apiDomain:"http://t5.allianz.com.tw/w2UtilAPI/"
         apiDomain:"https://preW2.allianz.com.tw/w2UtilAPI/",
-        apiSubDomain:""
+        apiSubDomain:"https://espreprod.allianz.com.tw/service/w2UtilAPI/"
     },
     {
         apiDomainKey:"accountManager",
         apiDomain:"https://preFirst2.allianz.com.tw/accountManager/",
-        apiSubDomain:""
+        apiSubDomain:"https://espreprod.allianz.com.tw/partner/accountManager/"
     }
 ]);
 
@@ -224,6 +240,22 @@ export const apiConfig_PreProd: IApiConfig[] = ([
     {
         apiID:"tokenData",
         keyId:"DAB87AF7-E85D-475D-B637-F1CF4873DFE2"
+    },
+    {
+        apiID:"generateSetupCode",
+        keyId:"1B4E84AD-1ED2-42C1-B17E-F54FBF54E9F3"
+    },
+    {
+        apiID:"getSetupCodeUrl",
+        keyId:""
+    },
+    {
+        apiID:"validateTwoFactorPIN",
+        keyId:"AED512F6-66A0-4732-84F3-7491404B32C7"
+    },
+    {
+        apiID:"resetTwoFactorDeviceUrl",
+        keyId:""
     }
 ]);
 
@@ -333,5 +365,21 @@ export const apiConfig_Prod: IApiConfig[] = ([
     {
         apiID:"tokenData",
         keyId:"14B7C122-2212-4F23-A62E-5DBBD7673A43"
+    },
+    {
+        apiID:"generateSetupCode",
+        keyId:"AA7ADF1D-1A79-47EE-9B11-0631FDF7F3BC"
+    },
+    {
+        apiID:"getSetupCodeUrl",
+        keyId:""
+    },
+    {
+        apiID:"validateTwoFactorPIN",
+        keyId:"DE1495EE-7247-417C-BAB3-6012F141F651"
+    },
+    {
+        apiID:"resetTwoFactorDeviceUrl",
+        keyId:""
     }
 ]);

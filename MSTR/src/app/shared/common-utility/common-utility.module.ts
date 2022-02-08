@@ -61,13 +61,13 @@ export class CommonUtilityModule {
     return rtn;
   }
 
-  public openUrl(url:string, target:string)
+  public openUrl(url:string, target:string, modalType:ModalType)
   {
     var deviceInfo:DeviceInfo;
     var os:string;
     deviceInfo=this.deviceDetectorService.getDeviceInfo();
     os=deviceInfo.os;
-
+    console.warn(os);
     //var ref=cordova.InAppBrowser.open(encodeURI(url), target, 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
     if (os=="iOS")
     {
@@ -86,7 +86,7 @@ export class CommonUtilityModule {
       msg={
         headText:'',
         linkContent:url,
-        type:ModalType.Confirm
+        type:modalType
       };
       this.modalService.openCustome(msg,'full');
       //window.open(encodeURI(url), "_system", 'location=no,closebuttoncaption=關閉,hidenavigationbuttons=yes');
@@ -133,8 +133,9 @@ public openRestApiTest(DocUrl:string,target:string)
         break;
     } 
     console.warn(Page);
+    var modaltype = ModalType.Doc;
     //this.commonUtility.modifyPwd(account,Page);
-    this.openUrl(Page, "_blank");
+    this.openUrl(Page, "_blank",modaltype);
   }
   public resetPwd(token:string,page:string)
   {
@@ -142,7 +143,8 @@ public openRestApiTest(DocUrl:string,target:string)
     var apiId:string;
     Page = page;
     Page+='?token='+token;
-    this.openUrl(Page, "_blank");
+    var modaltype = ModalType.Doc;
+    this.openUrl(Page, "_blank",modaltype);
   }
 
   public forgetPassword(page:string){
@@ -150,7 +152,8 @@ public openRestApiTest(DocUrl:string,target:string)
     // forgetPwdPage = "https://t1.allianz.com.tw/eProAgent/";
     //page+='&SystemID='+this.systemId ;
     console.log(page);
-    this.openUrl(page,"_blank");
+    var modaltype = ModalType.Doc;
+    this.openUrl(page,"_blank",modaltype);
   }
   public getUrlPrefix():string
   {

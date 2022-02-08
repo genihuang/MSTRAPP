@@ -1,0 +1,17 @@
+<div class="top">
+      <div class="LoginForm">
+      <img src="../../assets/images/allianz-en-blue.svg" class="logoEn" />
+      <div class="appName">雙因子驗證</div>
+      <form [formGroup]="validateForm" (ngSubmit)="onClickSubmit(validateForm.value)">
+        <div class="LoginInputGroup">
+          <div class="LoginInputGroup-prepend">
+            <span class="LoginInputGroup-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
+          </div>
+          <div class="LoginInputGroup-cut"><div></div></div>
+          <input type="text" class="form-control" placeholder="驗證碼" id="validatePin" formControlName="validatePin"> 
+        </div>
+        <input class="btnValidate" type="submit" value="雙因子認證"/>
+      </form>
+    </div>  
+</div>
+  

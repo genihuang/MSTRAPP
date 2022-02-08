@@ -14,6 +14,7 @@ import {ApiCommonModule} from './service/api-common/api-common.module';
 import {AppLoginService} from './service/app-login.service';
 import { ModalComponent } from './shared/modal/modal.component';
 import { LoadingComponent } from './shared/loading/loading.component';
+import { FormBuilder } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { LoadingComponent } from './shared/loading/loading.component';
     BrowserModule,
     NxModalModule,
     AppRoutingModule,  
+    //FormBuilder,
     //DeviceDetectorService,
     NgbModule
   ],

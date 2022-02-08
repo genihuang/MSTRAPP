@@ -12,6 +12,7 @@ import {CommonUtilityModule} from '../shared/common-utility/common-utility.modul
 import {ModalService} from '../shared/modal/modal.service';
 import {AppLoginService} from '../service/app-login.service';
 import {MaintainService} from '../service/maintain.service';
+import {TwofactorauthService} from '../service/twofactorauth.service';
 import {LoadingService} from '../shared/loading/loading.service';
 import {ApiCommonModule} from '../service/api-common/api-common.module';
 
@@ -19,6 +20,7 @@ import {ModalComponent} from '../shared/modal/modal.component'
 import { envData } from '../environment/environment';
 import { UpperCasePipe, JsonPipe, DatePipe } from '@angular/common';
 import { isBoolean } from 'util';
+import { env } from 'process';
 declare const cordova;
 declare const window;
 declare const document;
@@ -49,6 +51,7 @@ export class LoginComponent implements OnInit {
     private commonUtility:CommonUtilityModule,
     protected apiCommon:ApiCommonModule,
     private loginService:AppLoginService,
+    private twofactorauthService:TwofactorauthService,
     private maintainService:MaintainService,
     private modalService:ModalService,
     private loadingService:LoadingService,
@@ -112,7 +115,16 @@ onCompositionend($event:any){
     var msg:ModalOptions;
     var result:boolean=true;
     var isLoginSucess:boolean=false;
-
+    var isNeedTwoFactor:string="Y";
+    switch (envData.systemId)
+    {
+      case "160":
+        isNeedTwoFactor="Y";
+        break;
+      default:
+        isNeedTwoFactor="N";
+        break;
+    }
     if (data.account=='' || data.pwd =='')
     {
       msg={
@@ -205,13 +217,17 @@ onCompositionend($event:any){
                       }
                       else
                       {
-                        result=this.getTokenDetail();
+                        //result=this.getTokenDetail();
+                        if (isNeedTwoFactor=='Y')
+                        {
+                          console.warn("need twofactor");
+                          this.ngZone.run(()=>this.router.navigateByUrl('twofactorauth'));
+                        }else
+                        {
+                          result=this.getTokenDetail();
+                        }
                       }
                     }
-                    // if (result)
-                    // {
-                    //   this.ngZone.run(()=>this.router.navigateByUrl('/main'));
-                    // }
                     break;
                   default:
                     result=false;
@@ -240,6 +256,28 @@ onCompositionend($event:any){
                 if (result =='NEXT'){
                   isLoginSucess=false;
                   this.enableAcc(data.account.toUpperCase());
+                }               
+              }, (reason) => {
+                console.log(reason)
+              }
+             );
+              result=false;
+              break;
+            case "A05":
+              msg={
+                headText:'登入失敗',
+                txtContent :res.ReasonCode.map(
+                  item=>
+                  `${item.reasonMsg}(錯誤碼：${item.reasonCode})`
+                  )
+                  .join(' '),
+                type:ModalType.Confirm
+              };          
+              modalRtn=this.open(msg);
+              modalRtn.result.then((result) => {
+                if (result =='NEXT'){
+                  isLoginSucess=false;
+                  this.showSetupCodeUrl("A05",res.TokenData.Token);
                 }               
               }, (reason) => {
                 console.log(reason)
@@ -286,7 +324,16 @@ onCompositionend($event:any){
             }
             else
             {
-              result=this.getTokenDetail();
+              //this.ngZone.run(()=>this.router.navigateByUrl('twofactorauth'));
+              //result=this.getTokenDetail();
+              if (isNeedTwoFactor=='Y')
+              {
+                console.warn("need twofactor");
+                this.ngZone.run(()=>this.router.navigateByUrl('twofactorauth'));
+              }else
+              {
+                result=this.getTokenDetail();
+              }
             }
           }
         }
@@ -508,6 +555,7 @@ onCompositionend($event:any){
     this.loginService.versionCheck(this.appVersion,this.appLastUpdateTime, this.platform)
     .subscribe(
       res=>{
+        this.loadingService.hide();
         switch (res.ResponseDetails.responseCode) {
           case "000":
             var modalRtn:any;
@@ -531,7 +579,8 @@ onCompositionend($event:any){
                 headText:'更新資訊',
                 txtContent :'有新版本，請更新。',
                 type:ModalType.Confirm
-              };          
+              }; 
+              var modaltype = ModalType.Doc;
               // modalRtn=this.modalService.open(msg)
               modalRtn=this.open(msg);
               modalRtn.result.then((result) => {
@@ -540,7 +589,7 @@ onCompositionend($event:any){
                   localStorage.removeItem("appLastUpdateTime");
                   this.appVersion = res.AppVersionStatus.AppVersion;
                   this.appLastUpdateTime =`${this.commonUtility.Date}${this.commonUtility.TimeStamp}`;                
-                  this.commonUtility.openUrl(res.AppVersionStatus.AppLink,'_system');
+                  this.commonUtility.openUrl(res.AppVersionStatus.AppLink,'_system',modaltype);
                   console.log(updateUrl);
                 }
                 else
@@ -590,11 +639,11 @@ onCompositionend($event:any){
       ()=>{
         if (needUpdate)
         {
+          console.log(updateUrl);
           navigator['app'].exitApp();
         }
         
         console.log("versionCheck_Complete");
-        console.log(updateUrl);
       }
     );
     return Result;   
@@ -616,17 +665,6 @@ onCompositionend($event:any){
         break;
     } 
     Page = this.apiCommon.getApiUrl(apiId);
-    // switch(this.commonUtility.accType)
-    // {
-    //   case "1":
-    //     Page+='?SystemCode='+this.commonUtility.systemId+"&Kind=B";
-    //     break;
-    //   default:
-    //     Page+='&SystemID='+this.commonUtility.systemId ;
-    //     break;
-    // }   
-    //this.commonUtility.forgetPassword(Page);
-    //this.commonUtility.openUrl(Page, "_blank");
     console.warn(Page);
     this.commonUtility.ModifyPwd("",Page,kind);
   }
@@ -646,17 +684,6 @@ onCompositionend($event:any){
         break;
     } 
     Page = this.apiCommon.getApiUrl(apiId);
-    // switch(this.commonUtility.accType)
-    // {
-    //   case "1":
-    //     Page+='?SystemCode='+this.commonUtility.systemId+"&Kind=B";
-    //     break;
-    //   default:
-    //     Page+='&SystemID='+this.commonUtility.systemId + '&Account='+account;
-    //     break;
-    // } 
-    //this.commonUtility.modifyPwd(account,Page);
-    //this.commonUtility.openUrl(Page, "_blank");
     this.commonUtility.ModifyPwd(account,Page,kind);
   }
   enableAcc(account:string)
@@ -689,6 +716,19 @@ onCompositionend($event:any){
     //this.commonUtility.openUrl(Page, "_blank"); 
     this.commonUtility.ModifyPwd(account,Page,kind);
   }
+  resetTwoFactorDevice()
+  {
+    var Page:string;
+    var apiId:string;
+    var kind:string;
+    var target:string='_blank';
+    var modaltype = ModalType.Doc;
+    apiId="resetTwoFactorDeviceUrl";
+    Page = this.apiCommon.getApiUrl(apiId);
+    Page+="?SystemCode="+envData.systemId;
+    console.warn(Page);
+    this.commonUtility.openUrl(Page,target,modaltype);
+  }
   open(modalOptions:ModalOptions):any{
     var rtn:string;
     const modalRef = this.ngbModalService.open(ModalComponent,
@@ -706,5 +746,17 @@ onCompositionend($event:any){
     // console.log(modalRef.componentInstance.fromParent);
 
     return modalRef;
+  }
+  showSetupCodeUrl(type:string,token:string):void{
+    var Page:string;
+    var apiId:string;
+    var kind:string;
+    var target:string='_blank';
+    var modaltype = ModalType.Doc;
+    apiId="getSetupCodeUrl";
+    Page = this.apiCommon.getApiUrl(apiId);
+    Page+="?token="+token;
+    console.warn(Page);
+    this.commonUtility.openUrl(Page,target,modaltype);
   }
 }

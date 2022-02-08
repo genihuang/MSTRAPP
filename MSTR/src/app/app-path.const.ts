@@ -1,4 +1,5 @@
 export const appPath={
     login:'home',
-    main:'main'
+    main:'main',
+    twofactorauth:'twofactorauth'
 }
