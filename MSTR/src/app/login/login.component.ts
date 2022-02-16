@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
   appLastUpdateTime:string = "19110101";
   appEnvironment:string;
   isShowMaintain:boolean=false;
+  isNeedTwoFactor:boolean=false;
   showBeginTime:string;
   showEndTime:string;
   isComposite:boolean=false;
@@ -115,14 +116,14 @@ onCompositionend($event:any){
     var msg:ModalOptions;
     var result:boolean=true;
     var isLoginSucess:boolean=false;
-    var isNeedTwoFactor:string="Y";
+    //var isNeedTwoFactor:string="Y";
     switch (envData.systemId)
     {
       case "160":
-        isNeedTwoFactor="Y";
+        this.isNeedTwoFactor=true;
         break;
       default:
-        isNeedTwoFactor="N";
+        this.isNeedTwoFactor=false;
         break;
     }
     if (data.account=='' || data.pwd =='')
@@ -218,7 +219,7 @@ onCompositionend($event:any){
                       else
                       {
                         //result=this.getTokenDetail();
-                        if (isNeedTwoFactor=='Y')
+                        if (this.isNeedTwoFactor)
                         {
                           console.warn("need twofactor");
                           this.ngZone.run(()=>this.router.navigateByUrl('twofactorauth'));
@@ -326,7 +327,7 @@ onCompositionend($event:any){
             {
               //this.ngZone.run(()=>this.router.navigateByUrl('twofactorauth'));
               //result=this.getTokenDetail();
-              if (isNeedTwoFactor=='Y')
+              if (this.isNeedTwoFactor)
               {
                 console.warn("need twofactor");
                 this.ngZone.run(()=>this.router.navigateByUrl('twofactorauth'));

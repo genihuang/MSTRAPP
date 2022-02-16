@@ -126,3 +126,40 @@ export interface VersionStatus{
     sqlite?:string,
     Zip?:string
 }
+export interface reqSystemInfo{
+    SystemID?:string;
+    SystemCode?:string;
+}
+export interface resSystemInfo
+{
+    ResponseDetails?:commonData.ResponseDetails;
+    ReasonCode?:commonData.ReasonCode[];
+    SystemInfo?:SystemInfoDetail;
+}
+export interface SystemInfoDetail
+{
+    WEB_SYSTEM_CODE?:string;
+    WEB_SYSTEM_DESC?:string;
+    WEB_SYSTEM_ID?:string;
+    ALLOW_IDENTITY_CHANGE?:string;
+    APPROVAL_CATEGORY?:string;
+    WEB_SYSTEM_GROUP_CODE?:string;
+    IDENTITY_SOURCE?:string;
+    AUTHORITY_CATEGORY_METHOD?:string;
+    AUTHORITY_CATEGORY?:string;
+    ACC_GROUP_NO?:string;
+    MULTI_LOGIN?:string;
+    SYSTEM_TYPE?:string;
+    APP_SCHEME_NAME?:string;
+    PUSH_FUNCTION?:string;
+    REF_AGENCY_MANAGER?:string;
+    GET_SELLING_QUALIFICATION?:string;
+    TOKEN_PROCESS_METHOD?:string;
+    TOKEN_TREATMENT_TIME?:string;
+    TWO_FACTOR_AUTHENTICATION?:string;
+    TWO_FACTOR_AUTHEN_METHOD?:string;
+    ACTIVE_GOOGLE_CALENDAR?:string;
+    GOOGLE_CALENDAR_TABLE?:string;
+    MAINTAIN_ANNOUNCE_METHOD?:string;
+    ALLOW_LOGIN_WITHOUT_HIRE?:string;
+}

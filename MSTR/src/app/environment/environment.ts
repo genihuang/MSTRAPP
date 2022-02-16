@@ -121,6 +121,11 @@ export const apiPath : IApiConfig []=([
         apiID:"resetTwoFactorDeviceUrl",
         domainKey:"accountManager",
         path:"resetTwoFactor.aspx"
+    },
+    {
+        apiID: "apiSystemInfo",
+        domainKey: "utility",
+        path: "Public/getSystemInfo",
     }
 ]);
 export const contentSize:number=8;

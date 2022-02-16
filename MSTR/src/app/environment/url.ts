@@ -127,6 +127,10 @@ export const apiConfig_Uat: IApiConfig[] = ([
     {
         apiID:"resetTwoFactorDeviceUrl",
         keyId:""
+    },
+    {
+        apiID:"apiSystemInfo",
+        keyId:""
     }
 ]);
 
@@ -256,6 +260,10 @@ export const apiConfig_PreProd: IApiConfig[] = ([
     {
         apiID:"resetTwoFactorDeviceUrl",
         keyId:""
+    },
+    {
+        apiID:"apiSystemInfo",
+        keyId:""
     }
 ]);
 
@@ -380,6 +388,10 @@ export const apiConfig_Prod: IApiConfig[] = ([
     },
     {
         apiID:"resetTwoFactorDeviceUrl",
+        keyId:""
+    },
+    {
+        apiID:"apiSystemInfo",
         keyId:""
     }
 ]);
