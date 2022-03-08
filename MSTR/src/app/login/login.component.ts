@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
   appEnvironment:string;
   isShowMaintain:boolean=false;
   isNeedTwoFactor:boolean=false;
+  twoFactorMethod:string;
   showBeginTime:string;
   showEndTime:string;
   isComposite:boolean=false;
@@ -56,7 +57,7 @@ export class LoginComponent implements OnInit {
     private maintainService:MaintainService,
     private modalService:ModalService,
     private loadingService:LoadingService,
-    private ngbModalService:NgbModal
+    private ngbModalService:NgbModal,
   ) { 
     this.loginForm = this.formBuilder.group({
       account:'',
@@ -76,6 +77,7 @@ export class LoginComponent implements OnInit {
     this.appVersion=envData.version;
     this.appEnvironment = commonUtility.getEnvironment();
     localStorage.removeItem("maintain");
+    this.getSystemInfo();
     if(envData.needMaintain=="Y")
     {
       this.getMaintainData();
@@ -87,6 +89,7 @@ export class LoginComponent implements OnInit {
     document.addEventListener('deviceready', () => {
       window.CacheClear();
     })  
+    this.getSystemInfo();
     if(envData.needMaintain=="Y")
     {
       this.getMaintainData();
@@ -117,15 +120,15 @@ onCompositionend($event:any){
     var result:boolean=true;
     var isLoginSucess:boolean=false;
     //var isNeedTwoFactor:string="Y";
-    switch (envData.systemId)
-    {
-      case "160":
-        this.isNeedTwoFactor=true;
-        break;
-      default:
-        this.isNeedTwoFactor=false;
-        break;
-    }
+    // switch (envData.systemId)
+    // {
+    //   case "160":
+    //     this.isNeedTwoFactor=true;
+    //     break;
+    //   default:
+    //     this.isNeedTwoFactor=false;
+    //     break;
+    // }
     if (data.account=='' || data.pwd =='')
     {
       msg={
@@ -760,4 +763,272 @@ onCompositionend($event:any){
     console.warn(Page);
     this.commonUtility.openUrl(Page,target,modaltype);
   }
+  getSystemInfo(){
+    var msg:ModalOptions;
+    var result:boolean=true;
+    this.loginService.getSystemInfo()
+    .subscribe(
+      res=>{
+        console.log(res);
+        this.loadingService.hide();
+        switch (res.ResponseDetails.responseCode) {
+          case "000":
+            if (res.SystemInfo.TWO_FACTOR_AUTHENTICATION =="Y"){
+              this.isNeedTwoFactor=true;
+              this.twoFactorMethod=res.SystemInfo.TWO_FACTOR_AUTHEN_METHOD;
+              result=true;
+            }
+            else
+            {
+              this.isNeedTwoFactor=false;
+              result=true;
+            }
+            break;
+          case "008":
+            msg={
+              headText:'取資料失敗',
+              txtContent :res.ReasonCode.map(
+                item=>
+                `${item.reasonMsg}(錯誤碼：${item.reasonCode})`
+                )
+                .join(' '),
+              type:ModalType.Confirm
+            };          
+            this.modalService.open(msg,'sm');
+            result=false;
+            break;
+          default:
+            msg={
+              headText:'取資料失敗',
+              txtContent :'資料異常，請聯絡系統管理員。',
+              type:ModalType.Confirm
+            }; 
+            this.modalService.open(msg,'sm');
+            result=false;
+            break;
+        };
+      },
+      err=>{
+        console.log("error in SystemInfo");
+      }
+    );  
+    return result;     
+  }
+  testcors(){
+    var msg:ModalOptions;
+    var result:boolean=true;
+    var isLoginSucess:boolean=false;
+    //var isNeedTwoFactor:string="Y";
+    switch (envData.systemId)
+    {
+      case "160":
+        this.isNeedTwoFactor=true;
+        break;
+      default:
+        this.isNeedTwoFactor=false;
+        break;
+    }
+    console.warn('Cors');
+    this.loginService.appLogin('TAAOB', 'Abcd1234')
+    .subscribe(
+      res=>{
+        this.loadingService.hide();
+        switch (res.ResponseDetails.responseCode) {
+          case "000":
+            this.commonUtility.TokenData=res.TokenData;
+            this.commonUtility.loginUser='TAAOB'
+            isLoginSucess=true;
+            result=true;
+            break;
+          case "008":
+            msg={
+              headText:'登入失敗',
+              txtContent :res.ReasonCode.map(
+                item=>
+                `${item.reasonMsg}(錯誤碼：${item.reasonCode})`
+                )
+                .join(' '),
+              type:ModalType.Confirm
+            };          
+            this.modalService.open(msg,'sm');
+            result=false;
+            break;
+          //密碼已到期
+          case "A01":
+            msg={
+              headText:'登入失敗',
+              txtContent :res.ReasonCode.map(
+                item=>
+                `${item.reasonMsg}(錯誤碼：${item.reasonCode})`
+                )
+                .join(' '),
+              type:ModalType.Confirm
+            };          
+            modalRtn=this.open(msg);
+            modalRtn.result.then((result) => {
+              if (result =='NEXT'){
+                isLoginSucess=false;
+                this.modifyPwd('TAAOB');
+              }               
+            }, (reason) => {
+              console.log(reason)
+            }
+           );
+            result=false;
+            break;
+          //密碼即將到期
+          case "A02":
+            result=false;
+            var modalRtn:any;
+            msg={
+              headText:'登入成功',
+              txtContent :res.ReasonCode.map(
+                item=>
+                `${item.reasonMsg}(錯誤碼：${item.reasonCode})`
+                )
+                .join(' '),
+              type:ModalType.ModifyPwd
+            };          
+            modalRtn=this.open(msg);
+            modalRtn.result.then((result) => {
+              switch(result)
+              {
+                case "NEXT":
+                  this.commonUtility.TokenData=res.TokenData;
+                  this.commonUtility.loginUser='TAAOB';
+
+                  result=true;
+                  isLoginSucess=true;
+                  result = this.versionCheck();
+                  if (result)
+                  {
+                    if(this.commonUtility.accType=='0')
+                    {
+                      this.commonUtility.accSource="STAFF";  
+                      this.ngZone.run(()=>this.router.navigateByUrl('~/main'));
+                    }
+                    else
+                    {
+                      //result=this.getTokenDetail();
+                      if (this.isNeedTwoFactor)
+                      {
+                        console.warn("need twofactor");
+                        this.ngZone.run(()=>this.router.navigateByUrl('twofactorauth'));
+                      }else
+                      {
+                        result=this.getTokenDetail();
+                      }
+                    }
+                  }
+                  break;
+                default:
+                  result=false;
+                  isLoginSucess=false;
+                  this.modifyPwd('TAAOB');
+                  break;
+              }        
+            }, (reason) => {
+              console.log(reason)
+            }
+           );
+            break;
+          //首次登入
+          case "A03":
+            msg={
+              headText:'首次登入',
+              txtContent :res.ReasonCode.map(
+                item=>
+                `${item.reasonMsg}(錯誤碼：${item.reasonCode})`
+                )
+                .join(' '),
+              type:ModalType.Confirm
+            };          
+            modalRtn=this.open(msg);
+            modalRtn.result.then((result) => {
+              if (result =='NEXT'){
+                isLoginSucess=false;
+                this.enableAcc('TAAOB');
+              }               
+            }, (reason) => {
+              console.log(reason)
+            }
+           );
+            result=false;
+            break;
+          case "A05":
+            msg={
+              headText:'登入失敗',
+              txtContent :res.ReasonCode.map(
+                item=>
+                `${item.reasonMsg}(錯誤碼：${item.reasonCode})`
+                )
+                .join(' '),
+              type:ModalType.Confirm
+            };          
+            modalRtn=this.open(msg);
+            modalRtn.result.then((result) => {
+              if (result =='NEXT'){
+                isLoginSucess=false;
+                this.showSetupCodeUrl("A05",res.TokenData.Token);
+              }               
+            }, (reason) => {
+              console.log(reason)
+            }
+           );
+            result=false;
+            break;
+          default:
+            msg={
+              headText:'登入失敗',
+              txtContent :'資料異常，請聯絡系統管理員。',
+              type:ModalType.Confirm
+            }; 
+            this.modalService.open(msg,'sm');
+            result=false;
+            break;
+        };
+      },
+      err=>{
+        console.log("error");
+      },
+      ()=>{
+        console.log('onComplete');
+        if (result)
+        {
+          if (isLoginSucess)
+          {
+            result = this.versionCheck();
+          }  
+        }
+        else
+        {
+          this.loginForm = this.formBuilder.group({
+            account:'',
+            pwd:''
+          });
+        }
+        if (result)
+        {
+          if(this.commonUtility.accType=='0')
+          {
+            this.commonUtility.accSource="STAFF";  
+            this.ngZone.run(()=>this.router.navigateByUrl('~/main'));
+          }
+          else
+          {
+            //this.ngZone.run(()=>this.router.navigateByUrl('twofactorauth'));
+            //result=this.getTokenDetail();
+            if (this.isNeedTwoFactor)
+            {
+              console.warn("need twofactor");
+              this.ngZone.run(()=>this.router.navigateByUrl('twofactorauth'));
+            }else
+            {
+              result=this.getTokenDetail();
+            }
+          }
+        }
+      }
+    );
+  };
 }

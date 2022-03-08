@@ -130,7 +130,7 @@ export const apiConfig_Uat: IApiConfig[] = ([
     },
     {
         apiID:"apiSystemInfo",
-        keyId:""
+        keyId:"233FD977-683A-4EB0-A579-D63CF608CD98"
     }
 ]);
 
@@ -263,7 +263,7 @@ export const apiConfig_PreProd: IApiConfig[] = ([
     },
     {
         apiID:"apiSystemInfo",
-        keyId:""
+        keyId:"10297A7C-6444-48BB-8537-C44BBD135953"
     }
 ]);
 
@@ -392,6 +392,6 @@ export const apiConfig_Prod: IApiConfig[] = ([
     },
     {
         apiID:"apiSystemInfo",
-        keyId:""
+        keyId:"C3162D31-6EEC-4D97-983E-4A087CFC0531"
     }
 ]);

@@ -32,6 +32,7 @@ export class MstrLoginService {
   
       const httpOptions = {
         headers: new HttpHeaders({
+          'Origin':'http://MSTR',
           'Content-Type':'application/json',
           'authenticationToken':this.commonUtility.getSessionValue('authenticationToken')
         })

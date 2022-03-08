@@ -41,6 +41,7 @@ export class TwofactorauthService {
   
       const httpOptions = {
         headers: new HttpHeaders({
+          'Origin':'http://MSTR',
           'Content-Type':'application/json',
           'apiKey':this.ApiConfig.keyId,
           'authenticationToken':token
@@ -78,6 +79,7 @@ export class TwofactorauthService {
       console.log(apiUrl);
       const httpOptions = {
         headers: new HttpHeaders({
+          'Origin':'http://MSTR',
           'Content-Type':'application/json',
           'apiKey':this.ApiConfig.keyId,
           'authenticationToken':this.commonUtility.getSessionValue('authenticationToken')

@@ -35,6 +35,7 @@ export class MaintainService {
     console.log(apiUrl);
     const httpOptions = {
       headers: new HttpHeaders({
+        'Origin':'http://MSTR',
         'Content-Type':'application/json'
       })
     };

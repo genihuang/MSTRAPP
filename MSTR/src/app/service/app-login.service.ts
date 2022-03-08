@@ -42,6 +42,7 @@ export class AppLoginService {
 
     const httpOptions = {
       headers: new HttpHeaders({
+        'Origin':'http://MSTR',
         'Content-Type':'application/json',
         'apiKey':this.ApiConfig.keyId
       })
@@ -88,6 +89,7 @@ export class AppLoginService {
     console.log(apiUrl);
     const httpOptions = {
       headers: new HttpHeaders({
+        'Origin':'http://MSTR',
         'Content-Type':'application/json',
         'authenticationToken':this.commonUtility.getSessionValue('authenticationToken'),
         'apiKey':this.ApiConfig.keyId
@@ -125,6 +127,7 @@ export class AppLoginService {
     console.log(apiUrl);
     const httpOptions = {
       headers: new HttpHeaders({
+        'Origin':'http://MSTR',
         'Content-Type':'application/json',
         'authenticationToken':this.commonUtility.getSessionValue('authenticationToken'),
         'apiKey':this.ApiConfig.keyId
@@ -161,6 +164,7 @@ export class AppLoginService {
 
     const httpOptions = {
       headers: new HttpHeaders({
+        'Origin':'http://MSTR',
         'Content-Type':'application/json',
         'apiKey':this.ApiConfig.keyId
       })
@@ -188,5 +192,40 @@ export class AppLoginService {
           return throwError( error );
         }),
       );    
+  }
+
+  getSystemInfo(): Observable<login.resSystemInfo> {
+    var apiId:string = "apiSystemInfo";
+    console.log(apiId);
+    this.ApiConfig = this.apiCommon.getApiConfigByApiID(apiId);
+    const apiUrl = this.apiCommon.getApiUrl(apiId);
+    console.log(apiUrl);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Origin':'http://MSTR',
+        'Content-Type':'application/json',
+        'apiKey':this.ApiConfig.keyId
+      })
+    };
+    this.loadingService.show();
+    const rqbody:login.reqSystemInfo={
+      SystemID:this.commonUtility.systemId
+    }
+
+    console.log(rqbody);
+
+    return this.http.post<login.resSystemInfo>(apiUrl, JSON.stringify(rqbody), httpOptions)
+      .pipe(
+        timeout(90 * 1000),
+        catchError( error => {
+          console.log('error:', error);
+
+          this.loadingService.hide();
+
+          if (error instanceof TimeoutError) {
+          }
+          return throwError( error );
+        }),
+      );
   }
 }

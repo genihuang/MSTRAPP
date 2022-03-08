@@ -34,6 +34,7 @@ export class MenuService {
 
     const httpOptions = {
       headers: new HttpHeaders({
+        'Origin':'http://MSTR',
         'Content-Type':'application/json',
         'UKEY':this.commonUtility.getSessionValue('authenticationToken'),
         'Token':this.commonUtility.getSessionValue('authenticationToken'),
